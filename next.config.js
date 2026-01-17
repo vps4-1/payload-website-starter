@@ -1,6 +1,6 @@
-const { withPayload } = require('@payloadcms/next/withPayload')
+import { withPayload } from '@payloadcms/next/withPayload'
 
-module.exports = withPayload({
+export default withPayload({
   typescript: {
     ignoreBuildErrors: true,
   },
