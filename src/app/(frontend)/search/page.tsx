@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import TerminalLayout from '@/components/TerminalLayout'
+import { TerminalLayout } from '@/components/TerminalLayout'
 
 const allPosts = [
   {
