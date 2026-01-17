@@ -31,7 +31,6 @@ export default function TagsPage() {
   const { hot, normal } = groupTagsByHeat(allTags)
   const totalPosts = allTags.reduce((sum, tag) => sum + tag.count, 0)
 
-  // JSON-LD 结构化数据
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -53,7 +52,6 @@ export default function TagsPage() {
 
   return (
     <TerminalLayout title="SiJiGPT">
-      {/* JSON-LD 结构化数据 */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -67,14 +65,13 @@ export default function TagsPage() {
           </p>
         </header>
 
-        {/* 热门标签 */}
         {hot.length > 0 && (
           <section className="tags-section">
             <h2>🔥 热门标签</h2>
             <div className="tags-grid hot-tags">
               {hot.map((tag) => (
                 <article key={tag.slug} className="tag-card">
-                  <a href={`/search?q=${encodeURIComponent(tag.name)}`}>
+                  <Link href={`/search?q=${encodeURIComponent(tag.name)}`}>
                     <div className="tag-card-header">
                       <h3 className="tag-card-name">{tag.name}</h3>
                       <span className="tag-card-count">{tag.count} 篇</span>
@@ -87,13 +84,12 @@ export default function TagsPage() {
           </section>
         )}
 
-        {/* 全部标签 */}
         <section className="tags-section">
           <h2>📂 全部标签</h2>
           <div className="tags-grid">
             {normal.map((tag) => (
               <article key={tag.slug} className="tag-card">
-                <a href={`/search?q=${encodeURIComponent(tag.name)}`}>
+                <Link href={`/search?q=${encodeURIComponent(tag.name)}`}>
                   <div className="tag-card-header">
                     <h3 className="tag-card-name">{tag.name}</h3>
                     <span className="tag-card-count">{tag.count} 篇</span>
@@ -105,14 +101,13 @@ export default function TagsPage() {
           </div>
         </section>
 
-        {/* 标签索引（用于 SEO） */}
         <section className="tags-section">
           <h2>$ cat tags-index.txt</h2>
           <div className="terminal-output">
             <div className="tags-index">
               {allTags.map((tag, index) => (
                 <span key={tag.slug}>
-                  <a href={`/search?q=${encodeURIComponent(tag.name)}`}>
+                  <Link href={`/search?q=${encodeURIComponent(tag.name)}`}>
                     {tag.name}
                   </Link>
                   {index < allTags.length - 1 && ' · '}
