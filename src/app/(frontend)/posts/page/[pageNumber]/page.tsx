@@ -6,36 +6,34 @@ import { Pagination } from '@/components/Pagination'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
-import PageClient from './page.client'
-import { notFound } from 'next/navigation'
 
+export const dynamic = 'force-static'
 export const revalidate = 600
 
-type Args = {
+export default async function Page({
+  params,
+}: {
   params: Promise<{
     pageNumber: string
   }>
-}
-
-export default async function Page({ params: paramsPromise }: Args) {
-  const { pageNumber } = await paramsPromise
+}) {
+  const { pageNumber } = await params
   const payload = await getPayload({ config: configPromise })
-
-  const sanitizedPageNumber = Number(pageNumber)
-
-  if (!Number.isInteger(sanitizedPageNumber)) notFound()
 
   const posts = await payload.find({
     collection: 'posts',
     depth: 1,
     limit: 12,
-    page: sanitizedPageNumber,
-    overrideAccess: false,
+    page: parseInt(pageNumber),
   })
+
+  const postsWithCategories = posts.docs.map(post => ({
+    ...post,
+    categories: []
+  }))
 
   return (
     <div className="pt-24 pb-24">
-      <PageClient />
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none">
           <h1>Posts</h1>
@@ -51,7 +49,7 @@ export default async function Page({ params: paramsPromise }: Args) {
         />
       </div>
 
-      <CollectionArchive posts={posts.docs} />
+      <CollectionArchive posts={postsWithCategories} />
 
       <div className="container">
         {posts?.page && posts?.totalPages > 1 && (
@@ -62,27 +60,28 @@ export default async function Page({ params: paramsPromise }: Args) {
   )
 }
 
-export async function generateMetadata({ params: paramsPromise }: Args): Promise<Metadata> {
-  const { pageNumber } = await paramsPromise
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ pageNumber: string }>
+}): Promise<Metadata> {
+  const { pageNumber } = await params
   return {
-    title: `Payload Website Template Posts Page ${pageNumber || ''}`,
+    title: `Payload Website Template Posts Page ${pageNumber}`,
   }
 }
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
-  const { totalDocs } = await payload.count({
+  const posts = await payload.find({
     collection: 'posts',
-    overrideAccess: false,
+    depth: 0,
+    limit: 12,
   })
 
-  const totalPages = Math.ceil(totalDocs / 10)
+  const totalPages = posts.totalPages || 1
 
-  const pages: { pageNumber: string }[] = []
-
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push({ pageNumber: String(i) })
-  }
-
-  return pages
+  return Array.from({ length: totalPages }, (_, i) => ({
+    pageNumber: String(i + 1),
+  }))
 }
