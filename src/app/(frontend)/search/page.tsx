@@ -50,7 +50,7 @@ export default async function SearchPage({ searchParams }: Props) {
   return (
     <TerminalLayout title="SiJiGPT">
       <div className="terminal-section">
-        <h1>$ search --query="{query}"</h1>
+        <h1>$ search --query=&quot;{query}&quot;</h1>
         
         {query && (
           <p className="terminal-output">
