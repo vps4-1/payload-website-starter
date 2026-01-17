@@ -1,9 +1,8 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
-// 示例文章数据
 const mockPosts = [
   {
     id: '1',
@@ -57,13 +56,11 @@ export async function generateStaticParams() {
   }))
 }
 
-// ✅ 修复：使用 Promise 包装 params
 type Props = {
   params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // ✅ 修复：await params
   const { slug } = await params
   const post = mockPosts.find(p => p.slug === slug)
   
@@ -80,7 +77,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PostPage({ params }: Props) {
-  // ✅ 修复：await params
   const { slug } = await params
   const post = mockPosts.find(p => p.slug === slug)
 
@@ -91,18 +87,16 @@ export default async function PostPage({ params }: Props) {
   return (
     <TerminalLayout title="SiJiGPT">
       <article className="bilingual-post">
-        {/* 主标题 */}
         <header className="post-header">
           <h1>{post.title}</h1>
         </header>
 
-        {/* 元数据 */}
         <div className="post-meta">
           <div className="post-source">
             <strong>来源：</strong>
-            <Link href={post.source.url} target="_blank" rel="noopener noreferrer">
+            <a href={post.source.url} target="_blank" rel="noopener noreferrer">
               [{post.source.name}] {post.original_language === 'en' ? post.title_en : post.title}
-            </Link>
+            </a>
           </div>
           <div className="post-date">
             <strong>发布时间：</strong>
@@ -116,7 +110,6 @@ export default async function PostPage({ params }: Props) {
           )}
         </div>
 
-        {/* 中文摘要 */}
         <section className="summary-section chinese-summary">
           <h2>━━━ 中文摘要 ━━━</h2>
           <div className="summary-content">
@@ -125,7 +118,7 @@ export default async function PostPage({ params }: Props) {
           <div className="summary-keywords">
             <strong>关键词：</strong>
             {post.summary_zh.keywords.map((keyword, index) => (
-              <a 
+              <Link 
                 key={index}
                 href={`/search?q=${encodeURIComponent(keyword)}`}
                 className="keyword-link"
@@ -136,7 +129,6 @@ export default async function PostPage({ params }: Props) {
           </div>
         </section>
 
-        {/* 英文摘要 */}
         <section className="summary-section english-summary">
           <h2>━━━ English Summary ━━━</h2>
           <div className="english-title">
@@ -149,7 +141,7 @@ export default async function PostPage({ params }: Props) {
           <div className="summary-keywords">
             <strong>Keywords: </strong>
             {post.summary_en.keywords.map((keyword, index) => (
-              <a 
+              <Link 
                 key={index}
                 href={`/search?q=${encodeURIComponent(keyword)}`}
                 className="keyword-link"
@@ -160,12 +152,11 @@ export default async function PostPage({ params }: Props) {
           </div>
         </section>
 
-        {/* 文章标签 */}
         <section className="post-tags-section">
           <h3>━━━ 文章标签 ━━━</h3>
           <div className="post-tags">
             {post.tags.map((tag, index) => (
-              <a 
+              <Link 
                 key={index}
                 href={`/search?q=${encodeURIComponent(tag)}`}
                 className="keyword-link"
@@ -176,7 +167,6 @@ export default async function PostPage({ params }: Props) {
           </div>
         </section>
 
-        {/* 返回按钮 */}
         <div className="post-actions">
           <Link href="/posts" className="terminal-button">
             ← 返回文章列表
