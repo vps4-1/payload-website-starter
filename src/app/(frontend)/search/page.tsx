@@ -7,7 +7,6 @@ export const metadata: Metadata = {
   description: '搜索 AI 资讯和文章',
 }
 
-// 示例文章数据（与详情页同步）
 const allPosts = [
   {
     id: '1',
@@ -51,7 +50,7 @@ export default function SearchPage({
     <TerminalLayout title="SiJiGPT">
       <div className="search-page">
         <header className="search-header">
-          <h1>$ search --query "{query || '全部文章'}"</h1>
+          <h1>$ search --query &quot;{query || '全部文章'}&quot;</h1>
           <p className="search-meta">
             找到 {results.length} 篇相关文章
           </p>
@@ -76,11 +75,10 @@ export default function SearchPage({
                   </span>
                 </div>
 
-                {/* 显示完整标签列表 */}
                 <div className="post-tags">
                   <strong>标签：</strong>
                   {post.tags.map((tag, index) => (
-                    <a 
+                    <Link 
                       key={index}
                       href={`/search?q=${encodeURIComponent(tag)}`}
                       className="keyword-link"
