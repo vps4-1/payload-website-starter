@@ -1,43 +1,62 @@
-import React from 'react'
-import type { Metadata, Viewport } from 'next'
-
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
-import { InitTheme } from '@/providers/Theme/InitTheme'
-import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { getServerSideURL } from '@/utilities/getURL'
-import { Providers } from '@/providers'
-
 import './globals.css'
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  metadataBase: new URL(getServerSideURL()),
-  openGraph: mergeOpenGraph(),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com'),
+  title: {
+    default: 'SiJiGPT - AI驾驶员的全球资讯聚合站',
+    template: '%s - SiJiGPT',
+  },
+  description: '本站为AI驾驶员们提供全球AI硬件软件资讯聚合，助力驾驶技术越来越好',
+  keywords: ['AI', '人工智能', 'ChatGPT', '大模型', 'AI资讯', 'AI工具', 'AI硬件', 'AI软件'],
+  authors: [{ name: 'SiJiGPT' }],
+  creator: 'SiJiGPT',
+  publisher: 'SiJiGPT',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': '/rss.xml',
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'zh_CN',
+    url: '/',
+    title: 'SiJiGPT - AI驾驶员的全球资讯聚合站',
+    description: '本站为AI驾驶员们提供全球AI硬件软件资讯聚合，助力驾驶技术越来越好',
+    siteName: 'SiJiGPT',
+  },
   twitter: {
     card: 'summary_large_image',
-    creator: '@payloadcms',
+    title: 'SiJiGPT - AI驾驶员的全球资讯聚合站',
+    description: '本站为AI驾驶员们提供全球AI硬件软件资讯聚合，助力驾驶技术越来越好',
   },
 }
 
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-  userScalable: true,
-}
-
-export default async function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
-        <InitTheme />
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link 
+          rel="alternate" 
+          type="application/rss+xml" 
+          title="SiJiGPT RSS Feed" 
+          href="/rss.xml" 
+        />
+        <link rel="canonical" href={process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com'} />
       </head>
-      <body className={`${GeistSans.variable} ${GeistMono.variable}`}>
-        <Providers>
-          {children}
-        </Providers>
+      <body>
+        {children}
       </body>
     </html>
   )

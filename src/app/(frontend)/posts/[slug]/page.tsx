@@ -1,184 +1,187 @@
-import React from 'react'
-import Link from 'next/link'
-import { TerminalLayout } from '@/components/TerminalLayout'
+import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
+import { TerminalLayout } from '@/components/TerminalLayout'
 
-interface PostPageProps {
-  params: Promise<{
-    slug: string
-  }>
+// 示例文章数据
+const mockPosts = [
+  {
+    id: '1',
+    slug: 'zenken-chatgpt-enterprise',
+    title: 'Zenken通过ChatGPT Enterprise增强精简销售团队',
+    title_en: 'Zenken Enhances Lean Sales Team with ChatGPT Enterprise',
+    publishedAt: '2026-01-15',
+    source: {
+      url: 'https://openai.com/index/zenken-chatgpt-enterprise/',
+      name: 'OpenAI Blog',
+      author: 'OpenAI Team'
+    },
+    original_language: 'en' as const,
+    summary_zh: {
+      content: '日本数字营销公司 Zenken 面临着一个独特的挑战：如何在维持精简团队的同时扩大销售运营。该公司采用了 ChatGPT Enterprise 来革新其销售流程，特别是在潜在客户资格认定和客户关系管理方面。通过将 AI 集成到日常工作流程中，Zenken 的销售代表能够自动化重复性任务，专注于高价值的客户互动，并更快地做出数据驱动的决策。这一实施不仅提高了运营效率，还使团队能够处理更大的客户负载而无需按比例增加人员配置。该案例展示了企业级 AI 工具如何赋能小型团队取得通常需要更大资源的成果，为各行业的可扩展增长提供了蓝图。',
+      keywords: ['ChatGPT Enterprise', '销售自动化', 'AI商业应用', '客户关系管理', '数字化转型']
+    },
+    summary_en: {
+      content: 'Zenken, a Japanese digital marketing firm, faced a unique challenge: how to scale sales operations while maintaining a lean team. The company adopted ChatGPT Enterprise to revolutionize its sales processes, particularly in lead qualification and customer relationship management. By integrating AI into daily workflows, Zenken\'s sales representatives were able to automate repetitive tasks, focus on high-value customer interactions, and make data-driven decisions faster. This implementation not only improved operational efficiency but also enabled the team to handle a larger customer load without proportionally increasing headcount. The case demonstrates how enterprise-grade AI tools can empower small teams to achieve results that typically require much larger resources, providing a blueprint for scalable growth across industries.',
+      keywords: ['sales automation', 'AI business applications', 'customer relationship management', 'digital transformation', 'enterprise AI']
+    },
+    tags: ['ChatGPT', '企业应用', '销售', 'AI工具', '数字化转型']
+  },
+  {
+    id: '2',
+    slug: 'alibaba-tongyi-qianwen-3',
+    title: '阿里云发布通义千问3.0大模型',
+    title_en: 'Alibaba Cloud Releases Tongyi Qianwen 3.0 Large Model',
+    publishedAt: '2026-01-14',
+    source: {
+      url: 'https://www.alibabacloud.com/blog/tongyi-qianwen-3-launch',
+      name: '阿里云官方博客',
+      author: '阿里云团队'
+    },
+    original_language: 'zh' as const,
+    summary_zh: {
+      content: '阿里云正式发布通义千问 3.0 大语言模型，这是中国企业在大模型领域的又一重要突破。相比前代版本，通义千问 3.0 在中文理解、逻辑推理和代码生成能力上都有显著提升。模型支持超长上下文窗口（最高 32K tokens），能够处理更复杂的企业级应用场景。阿里云还宣布将通义千问 3.0 开放给企业用户，提供 API 接口和私有化部署方案。新版本特别优化了金融、电商、客服等垂直领域的表现，并通过强化学习提升了模型的安全性和可控性。这一发布标志着国产大模型在商业化应用上迈出了坚实的一步，为企业 AI 转型提供了更多本土化的选择。',
+      keywords: ['通义千问', '大语言模型', '阿里云AI', '企业级应用', '中文NLP']
+    },
+    summary_en: {
+      content: 'Alibaba Cloud officially released Tongyi Qianwen 3.0, a large language model representing another significant breakthrough for Chinese enterprises in the LLM field. Compared to previous versions, Tongyi Qianwen 3.0 demonstrates substantial improvements in Chinese comprehension, logical reasoning, and code generation capabilities. The model supports extended context windows (up to 32K tokens), enabling it to handle more complex enterprise-level application scenarios. Alibaba Cloud has announced that Tongyi Qianwen 3.0 will be made available to enterprise users through API interfaces and private deployment options. The new version has been specifically optimized for vertical sectors such as finance, e-commerce, and customer service, with enhanced safety and controllability through reinforcement learning. This release marks a solid step forward in the commercialization of domestic large models, providing enterprises with more localized options for AI transformation.',
+      keywords: ['Tongyi Qianwen', 'large language model', 'Alibaba Cloud AI', 'enterprise applications', 'Chinese NLP']
+    },
+    tags: ['通义千问', '阿里云', '大模型', '企业AI', '中文NLP']
+  }
+]
+
+export async function generateStaticParams() {
+  return mockPosts.map((post) => ({
+    slug: post.slug,
+  }))
 }
 
-// 模拟双语文章数据
-const bilingualPosts: Record<string, any> = {
-  'zenken-chatgpt-enterprise': {
-    title: 'Zenken通过ChatGPT Enterprise增强精简销售团队',
-    title_en: 'Zenken boosts a lean sales team with ChatGPT Enterprise',
-    source: {
-      url: 'https://openai.com/index/zenken',
-      name: 'OpenAI Blog',
-      author: 'OpenAI Team',
-    },
-    original_language: 'en',
-    publishedAt: '2026-01-14',
-    summary_zh: {
-      content: `日本企业Zenken成功部署ChatGPT Enterprise版本，显著提升了其精简销售团队的工作效率和业务成果。该公司通过AI驱动的工作流程实现了三大突破：首先，销售准备时间大幅缩短，团队成员能够更快速地响应客户需求；其次，商业提案的成功率明显提升，AI辅助使提案更加精准和个性化；第三，实现了更高质量的客户互动，通过智能分析客户需求提供定制化解决方案。
+// ✅ 修复：使用 Promise 包装 params
+type Props = {
+  params: Promise<{ slug: string }>
+}
 
-这个案例充分展示了企业级AI工具在实际商业场景中的应用价值，特别是在销售和客户关系管理领域。即使是小型团队，通过合理利用AI技术，也能实现运营效率的显著提升和业务成果的突破。Zenken的成功经验表明，AI技术正在成为企业数字化转型的关键驱动力，帮助企业在激烈的市场竞争中保持优势。`,
-      keywords: [
-        'ChatGPT Enterprise',
-        '销售自动化',
-        'AI商业应用',
-        '客户关系管理',
-        '数字化转型'
-      ]
-    },
-    summary_en: {
-      content: `Japanese company Zenken has successfully deployed ChatGPT Enterprise, significantly enhancing the efficiency and business outcomes of its lean sales team. Through AI-driven workflows, the company achieved three major breakthroughs: First, sales preparation time was dramatically reduced, enabling team members to respond to customer needs more quickly; Second, the success rate of business proposals notably improved, with AI assistance making proposals more precise and personalized; Third, higher-quality customer interactions were achieved through intelligent analysis of customer needs and customized solutions.
-
-This case fully demonstrates the practical value of enterprise-level AI tools in real business scenarios, particularly in sales and customer relationship management. Even small teams can achieve significant improvements in operational efficiency and business outcomes through proper utilization of AI technology. Zenken's success shows that AI technology is becoming a key driver of enterprise digital transformation, helping businesses maintain competitive advantages in fierce market competition.`,
-      keywords: [
-        'ChatGPT Enterprise',
-        'sales automation',
-        'AI business applications',
-        'customer relationship management',
-        'digital transformation'
-      ]
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // ✅ 修复：await params
+  const { slug } = await params
+  const post = mockPosts.find(p => p.slug === slug)
+  
+  if (!post) {
+    return {
+      title: '文章未找到',
     }
-  },
-  'alibaba-tongyi-qianwen-3': {
-    title: '阿里云发布通义千问3.0大模型',
-    title_en: 'Alibaba Cloud Releases Tongyi Qianwen 3.0 Large Language Model',
-    source: {
-      url: 'https://example.com/alibaba-qianwen-3',
-      name: '阿里云官方博客',
-      author: '阿里云团队',
-    },
-    original_language: 'zh',
-    publishedAt: '2026-01-14',
-    summary_zh: {
-      content: `阿里云正式发布通义千问3.0大语言模型，标志着中国AI技术取得重大突破。新版本在多项核心指标上实现显著提升，包括推理能力、代码生成、多语言理解等方面。通义千问3.0采用了全新的训练架构和数据处理技术，参数规模达到千亿级别，在中文理解和生成任务上表现尤为出色。
+  }
 
-该模型特别针对企业应用场景进行了优化，支持私有化部署和定制化训练，能够满足不同行业的专业需求。在金融、医疗、教育等领域的实际测试中，通义千问3.0展现出了强大的领域适应能力和任务完成质量。阿里云还宣布将开放API接口，让更多开发者和企业能够使用这一先进的AI技术，推动产业智能化升级。`,
-      keywords: [
-        '通义千问',
-        '大语言模型',
-        '阿里云AI',
-        '企业级应用',
-        '中文NLP'
-      ]
-    },
-    summary_en: {
-      content: `Alibaba Cloud officially released Tongyi Qianwen 3.0, marking a major breakthrough in Chinese AI technology. The new version achieves significant improvements in multiple core metrics, including reasoning capabilities, code generation, and multilingual understanding. Tongyi Qianwen 3.0 adopts a new training architecture and data processing technology, with parameters reaching hundreds of billions, and performs exceptionally well in Chinese understanding and generation tasks.
-
-The model has been specifically optimized for enterprise application scenarios, supporting private deployment and customized training to meet the professional needs of different industries. In practical tests across finance, healthcare, and education sectors, Tongyi Qianwen 3.0 demonstrated strong domain adaptation capabilities and task completion quality. Alibaba Cloud also announced the opening of API interfaces, enabling more developers and enterprises to leverage this advanced AI technology and drive industrial intelligence upgrades.`,
-      keywords: [
-        'Tongyi Qianwen',
-        'large language model',
-        'Alibaba Cloud AI',
-        'enterprise applications',
-        'Chinese NLP'
-      ]
-    }
+  return {
+    title: `${post.title} - SiJiGPT`,
+    description: post.summary_zh.content.slice(0, 160),
   }
 }
 
-export default async function PostPage({ params }: PostPageProps) {
+export default async function PostPage({ params }: Props) {
+  // ✅ 修复：await params
   const { slug } = await params
-  const post = bilingualPosts[slug]
+  const post = mockPosts.find(p => p.slug === slug)
 
   if (!post) {
     notFound()
   }
 
   return (
-    <TerminalLayout title="我的终端博客">
+    <TerminalLayout title="SiJiGPT">
       <article className="bilingual-post">
-        {/* 文章标题 */}
-        <h1 className="post-title">
-          {post.title}
-        </h1>
+        {/* 主标题 */}
+        <header className="post-header">
+          <h1>{post.title}</h1>
+        </header>
 
-        {/* 来源信息 */}
-        <div className="post-source">
-          <strong>来源：</strong>
-          <a href={post.source.url} target="_blank" rel="noopener noreferrer">
-            {post.source.name}
-          </a>
-          {' - '}
-          <a href={post.source.url} target="_blank" rel="noopener noreferrer">
-            {post.original_language === 'en' ? post.title_en : post.title}
-          </a>
-        </div>
-
-        {/* 发布时间 */}
+        {/* 元数据 */}
         <div className="post-meta">
-          发布时间：{new Date(post.publishedAt).toLocaleDateString('zh-CN', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
+          <div className="post-source">
+            <strong>来源：</strong>
+            <a href={post.source.url} target="_blank" rel="noopener noreferrer">
+              [{post.source.name}] {post.original_language === 'en' ? post.title_en : post.title}
+            </a>
+          </div>
+          <div className="post-date">
+            <strong>发布时间：</strong>
+            {new Date(post.publishedAt).toLocaleDateString('zh-CN')}
+          </div>
+          {post.source.author && (
+            <div className="post-author">
+              <strong>作者：</strong>
+              {post.source.author}
+            </div>
+          )}
         </div>
-
-        <hr style={{ margin: '2rem 0' }} />
 
         {/* 中文摘要 */}
-        <section className="summary-section">
-          <h2>📝 中文摘要</h2>
+        <section className="summary-section chinese-summary">
+          <h2>━━━ 中文摘要 ━━━</h2>
           <div className="summary-content">
-            {post.summary_zh.content.split('\n\n').map((paragraph: string, idx: number) => (
-              <p key={idx}>{paragraph}</p>
-            ))}
+            <p>{post.summary_zh.content}</p>
           </div>
-          <div className="keywords">
+          <div className="summary-keywords">
             <strong>关键词：</strong>
-            {post.summary_zh.keywords.map((keyword: string, idx: number) => (
-              <React.Fragment key={keyword}>
-                <Link href={`/search?q=${encodeURIComponent(keyword)}`} className="keyword-link">
-                  {keyword}
-                </Link>
-                {idx < post.summary_zh.keywords.length - 1 && ', '}
-              </React.Fragment>
+            {post.summary_zh.keywords.map((keyword, index) => (
+              <a 
+                key={index}
+                href={`/search?q=${encodeURIComponent(keyword)}`}
+                className="keyword-link"
+              >
+                {keyword}
+              </a>
             ))}
           </div>
         </section>
 
-        <hr style={{ margin: '2rem 0' }} />
-
         {/* 英文摘要 */}
-        <section className="summary-section">
-          <h2>📝 English Summary</h2>
-          <h3 className="english-title">{post.title_en}</h3>
+        <section className="summary-section english-summary">
+          <h2>━━━ English Summary ━━━</h2>
+          <div className="english-title">
+            <strong>标题：</strong>
+            {post.title_en}
+          </div>
           <div className="summary-content">
-            {post.summary_en.content.split('\n\n').map((paragraph: string, idx: number) => (
-              <p key={idx}>{paragraph}</p>
+            <p>{post.summary_en.content}</p>
+          </div>
+          <div className="summary-keywords">
+            <strong>Keywords: </strong>
+            {post.summary_en.keywords.map((keyword, index) => (
+              <a 
+                key={index}
+                href={`/search?q=${encodeURIComponent(keyword)}`}
+                className="keyword-link"
+              >
+                {keyword}
+              </a>
             ))}
           </div>
-          <div className="keywords">
-            <strong>Keywords:</strong>
-            {' '}
-            {post.summary_en.keywords.map((keyword: string, idx: number) => (
-              <React.Fragment key={keyword}>
-                <Link href={`/search?q=${encodeURIComponent(keyword)}`} className="keyword-link">
-                  {keyword}
-                </Link>
-                {idx < post.summary_en.keywords.length - 1 && ', '}
-              </React.Fragment>
+        </section>
+
+        {/* 文章标签 */}
+        <section className="post-tags-section">
+          <h3>━━━ 文章标签 ━━━</h3>
+          <div className="post-tags">
+            {post.tags.map((tag, index) => (
+              <a 
+                key={index}
+                href={`/search?q=${encodeURIComponent(tag)}`}
+                className="keyword-link"
+              >
+                {tag}
+              </a>
             ))}
           </div>
         </section>
 
         {/* 返回按钮 */}
-        <div style={{ marginTop: '3rem' }}>
-          <Link className="button" href="/posts">
-            ← 返回列表
-          </Link>
+        <div className="post-actions">
+          <a href="/posts" className="terminal-button">
+            ← 返回文章列表
+          </a>
         </div>
       </article>
     </TerminalLayout>
   )
-}
-
-export async function generateStaticParams() {
-  return Object.keys(bilingualPosts).map((slug) => ({ slug }))
 }
