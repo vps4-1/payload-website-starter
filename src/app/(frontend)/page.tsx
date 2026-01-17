@@ -1,5 +1,6 @@
-import PageTemplate, { generateMetadata } from './[slug]/page'
+import React from 'react'
+import { redirect } from 'next/navigation'
 
-export default PageTemplate
-
-export { generateMetadata }
+export default function HomePage() {
+  redirect('/posts')
+}
