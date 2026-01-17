@@ -6,10 +6,8 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
-import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Media } from './collections/Media'
-import { Categories } from './collections/Categories'
 import { Users } from './collections/Users'
 
 const filename = fileURLToPath(import.meta.url)
@@ -22,7 +20,7 @@ export default buildConfig({
       baseDir: path.resolve(dirname),
     },
   },
-  collections: [Pages, Posts, Media, Categories, Users],
+  collections: [Posts, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
