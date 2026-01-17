@@ -75,7 +75,7 @@ export default function ArchivesPage() {
                               day: '2-digit',
                             })}
                           </time>
-                          <a href={`/posts/${post.slug}`} className="archive-post-title">
+                          <Link href={`/posts/${post.slug}`} className="archive-post-title">
                             {post.title}
                           </Link>
                           <span className="archive-post-source">[{post.source}]</span>

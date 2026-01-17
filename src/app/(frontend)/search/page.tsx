@@ -62,7 +62,7 @@ export default function SearchPage({
             {results.map((post) => (
               <article key={post.id} className="search-result-card">
                 <h2>
-                  <a href={`/posts/${post.slug}`}>
+                  <Link href={`/posts/${post.slug}`}>
                     {post.title}
                   </Link>
                 </h2>
@@ -90,7 +90,7 @@ export default function SearchPage({
                   ))}
                 </div>
 
-                <a href={`/posts/${post.slug}`} className="result-link">
+                <Link href={`/posts/${post.slug}`} className="result-link">
                   查看文章 →
                 </Link>
               </article>

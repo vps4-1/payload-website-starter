@@ -100,7 +100,7 @@ export default async function PostPage({ params }: Props) {
         <div className="post-meta">
           <div className="post-source">
             <strong>来源：</strong>
-            <a href={post.source.url} target="_blank" rel="noopener noreferrer">
+            <Link href={post.source.url} target="_blank" rel="noopener noreferrer">
               [{post.source.name}] {post.original_language === 'en' ? post.title_en : post.title}
             </Link>
           </div>

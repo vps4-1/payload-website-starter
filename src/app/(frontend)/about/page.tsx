@@ -46,11 +46,11 @@ export default function AboutPage() {
               <li>🏷️ 完整的标签分类</li>
             </ul>
             <p style={{ marginTop: '15px' }}>
-              <a href="/rss.xml" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
+              <Link href="/rss.xml" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
                 📡 RSS 订阅
               </Link>
               <span> :: </span>
-              <a href="https://github.com/vps4-1/payload-website-starter" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
+              <Link href="https://github.com/vps4-1/payload-website-starter" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
                 GitHub 仓库
               </Link>
             </p>
@@ -117,15 +117,15 @@ export default function AboutPage() {
           <div className="terminal-output contact-grid">
             <div>
               <strong>📧 邮箱</strong>
-              <a href="mailto:contact@sijigpt.com">contact@sijigpt.com</Link>
+              <Link href="mailto:contact@sijigpt.com">contact@sijigpt.com</Link>
             </div>
             <div>
               <strong>🌐 网站</strong>
-              <a href="https://sijigpt.com" target="_blank" rel="noopener">sijigpt.com</Link>
+              <Link href="https://sijigpt.com" target="_blank" rel="noopener">sijigpt.com</Link>
             </div>
             <div>
               <strong>🏠 主站</strong>
-              <a href="https://zhuji.gd" target="_blank" rel="noopener">zhuji.gd</Link>
+              <Link href="https://zhuji.gd" target="_blank" rel="noopener">zhuji.gd</Link>
             </div>
           </div>
         </section>
@@ -187,17 +187,17 @@ export default function AboutPage() {
             <p>搜索引擎优化相关：</p>
             <ul className="links-list">
               <li>
-                <a href="/sitemap.xml" target="_blank" rel="noopener">
+                <Link href="/sitemap.xml" target="_blank" rel="noopener">
                   Sitemap.xml
                 </Link> - 网站地图
               </li>
               <li>
-                <a href="/robots.txt" target="_blank" rel="noopener">
+                <Link href="/robots.txt" target="_blank" rel="noopener">
                   Robots.txt
                 </Link> - 爬虫协议
               </li>
               <li>
-                <a href="/rss.xml" target="_blank" rel="noopener">
+                <Link href="/rss.xml" target="_blank" rel="noopener">
                   RSS Feed
                 </Link> - 订阅源
               </li>
@@ -212,22 +212,22 @@ export default function AboutPage() {
             <p>本站的诞生离不开以下项目和资源：</p>
             <ul className="links-list">
               <li>
-                <a href="https://aigc-weekly.agi.li" target="_blank" rel="noopener">
+                <Link href="https://aigc-weekly.agi.li" target="_blank" rel="noopener">
                   Agili 的 AIGC 周刊
                 </Link> - Terminal 主题的灵感来源
               </li>
               <li>
-                <a href="https://payloadcms.com" target="_blank" rel="noopener">
+                <Link href="https://payloadcms.com" target="_blank" rel="noopener">
                   Payload CMS
                 </Link> - 强大的内容管理系统
               </li>
               <li>
-                <a href="https://nextjs.org" target="_blank" rel="noopener">
+                <Link href="https://nextjs.org" target="_blank" rel="noopener">
                   Next.js
                 </Link> - 现代化的 React 框架
               </li>
               <li>
-                <a href="https://neon.tech" target="_blank" rel="noopener">
+                <Link href="https://neon.tech" target="_blank" rel="noopener">
                   Neon
                 </Link> - Serverless PostgreSQL
               </li>
