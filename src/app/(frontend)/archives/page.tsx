@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata: Metadata = {
@@ -76,7 +77,7 @@ export default function ArchivesPage() {
                           </time>
                           <a href={`/posts/${post.slug}`} className="archive-post-title">
                             {post.title}
-                          </a>
+                          </Link>
                           <span className="archive-post-source">[{post.source}]</span>
                         </div>
                       </article>
@@ -117,12 +118,12 @@ export default function ArchivesPage() {
         </section>
 
         <div className="terminal-actions">
-          <a href="/posts" className="terminal-button">
+          <Link href="/posts" className="terminal-button">
             ← 返回文章列表
-          </a>
-          <a href="/tags" className="terminal-button">
+          </Link>
+          <Link href="/tags" className="terminal-button">
             🏷️ 查看标签
-          </a>
+          </Link>
         </div>
       </div>
     </TerminalLayout>

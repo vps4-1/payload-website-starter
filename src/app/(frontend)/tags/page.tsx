@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata: Metadata = {
@@ -79,7 +80,7 @@ export default function TagsPage() {
                       <span className="tag-card-count">{tag.count} 篇</span>
                     </div>
                     <p className="tag-card-desc">{tag.description}</p>
-                  </a>
+                  </Link>
                 </article>
               ))}
             </div>
@@ -98,7 +99,7 @@ export default function TagsPage() {
                     <span className="tag-card-count">{tag.count} 篇</span>
                   </div>
                   <p className="tag-card-desc">{tag.description}</p>
-                </a>
+                </Link>
               </article>
             ))}
           </div>
@@ -113,7 +114,7 @@ export default function TagsPage() {
                 <span key={tag.slug}>
                   <a href={`/search?q=${encodeURIComponent(tag.name)}`}>
                     {tag.name}
-                  </a>
+                  </Link>
                   {index < allTags.length - 1 && ' · '}
                 </span>
               ))}
@@ -122,12 +123,12 @@ export default function TagsPage() {
         </section>
 
         <div className="terminal-actions">
-          <a href="/posts" className="terminal-button">
+          <Link href="/posts" className="terminal-button">
             ← 返回文章列表
-          </a>
-          <a href="/archives" className="terminal-button">
+          </Link>
+          <Link href="/archives" className="terminal-button">
             📅 查看归档
-          </a>
+          </Link>
         </div>
       </div>
     </TerminalLayout>

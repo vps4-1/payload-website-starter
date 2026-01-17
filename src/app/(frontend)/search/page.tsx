@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata: Metadata = {
@@ -63,7 +64,7 @@ export default function SearchPage({
                 <h2>
                   <a href={`/posts/${post.slug}`}>
                     {post.title}
-                  </a>
+                  </Link>
                 </h2>
                 
                 <div className="result-meta">
@@ -85,22 +86,22 @@ export default function SearchPage({
                       className="keyword-link"
                     >
                       {tag}
-                    </a>
+                    </Link>
                   ))}
                 </div>
 
                 <a href={`/posts/${post.slug}`} className="result-link">
                   查看文章 →
-                </a>
+                </Link>
               </article>
             ))}
           </div>
         ) : (
           <div className="no-results">
             <p>没有找到匹配的文章</p>
-            <a href="/posts" className="terminal-button">
+            <Link href="/posts" className="terminal-button">
               浏览全部文章
-            </a>
+            </Link>
           </div>
         )}
       </div>

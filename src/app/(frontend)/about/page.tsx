@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata: Metadata = {
@@ -47,11 +48,11 @@ export default function AboutPage() {
             <p style={{ marginTop: '15px' }}>
               <a href="/rss.xml" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
                 📡 RSS 订阅
-              </a>
+              </Link>
               <span> :: </span>
               <a href="https://github.com/vps4-1/payload-website-starter" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
                 GitHub 仓库
-              </a>
+              </Link>
             </p>
           </div>
         </section>
@@ -116,15 +117,15 @@ export default function AboutPage() {
           <div className="terminal-output contact-grid">
             <div>
               <strong>📧 邮箱</strong>
-              <a href="mailto:contact@sijigpt.com">contact@sijigpt.com</a>
+              <a href="mailto:contact@sijigpt.com">contact@sijigpt.com</Link>
             </div>
             <div>
               <strong>🌐 网站</strong>
-              <a href="https://sijigpt.com" target="_blank" rel="noopener">sijigpt.com</a>
+              <a href="https://sijigpt.com" target="_blank" rel="noopener">sijigpt.com</Link>
             </div>
             <div>
               <strong>🏠 主站</strong>
-              <a href="https://zhuji.gd" target="_blank" rel="noopener">zhuji.gd</a>
+              <a href="https://zhuji.gd" target="_blank" rel="noopener">zhuji.gd</Link>
             </div>
           </div>
         </section>
@@ -188,17 +189,17 @@ export default function AboutPage() {
               <li>
                 <a href="/sitemap.xml" target="_blank" rel="noopener">
                   Sitemap.xml
-                </a> - 网站地图
+                </Link> - 网站地图
               </li>
               <li>
                 <a href="/robots.txt" target="_blank" rel="noopener">
                   Robots.txt
-                </a> - 爬虫协议
+                </Link> - 爬虫协议
               </li>
               <li>
                 <a href="/rss.xml" target="_blank" rel="noopener">
                   RSS Feed
-                </a> - 订阅源
+                </Link> - 订阅源
               </li>
             </ul>
           </div>
@@ -213,22 +214,22 @@ export default function AboutPage() {
               <li>
                 <a href="https://aigc-weekly.agi.li" target="_blank" rel="noopener">
                   Agili 的 AIGC 周刊
-                </a> - Terminal 主题的灵感来源
+                </Link> - Terminal 主题的灵感来源
               </li>
               <li>
                 <a href="https://payloadcms.com" target="_blank" rel="noopener">
                   Payload CMS
-                </a> - 强大的内容管理系统
+                </Link> - 强大的内容管理系统
               </li>
               <li>
                 <a href="https://nextjs.org" target="_blank" rel="noopener">
                   Next.js
-                </a> - 现代化的 React 框架
+                </Link> - 现代化的 React 框架
               </li>
               <li>
                 <a href="https://neon.tech" target="_blank" rel="noopener">
                   Neon
-                </a> - Serverless PostgreSQL
+                </Link> - Serverless PostgreSQL
               </li>
             </ul>
           </div>
@@ -250,12 +251,12 @@ $ █
 
         {/* 导航按钮 */}
         <div className="terminal-actions">
-          <a href="/posts" className="terminal-button">
+          <Link href="/posts" className="terminal-button">
             📚 浏览文章
-          </a>
-          <a href="/search" className="terminal-button">
+          </Link>
+          <Link href="/search" className="terminal-button">
             🔍 搜索内容
-          </a>
+          </Link>
         </div>
       </div>
     </TerminalLayout>

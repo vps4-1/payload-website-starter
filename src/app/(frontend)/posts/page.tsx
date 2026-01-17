@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata: Metadata = {
@@ -6,7 +7,6 @@ export const metadata: Metadata = {
   description: 'AI驾驶员的全球资讯聚合站 - 最新 AI 硬件软件资讯',
 }
 
-// 示例文章列表
 const mockPosts = [
   {
     id: '1',
@@ -35,15 +35,30 @@ export default function PostsPage() {
           <p className="posts-subtitle">
             AI驾驶员的全球资讯聚合站 🚗💨
           </p>
+          
+          <div className="posts-nav" style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <Link href="/tags" className="terminal-button" style={{ padding: '3px 12px', fontSize: '0.9rem' }}>
+              🏷️ 标签
+            </Link>
+            <Link href="/archives" className="terminal-button" style={{ padding: '3px 12px', fontSize: '0.9rem' }}>
+              📅 归档
+            </Link>
+            <Link href="/about" className="terminal-button" style={{ padding: '3px 12px', fontSize: '0.9rem' }}>
+              ℹ️ 关于
+            </Link>
+            <Link href="/rss.xml" className="terminal-button" style={{ padding: '3px 12px', fontSize: '0.9rem' }} target="_blank">
+              📡 RSS
+            </Link>
+          </div>
         </header>
 
         <div className="posts-list">
           {mockPosts.map((post) => (
             <article key={post.id} className="post-card framed">
               <h2>
-                <a href={`/posts/${post.slug}`}>
+                <Link href={`/posts/${post.slug}`}>
                   {post.title}
-                </a>
+                </Link>
               </h2>
               
               <div className="post-meta">
@@ -56,9 +71,9 @@ export default function PostsPage() {
                 {post.description}
               </p>
 
-              <a href={`/posts/${post.slug}`} className="read-more">
+              <Link href={`/posts/${post.slug}`} className="read-more">
                 阅读全文 →
-              </a>
+              </Link>
             </article>
           ))}
         </div>

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
@@ -101,7 +102,7 @@ export default async function PostPage({ params }: Props) {
             <strong>来源：</strong>
             <a href={post.source.url} target="_blank" rel="noopener noreferrer">
               [{post.source.name}] {post.original_language === 'en' ? post.title_en : post.title}
-            </a>
+            </Link>
           </div>
           <div className="post-date">
             <strong>发布时间：</strong>
@@ -130,7 +131,7 @@ export default async function PostPage({ params }: Props) {
                 className="keyword-link"
               >
                 {keyword}
-              </a>
+              </Link>
             ))}
           </div>
         </section>
@@ -154,7 +155,7 @@ export default async function PostPage({ params }: Props) {
                 className="keyword-link"
               >
                 {keyword}
-              </a>
+              </Link>
             ))}
           </div>
         </section>
@@ -170,16 +171,16 @@ export default async function PostPage({ params }: Props) {
                 className="keyword-link"
               >
                 {tag}
-              </a>
+              </Link>
             ))}
           </div>
         </section>
 
         {/* 返回按钮 */}
         <div className="post-actions">
-          <a href="/posts" className="terminal-button">
+          <Link href="/posts" className="terminal-button">
             ← 返回文章列表
-          </a>
+          </Link>
         </div>
       </article>
     </TerminalLayout>
