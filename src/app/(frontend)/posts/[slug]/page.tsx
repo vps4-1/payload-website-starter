@@ -36,21 +36,17 @@ export default async function PostPage({ params }: PageProps) {
           {post.title}
         </h1>
 
-        {post.title_en && (
-          <h2 className="text-xl text-terminal-muted">{post.title_en}</h2>
-        )}
-
         <div className="text-terminal-muted text-sm space-y-1">
           {post.source?.url && (
-            <p>
-              来源:{' '}
+            <p className="break-words">
+              出处:{' '}
               <a
                 href={post.source.url}
                 target="_blank"
                 rel="noopener"
                 className="text-pistachio-400 hover:underline"
               >
-                {post.source.name || 'Unknown'}
+                {post.source.name || 'Unknown'} - {post.title_en || post.title}
               </a>
             </p>
           )}
@@ -61,16 +57,20 @@ export default async function PostPage({ params }: PageProps) {
 
         {post.summary_zh?.content && (
           <div className="space-y-2 border-l-2 border-pistachio-400 pl-4">
-            <h3 className="text-pistachio-400 font-bold">📄 中文摘要</h3>
+            <h3 className="text-pistachio-400 font-bold">中文摘要</h3>
             <p className="text-terminal-text leading-relaxed whitespace-pre-wrap">
               {post.summary_zh.content}
             </p>
             {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
               <div className="flex flex-wrap gap-2 pt-2">
                 {post.summary_zh.keywords.map((kw: any) => (
-                  <span key={kw.id} className="text-xs text-pistachio-300">
+                  <Link
+                    key={kw.id}
+                    href={`/tags/${encodeURIComponent(kw.keyword)}`}
+                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline"
+                  >
                     #{kw.keyword}
-                  </span>
+                  </Link>
                 ))}
               </div>
             )}
@@ -79,16 +79,32 @@ export default async function PostPage({ params }: PageProps) {
 
         {post.summary_en?.content && (
           <div className="space-y-2 border-l-2 border-pistachio-400 pl-4">
-            <h3 className="text-pistachio-400 font-bold">📝 English Summary</h3>
+            <h3 className="text-pistachio-400 font-bold">English Summary</h3>
+            {post.title_en && (
+              <h4 className="text-lg text-terminal-text">
+                <a
+                  href={post.source?.url}
+                  target="_blank"
+                  rel="noopener"
+                  className="hover:text-pistachio-400 hover:underline"
+                >
+                  {post.title_en}
+                </a>
+              </h4>
+            )}
             <p className="text-terminal-text leading-relaxed whitespace-pre-wrap">
               {post.summary_en.content}
             </p>
             {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
               <div className="flex flex-wrap gap-2 pt-2">
                 {post.summary_en.keywords.map((kw: any) => (
-                  <span key={kw.id} className="text-xs text-pistachio-300">
+                  <Link
+                    key={kw.id}
+                    href={`/tags/${encodeURIComponent(kw.keyword)}`}
+                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline"
+                  >
                     #{kw.keyword}
-                  </span>
+                  </Link>
                 ))}
               </div>
             )}
