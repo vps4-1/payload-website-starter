@@ -44,12 +44,9 @@ export default async function HomePage() {
  |_____/|_| |_|\\_____|\\_____|  |_|   
 `}
           </pre>
-          
-          <div className="text-terminal-muted">
-          </pre>
-          
+
           {/* 导航栏 */}
-          <nav className="flex items-center gap-4 text-sm border-b border-terminal-border pb-3">
+          <nav className="flex items-center gap-4 text-sm border-b border-terminal-border pb-3 mb-4">
             <Link href="/" className="text-pistachio-400 hover:underline">主页</Link>
             <span className="text-terminal-gray">|</span>
             <Link href="/posts" className="text-pistachio-400 hover:underline">文章</Link>
@@ -60,6 +57,8 @@ export default async function HomePage() {
             <span className="text-terminal-gray">|</span>
             <Link href="/rss.xml" className="text-pistachio-400 hover:underline">RSS</Link>
           </nav>
+          
+          <div className="text-terminal-muted">
             <span className="text-pistachio-400">$ whoami</span>
             <p className="pl-4 mt-1">
               斯基GPT (SijiGPT) - 你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
