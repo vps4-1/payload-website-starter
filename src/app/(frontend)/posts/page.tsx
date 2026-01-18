@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata = {
-  title: '文章列表 - SiJiGPT',
+  title: '文章列表 - SijiGPT',
 }
 
 // 按需刷新：只有调用 revalidate API 时才更新

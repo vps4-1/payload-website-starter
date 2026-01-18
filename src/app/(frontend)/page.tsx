@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 export const metadata = {
-  title: 'SiJiGPT - 你的 AI 资讯驾驶员',
+  title: 'SijiGPT - 斯基GPT - 你的 AI 资讯驾驶员',
   description: '聚合全球优质 AI 资讯，提供中英双语深度解读',
 }
 
@@ -48,7 +48,7 @@ export default async function HomePage() {
           <div className="text-terminal-muted">
             <span className="text-pistachio-400">$ whoami</span>
             <p className="pl-4 mt-1">
-              SiJiGPT - 你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
+              SijiGPT - 斯基GPT - 你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
             </p>
           </div>
 
