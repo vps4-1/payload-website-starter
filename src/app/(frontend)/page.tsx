@@ -8,11 +8,10 @@ export const metadata = {
 }
 
 // 按需刷新
-export const revalidate = false
 
 async function getPosts(limit = 50) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=${limit}&sort=-createdAt`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=${limit}&sort=-createdAt`, { cache: 'no-store' })
     if (!res.ok) throw new Error('Failed to fetch')
     const data = await res.json()
     return {
