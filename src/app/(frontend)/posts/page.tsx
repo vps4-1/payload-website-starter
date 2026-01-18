@@ -5,14 +5,12 @@ export const metadata = {
   title: '文章列表 - SiJiGPT',
 }
 
-// ISR: 每小时重新生成一次
-export const revalidate = 3600
+// 按需刷新：只有调用 revalidate API 时才更新
+export const revalidate = false
 
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`, {
-      next: { revalidate: 3600 }
-    })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`)
     if (!res.ok) throw new Error('Failed to fetch')
     const data = await res.json()
     return data.docs || []
