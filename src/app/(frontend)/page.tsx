@@ -46,16 +46,16 @@ export default async function HomePage() {
           </pre>
 
           {/* 导航栏 */}
-          <nav className="flex items-center gap-4 text-sm border-b border-terminal-border pb-3 mb-4">
-            <Link href="/" className="text-pistachio-400 hover:underline">主页</Link>
+          <nav className="flex items-center gap-6 text-base font-semibold border-b border-terminal-border py-3 my-4 bg-terminal-bg-secondary">
+            <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">主页</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/posts" className="text-pistachio-400 hover:underline">文章</Link>
+            <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">文章</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/tags" className="text-pistachio-400 hover:underline">标签</Link>
+            <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">标签</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/archives" className="text-pistachio-400 hover:underline">归档</Link>
+            <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">归档</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/rss.xml" className="text-pistachio-400 hover:underline">RSS</Link>
+            <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">RSS</Link>
           </nav>
           
           <div className="text-terminal-muted">
@@ -108,7 +108,7 @@ export default async function HomePage() {
                             href={post.source.url}
                             target="_blank"
                             rel="noopener"
-                            className="text-pistachio-300 hover:text-pistachio-400 hover:underline"
+                            className="text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200"
                           >
                             {post.source.name || 'Unknown'}
                           </a>
@@ -130,12 +130,12 @@ export default async function HomePage() {
                     
                     {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap gap-8 pt-1">
+                      <div className="flex flex-wrap gap-12 pt-1">
                         {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                           <Link
                             key={kw.id}
                             href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
+                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200 whitespace-nowrap"
                           >
                             #{kw.keyword}
                           </Link>
