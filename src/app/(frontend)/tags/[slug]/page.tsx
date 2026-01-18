@@ -8,7 +8,7 @@ async function getPostsByTag(tag: string) {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=100&sort=-createdAt`,
-      { cache: 'no-store' }
+      { next: { revalidate: 0, tags: [] } }
     )
 
     if (!res.ok) return []

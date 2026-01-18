@@ -9,7 +9,7 @@ export const metadata = {
 
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`, { cache: 'no-store', next: { tags: ['posts'] } })
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`, { next: { revalidate: 0, tags: ['posts'] } })
     if (!res.ok) throw new Error('Failed to fetch')
     const data = await res.json()
     return data.docs || []
