@@ -30,7 +30,7 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound()
 
   return (
-    <TerminalLayout>
+    <TemplateLayout>
       <article className="space-y-6">
         <h1 className="text-2xl text-pistachio-400">
           {post.title}
@@ -62,12 +62,12 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_zh.content}
             </p>
             {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
-              <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2">
+              <div className="flex flex-wrap gap-3 pt-2">
                 {post.summary_zh.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
                     href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
+                    className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
                   >
                     #{kw.keyword}
                   </Link>
@@ -96,12 +96,12 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.content}
             </p>
             {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
-              <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2">
+              <div className="flex flex-wrap gap-3 pt-2">
                 {post.summary_en.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
                     href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
+                    className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
                   >
                     #{kw.keyword}
                   </Link>
