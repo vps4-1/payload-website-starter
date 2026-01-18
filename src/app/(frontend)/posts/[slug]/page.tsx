@@ -56,18 +56,18 @@ export default async function PostPage({ params }: PageProps) {
         </div>
 
         {post.summary_zh?.content && (
-          <div className="space-y-2 border-l-2 border-pistachio-400 pl-4">
+          <div className="space-y-3 border-l-2 border-pistachio-400 pl-4">
             <h3 className="text-pistachio-400 font-bold">中文摘要</h3>
             <p className="text-terminal-text leading-relaxed whitespace-pre-wrap">
               {post.summary_zh.content}
             </p>
             {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2">
                 {post.summary_zh.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
                     href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline"
+                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
                   >
                     #{kw.keyword}
                   </Link>
@@ -78,7 +78,7 @@ export default async function PostPage({ params }: PageProps) {
         )}
 
         {post.summary_en?.content && (
-          <div className="space-y-2 border-l-2 border-pistachio-400 pl-4">
+          <div className="space-y-3 border-l-2 border-pistachio-400 pl-4">
             <h3 className="text-pistachio-400 font-bold">English Summary</h3>
             {post.title_en && (
               <h4 className="text-lg text-terminal-text">
@@ -96,12 +96,12 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.content}
             </p>
             {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
-              <div className="flex flex-wrap gap-2 pt-2">
+              <div className="flex flex-wrap gap-x-4 gap-y-2 pt-2">
                 {post.summary_en.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
                     href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline"
+                    className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
                   >
                     #{kw.keyword}
                   </Link>
