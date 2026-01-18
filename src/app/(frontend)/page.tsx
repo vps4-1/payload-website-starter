@@ -65,7 +65,7 @@ export default async function HomePage() {
         <div className="space-y-6">
           <h2 className="text-xl text-pistachio-400 border-b border-terminal-border pb-2">
           {/* 导航栏 */}
-          <nav className="flex items-center gap-6 text-base font-bold border-2 border-pistachio-400 rounded-lg px-6 py-3 mb-6 bg-terminal-bg-secondary shadow-lg">
+          <nav className="flex items-center justify-center gap-6 text-base font-bold border-2 border-pistachio-400 rounded-lg px-6 py-3 mb-6 bg-terminal-bg-secondary shadow-lg">
             <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">主页</Link>
             <span className="text-terminal-gray">|</span>
             <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">文章</Link>
@@ -130,18 +130,20 @@ export default async function HomePage() {
                     )}
                     
                     {/* 第四行：标签 */}
+                    {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap gap-16 pt-1">
+                      <div className="flex flex-wrap pt-1" style={{ gap: '4rem' }}>
                         {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                           <Link
                             key={kw.id}
                             href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200 whitespace-nowrap"
+                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
                           >
                             #{kw.keyword}
                           </Link>
                         ))}
                       </div>
+                    )}
                     )}
                   </article>
                   

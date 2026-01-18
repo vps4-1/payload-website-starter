@@ -62,7 +62,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_zh.content}
             </p>
             {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap" style={{ gap: "4rem" }} pt-2">
                 {post.summary_zh.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
@@ -96,7 +96,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.content}
             </p>
             {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
-              <div className="flex flex-wrap gap-4 pt-2">
+              <div className="flex flex-wrap" style={{ gap: "4rem" }} pt-2">
                 {post.summary_en.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
