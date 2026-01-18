@@ -30,7 +30,7 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound()
 
   return (
-    <TemplateLayout>
+    <TerminalLayout>
       <article className="space-y-6">
         <h1 className="text-2xl text-pistachio-400">
           {post.title}
