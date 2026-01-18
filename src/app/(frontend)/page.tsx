@@ -71,45 +71,64 @@ export default async function HomePage() {
               文章正在聚合中，Worker 每天会自动发布新内容...
             </p>
           ) : (
-            <div className="space-y-4">
-              {posts.map((post: any, index: number) => (
-                <div key={post.id} className="border-l-2 border-pistachio-400 pl-4 hover:border-pistachio-300 transition-colors">
-                  <div className="flex items-center gap-2 text-terminal-muted text-sm">
-                    <span className="text-pistachio-300">#{index + 1}</span>
+            <div className="space-y-6">
+              {posts.map((post: any) => (
+                <article key={post.id} className="border-l-2 border-pistachio-400 pl-4 space-y-2">
+                  {/* 第一行：标题 */}
+                  <h3>
+                    <Link 
+                      href={`/posts/${post.slug}`}
+                      className="text-pistachio-400 hover:text-pistachio-300 text-lg font-medium"
+                    >
+                      {post.title}
+                    </Link>
+                  </h3>
+                  
+                  {/* 第二行：发布时间 + 出处 */}
+                  <div className="text-terminal-muted text-sm flex flex-wrap items-center gap-2">
                     <span>{new Date(post.createdAt).toLocaleDateString('zh-CN')}</span>
+                    {post.source?.url && (
+                      <>
+                        <span>·</span>
+                        <a
+                          href={post.source.url}
+                          target="_blank"
+                          rel="noopener"
+                          className="text-pistachio-300 hover:text-pistachio-400 hover:underline"
+                        >
+                          {post.source.name || 'Unknown'}
+                        </a>
+                      </>
+                    )}
                   </div>
                   
-                  <Link 
-                    href={`/posts/${post.slug}`}
-                    className="text-pistachio-400 hover:text-pistachio-300 text-lg block mt-1 font-medium"
-                  >
-                    {post.title}
-                  </Link>
+                  {/* 第三行：摘要（带链接） */}
+                  {post.summary_zh?.content && (
+                    <Link 
+                      href={`/posts/${post.slug}`}
+                      className="block text-terminal-text hover:text-pistachio-400 transition-colors"
+                    >
+                      <p className="line-clamp-2">
+                        {post.summary_zh.content.substring(0, 200)}...
+                      </p>
+                    </Link>
+                  )}
                   
-                  {post.title_en && (
-                    <div className="text-terminal-muted text-sm mt-1">
-                      {post.title_en}
+                  {/* 第四行：标签 */}
+                  {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
+                    <div className="flex flex-wrap gap-4 pt-1">
+                      {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
+                        <Link
+                          key={kw.id}
+                          href={`/tags/${encodeURIComponent(kw.keyword)}`}
+                          className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
+                        >
+                          #{kw.keyword}
+                        </Link>
+                      ))}
                     </div>
                   )}
-                  
-                  {post.summary_zh?.content && (
-                    <p className="text-terminal-text mt-2 line-clamp-2">
-                      {post.summary_zh.content.substring(0, 150)}...
-                    </p>
-                  )}
-                  
-                  <div className="flex flex-wrap gap-4 mt-2">
-                    {post.summary_zh?.keywords?.slice(0, 5).map((kw: any) => (
-                      <Link
-                        key={kw.id}
-                        href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                        className="text-xs text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
-                      >
-                        #{kw.keyword}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
+                </article>
               ))}
             </div>
           )}
