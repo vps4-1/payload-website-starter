@@ -96,7 +96,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.content}
             </p>
             {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
-              <div className="flex flex-wrap pt-2" style={{ gap: "4rem" }}">
+              <div className="flex flex-wrap pt-2" style={{ gap: "4rem" }}>
                 {post.summary_en.keywords.map((kw: any) => (
                   <Link
                     key={kw.id}
