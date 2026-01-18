@@ -46,6 +46,20 @@ export default async function HomePage() {
           </pre>
           
           <div className="text-terminal-muted">
+          </pre>
+          
+          {/* 导航栏 */}
+          <nav className="flex items-center gap-4 text-sm border-b border-terminal-border pb-3">
+            <Link href="/" className="text-pistachio-400 hover:underline">主页</Link>
+            <span className="text-terminal-gray">|</span>
+            <Link href="/posts" className="text-pistachio-400 hover:underline">文章</Link>
+            <span className="text-terminal-gray">|</span>
+            <Link href="/tags" className="text-pistachio-400 hover:underline">标签</Link>
+            <span className="text-terminal-gray">|</span>
+            <Link href="/archives" className="text-pistachio-400 hover:underline">归档</Link>
+            <span className="text-terminal-gray">|</span>
+            <Link href="/rss.xml" className="text-pistachio-400 hover:underline">RSS</Link>
+          </nav>
             <span className="text-pistachio-400">$ whoami</span>
             <p className="pl-4 mt-1">
               斯基GPT (SijiGPT) - 你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
@@ -117,7 +131,7 @@ export default async function HomePage() {
                     
                     {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap gap-6 pt-1">
+                      <div className="flex flex-wrap gap-8 pt-1">
                         {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                           <Link
                             key={kw.id}
