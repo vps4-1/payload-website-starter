@@ -46,7 +46,7 @@ export default async function HomePage() {
           </pre>
 
           {/* 导航栏 */}
-          <nav className="flex items-center gap-6 text-base font-semibold border-b border-terminal-border py-3 my-4 bg-terminal-bg-secondary">
+          <nav className="flex items-center gap-6 text-lg font-bold border-2 border-pistachio-400 rounded px-4 py-3 my-6 bg-terminal-bg-secondary">
             <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">主页</Link>
             <span className="text-terminal-gray">|</span>
             <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200">文章</Link>
@@ -130,7 +130,7 @@ export default async function HomePage() {
                     
                     {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap gap-12 pt-1">
+                      <div className="flex flex-wrap gap-16 pt-1">
                         {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                           <Link
                             key={kw.id}
