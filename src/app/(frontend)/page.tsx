@@ -131,7 +131,7 @@ export default async function HomePage() {
                     
                     {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap pt-1" style={{ gap: '4rem' }}>
+                      <div className="flex flex-wrap pt-1" style={{ gap: '64px' }}>
                         {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                           <Link
                             key={kw.id}
