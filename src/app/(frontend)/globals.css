@@ -758,3 +758,24 @@ hr {
     font-size: 1.1rem;
   }
 }
+
+/* 导航栏样式 */
+.terminal-nav {
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--terminal-border);
+}
+
+.nav-link {
+  color: var(--terminal-green);
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+  transition: all 0.2s;
+}
+
+.nav-link:hover {
+  background-color: var(--terminal-green);
+  color: var(--terminal-bg);
+}

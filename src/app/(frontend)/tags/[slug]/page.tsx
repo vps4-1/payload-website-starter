@@ -1,99 +1,96 @@
+import React from 'react'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
-// 按需刷新
 export const revalidate = false
-
-interface PageProps {
-  params: Promise<{ slug: string }>
-}
 
 async function getPostsByTag(tag: string) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=100&sort=-createdAt`
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=100&sort=-createdAt`,
+      { cache: 'no-store' }
     )
-    if (!res.ok) throw new Error('Failed to fetch')
+
+    if (!res.ok) return []
+
     const data = await res.json()
-    
-    // 前端过滤包含该标签的文章
-    const filtered = data.docs.filter((post: any) => {
-      const zhKeywords = post.summary_zh?.keywords || []
-      const enKeywords = post.summary_en?.keywords || []
-      return [...zhKeywords, ...enKeywords].some((kw: any) => 
-        kw.keyword === decodeURIComponent(tag)
+    const posts = data.docs || []
+
+    return posts.filter((post: any) => {
+      const zhKeywords = post.summary_zh?.keywords?.map((k: any) => 
+        typeof k === 'string' ? k : k.keyword
+      ) || []
+      const enKeywords = post.summary_en?.keywords?.map((k: any) => 
+        typeof k === 'string' ? k : k.keyword
+      ) || []
+
+      return [...zhKeywords, ...enKeywords].some((keyword: string) => 
+        keyword.toLowerCase() === tag.toLowerCase()
       )
     })
-    
-    return filtered
   } catch (error) {
-    console.error('获取文章失败:', error)
+    console.error('获取标签文章失败:', error)
     return []
   }
 }
 
-export default async function TagPage({ params }: PageProps) {
-  const { slug } = await params
-  const tag = decodeURIComponent(slug)
+export default async function TagPage({ 
+  params 
+}: { 
+  params: { slug: string } 
+}) {
+  const tag = decodeURIComponent(params.slug)
   const posts = await getPostsByTag(tag)
 
-  if (posts.length === 0) notFound()
+  if (posts.length === 0) {
+    notFound()
+  }
 
   return (
     <TerminalLayout>
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold mb-2">
+          标签: #{tag}
+        </h1>
+        <p className="text-terminal-gray">
+          找到 {posts.length} 篇相关文章
+        </p>
+      </div>
+
       <div className="space-y-6">
-        <div>
-          <h1 className="text-2xl text-pistachio-400">$ ls posts/ | grep "#{tag}"</h1>
-          <p className="text-terminal-muted mt-2">
-            找到 {posts.length} 篇相关文章
-          </p>
-        </div>
+        {posts.map((post: any) => (
+          <article key={post.id} className="border-b border-terminal-border pb-4">
+            <Link href={`/posts/${post.slug}`}>
+              <h2 className="text-xl font-bold hover:text-terminal-green transition-colors">
+                {post.title}
+              </h2>
+            </Link>
+            
+            {post.title_en && (
+              <p className="text-terminal-gray text-sm mt-1">
+                {post.title_en}
+              </p>
+            )}
 
-        <div className="space-y-6">
-          {posts.map((post: any, index: number) => (
-            <React.Fragment key={post.id}>
-              <article className="border-l-2 border-pistachio-400 pl-4 space-y-2">
-                <h3>
-                  <Link 
-                    href={`/posts/${post.slug}`}
-                    className="text-pistachio-400 hover:text-pistachio-300 text-lg font-medium"
-                  >
-                    {post.title}
-                  </Link>
-                </h3>
-                
-                <div className="text-terminal-muted text-sm">
-                  {new Date(post.createdAt).toLocaleDateString('zh-CN')}
-                </div>
-                
-                {post.summary_zh?.content && (
-                  <Link 
-                    href={`/posts/${post.slug}`}
-                    className="block text-terminal-text hover:text-pistachio-400"
-                  >
-                    <p className="line-clamp-2">
-                      {post.summary_zh.content.substring(0, 150)}...
-                    </p>
-                  </Link>
-                )}
-              </article>
-              
-              {index < posts.length - 1 && (
-                <hr className="border-terminal-border" />
-              )}
-            </React.Fragment>
-          ))}
-        </div>
+            <time className="text-terminal-gray text-sm block mt-2">
+              {new Date(post.createdAt).toLocaleDateString('zh-CN')}
+            </time>
 
-        <Link href="/" className="text-pistachio-400 hover:underline block mt-8">
-          ← 返回首页
+            {post.summary_zh?.content && (
+              <p className="text-terminal-gray mt-2">
+                {post.summary_zh.content.substring(0, 150)}...
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+
+      <div className="mt-6">
+        <Link href="/tags" className="text-terminal-green hover:underline">
+          ← 返回所有标签
         </Link>
       </div>
     </TerminalLayout>
   )
-}
-
-export async function generateStaticParams() {
-  return []
 }
