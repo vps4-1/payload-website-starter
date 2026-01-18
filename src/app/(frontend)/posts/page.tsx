@@ -5,10 +5,13 @@ export const metadata = {
   title: '文章列表 - SiJiGPT',
 }
 
+// ISR: 每小时重新生成一次
+export const revalidate = 3600
+
 async function getPosts() {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`, {
-      cache: 'no-store'
+      next: { revalidate: 3600 }
     })
     if (!res.ok) throw new Error('Failed to fetch')
     const data = await res.json()
