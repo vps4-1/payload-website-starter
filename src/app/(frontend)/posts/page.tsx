@@ -6,11 +6,10 @@ export const metadata = {
 }
 
 // 按需刷新：只有调用 revalidate API 时才更新
-export const revalidate = false
 
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20`, { cache: 'no-store', next: { tags: ['posts'] } })
     if (!res.ok) throw new Error('Failed to fetch')
     const data = await res.json()
     return data.docs || []

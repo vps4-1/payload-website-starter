@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
 // 按需刷新
-export const revalidate = false
 
 interface PageProps {
   params: Promise<{ slug: string }>

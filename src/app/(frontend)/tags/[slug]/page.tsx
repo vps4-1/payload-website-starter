@@ -3,7 +3,6 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
-export const revalidate = false
 
 async function getPostsByTag(tag: string) {
   try {
