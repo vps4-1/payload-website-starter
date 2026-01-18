@@ -7,4 +7,8 @@ export default withPayload({
   eslint: {
     ignoreDuringBuilds: true,
   },
+  experimental: {
+    // 禁用构建时的数据库查询
+    serverComponentsExternalPackages: ['payload'],
+  },
 })
