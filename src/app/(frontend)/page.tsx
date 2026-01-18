@@ -71,10 +71,10 @@ export default async function HomePage() {
               文章正在聚合中，Worker 每天会自动发布新内容...
             </p>
           ) : (
-            <div className="divide-y divide-terminal-border">
-              {posts.map((post: any) => (
-                <article key={post.id} className="py-6 first:pt-0">
-                  <div className="border-l-2 border-pistachio-400 pl-4 space-y-2">
+            <div className="space-y-6">
+              {posts.map((post: any, index: number) => (
+                <React.Fragment key={post.id}>
+                  <article className="border-l-2 border-pistachio-400 pl-4 space-y-2">
                     {/* 第一行：标题 */}
                     <h3>
                       <Link 
@@ -129,8 +129,13 @@ export default async function HomePage() {
                         ))}
                       </div>
                     )}
-                  </div>
-                </article>
+                  </article>
+                  
+                  {/* 分割线（最后一篇不显示） */}
+                  {index < posts.length - 1 && (
+                    <hr className="border-terminal-border" />
+                  )}
+                </React.Fragment>
               ))}
             </div>
           )}
