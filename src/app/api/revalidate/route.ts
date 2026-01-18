@@ -10,12 +10,27 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    // 刷新文章列表页
-    revalidatePath('/posts')
-    revalidatePath('/')
+    // 刷新所有相关页面
+    const paths = [
+      '/',              // 首页
+      '/posts',         // 文章列表
+      '/archives',      // 归档页
+      '/tags',          // 标签页
+      '/search',        // 搜索页
+      '/about',         // 关于页
+    ]
+    
+    paths.forEach(path => {
+      revalidatePath(path)
+    })
+    
+    // 刷新所有动态路由
+    revalidatePath('/posts/[slug]', 'page')
+    revalidatePath('/tags/[slug]', 'page')
     
     return NextResponse.json({ 
-      revalidated: true, 
+      revalidated: true,
+      paths: paths,
       now: Date.now() 
     })
   } catch (err) {
