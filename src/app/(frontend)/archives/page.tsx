@@ -1,129 +1,101 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 
-export const metadata: Metadata = {
-  title: '归档 - SiJiGPT',
-  description: '按时间查看所有文章',
+export const metadata = {
+  title: '归档 - SijiGPT',
+  description: '按时间归档的所有文章',
 }
 
-const archives = [
-  {
-    year: '2026',
-    months: [
-      {
-        month: '01',
-        monthName: '一月',
-        posts: [
-          {
-            id: '1',
-            slug: 'zenken-chatgpt-enterprise',
-            title: 'Zenken通过ChatGPT Enterprise增强精简销售团队',
-            date: '2026-01-15',
-            source: 'OpenAI Blog',
-          },
-          {
-            id: '2',
-            slug: 'alibaba-tongyi-qianwen-3',
-            title: '阿里云发布通义千问3.0大模型',
-            date: '2026-01-14',
-            source: '阿里云官方博客',
-          },
-        ],
-      },
-    ],
-  },
-]
+// ✅ 纯 ISR：不设置 revalidate，完全按需刷新
+// 只有调用 revalidatePath('/archives') 时才更新
 
-export default function ArchivesPage() {
-  const totalPosts = archives.reduce((sum, year) => {
-    return sum + year.months.reduce((monthSum, month) => monthSum + month.posts.length, 0)
-  }, 0)
+async function getArchives() {
+  try {
+    const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL
+    
+    const res = await fetch(
+      `${NEXT_PUBLIC_SERVER_URL}/api/posts?limit=1000&sort=-createdAt`,
+      { 
+        next: { tags: ['posts'] }  // 支持 revalidateTag('posts')
+      }
+    )
+    
+    if (!res.ok) throw new Error('Failed to fetch')
+    
+    const data = await res.json()
+    const posts = data.docs || []
+    
+    // 按年月分组
+    const archives: Record<string, any[]> = {}
+    
+    posts.forEach((post: any) => {
+      const date = new Date(post.createdAt)
+      const year = date.getFullYear()
+      const month = String(date.getMonth() + 1).padStart(2, '0')
+      const key = `${year}-${month}`
+      
+      if (!archives[key]) {
+        archives[key] = []
+      }
+      archives[key].push(post)
+    })
+    
+    return {
+      archives,
+      totalDocs: data.totalDocs || 0
+    }
+  } catch (error) {
+    console.error('Failed to fetch archives:', error)
+    return { archives: {}, totalDocs: 0 }
+  }
+}
 
+export default async function ArchivesPage() {
+  const { archives, totalDocs } = await getArchives()
+  
   return (
-    <TerminalLayout title="SiJiGPT">
-      <div className="archives-page">
-        <header className="archives-header">
-          <h1>$ ls posts/ --sort-by date --group-by month</h1>
-          <p className="archives-subtitle">共 {totalPosts} 篇文章</p>
-        </header>
-
-        <div className="archives-timeline">
-          {archives.map((yearData) => (
-            <div key={yearData.year} className="archive-year">
-              <h2 className="year-title">
-                <span className="year-marker">▸</span> {yearData.year} 年
-              </h2>
-              
-              {yearData.months.map((monthData) => (
-                <div key={`${yearData.year}-${monthData.month}`} className="archive-month">
-                  <h3 className="month-title">
-                    <span className="month-marker">├─</span> {monthData.monthName}
-                    <span className="month-count">({monthData.posts.length} 篇)</span>
-                  </h3>
-
-                  <div className="posts-in-month">
-                    {monthData.posts.map((post, index) => (
-                      <article key={post.id} className="archive-post-item">
-                        <span className="post-marker">
-                          {index === monthData.posts.length - 1 ? '└─' : '├─'}
-                        </span>
-                        <div className="archive-post-content">
-                          <time className="archive-post-date">
-                            {new Date(post.date).toLocaleDateString('zh-CN', {
-                              month: '2-digit',
-                              day: '2-digit',
-                            })}
-                          </time>
-                          <Link href={`/posts/${post.slug}`} className="archive-post-title">
-                            {post.title}
-                          </Link>
-                          <span className="archive-post-source">[{post.source}]</span>
-                        </div>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        <section className="archives-stats">
-          <h2>$ cat stats.log</h2>
-          <div className="terminal-output">
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-number">{totalPosts}</div>
-                <div className="stat-label">文章总数</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">{archives.length}</div>
-                <div className="stat-label">年份</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">
-                  {archives.reduce((sum, year) => sum + year.months.length, 0)}
-                </div>
-                <div className="stat-label">月份</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">
-                  {(totalPosts / archives.reduce((sum, year) => sum + year.months.length, 0)).toFixed(1)}
-                </div>
-                <div className="stat-label">月均产出</div>
-              </div>
-            </div>
+    <TerminalLayout>
+      <div className="space-y-8">
+        <div className="space-y-4">
+          <h1 className="text-2xl text-pistachio-400 border-b border-terminal-border pb-2">
+            归档
+          </h1>
+          
+          <div className="text-terminal-muted text-sm">
+            <span className="text-pistachio-400">$ ls -la archives/</span>
+            <p className="pl-4 mt-1">共 {totalDocs} 篇文章</p>
           </div>
-        </section>
-
-        <div className="terminal-actions">
-          <Link href="/posts" className="terminal-button">
-            ← 返回文章列表
-          </Link>
-          <Link href="/tags" className="terminal-button">
-            🏷️ 查看标签
-          </Link>
+        </div>
+        
+        <div className="space-y-8">
+          {Object.entries(archives)
+            .sort(([a], [b]) => b.localeCompare(a))
+            .map(([month, posts]) => (
+              <div key={month} className="space-y-3">
+                <h2 className="text-lg text-pistachio-400 font-semibold">
+                  {month}
+                </h2>
+                <ul className="pl-4 space-y-2">
+                  {posts.map((post: any) => (
+                    <li key={post.id} className="text-sm">
+                      <Link 
+                        href={`/posts/${post.slug}`}
+                        className="text-terminal-text hover:text-pistachio-400 transition-colors"
+                      >
+                        <span className="text-terminal-muted mr-3">
+                          {new Date(post.createdAt).toLocaleDateString('zh-CN')}
+                        </span>
+                        {post.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          
+          {Object.keys(archives).length === 0 && (
+            <p className="text-terminal-muted">暂无文章</p>
+          )}
         </div>
       </div>
     </TerminalLayout>
