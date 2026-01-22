@@ -55,10 +55,10 @@ export default async function HomePage() {
 
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
-      <div className="space-y-6">
-        {/* 网站介绍 - 强制居中 */}
+      <div className="space-y-4">
+        {/* 网站介绍 - 强制居中，缩小间距 */}
         <div className="w-full" style={{ textAlign: 'center' }}>
-          <div className="space-y-3">
+          <div className="space-y-1">
             <p className="text-lg text-terminal-muted" style={{ textAlign: 'center' }}>
               你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
             </p>
