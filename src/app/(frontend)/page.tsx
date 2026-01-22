@@ -67,39 +67,39 @@ export default async function HomePage() {
         </div>
 
         {/* 订阅服务 */}
-        <div className="space-y-4">
-          <div className="text-pistachio-400 text-center text-lg font-bold">
-            $ 订阅我们 ————————————————————————————————————————
+        <div className="flex flex-wrap items-center justify-center gap-4 max-w-6xl mx-auto">
+          <div className="text-pistachio-400 text-lg font-bold flex items-center gap-2">
+            <span>$ 订阅我们</span>
+            <span className="text-terminal-gray">——</span>
           </div>
-          <div className="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
-            <a 
-              href="https://t.me/sijigpt" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-center whitespace-nowrap"
-            >
-              <span>📱</span>
-              <span>Telegram 频道</span>
-            </a>
-            
-            <a 
-              href="mailto:subscribe@sijigpt.com" 
-              className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-center whitespace-nowrap"
-            >
-              <span>📧</span>
-              <span>邮件订阅</span>
-            </a>
-            
-            <a 
-              href="https://notion.so/sijigpt" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-center whitespace-nowrap"
-            >
-              <span>📄</span>
-              <span>Notion 订阅</span>
-            </a>
-          </div>
+          
+          <a 
+            href="https://t.me/sijigpt" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-center whitespace-nowrap"
+          >
+            <span>📱</span>
+            <span>Telegram 频道</span>
+          </a>
+          
+          <a 
+            href="mailto:subscribe@sijigpt.com" 
+            className="flex items-center justify-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-center whitespace-nowrap"
+          >
+            <span>📧</span>
+            <span>邮件订阅</span>
+          </a>
+          
+          <a 
+            href="https://notion.so/sijigpt" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-center whitespace-nowrap"
+          >
+            <span>📄</span>
+            <span>Notion 订阅</span>
+          </a>
         </div>
 
         {/* 文章列表 */}
