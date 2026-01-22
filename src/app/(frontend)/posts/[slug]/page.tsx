@@ -134,7 +134,7 @@ export default async function PostPage({ params }: PageProps) {
                     rel="noopener noreferrer"
                     className="text-pistachio-400 hover:text-pistachio-300 hover:underline transition-colors"
                   >
-                    {post.source.name || 'Unknown'}
+                    {post.title_en || post.title}
                   </a>
                 </p>
               )}
@@ -190,16 +190,16 @@ export default async function PostPage({ params }: PageProps) {
 
         {/* 上一篇下一篇导航 */}
         <nav className="flex justify-between items-center py-8 border-t-2 border-terminal-border mt-8">
-          <div className="flex-1">
+          <div className="flex-1 pr-4">
             {prevPost && (
               <Link
                 href={`/posts/${prevPost.slug}`}
                 className="group flex items-center gap-2 text-terminal-muted hover:text-pistachio-400 transition-colors"
               >
                 <span className="text-lg">←</span>
-                <div>
+                <div className="min-w-0 flex-1">
                   <div className="text-xs text-terminal-muted">上一篇</div>
-                  <div className="group-hover:text-pistachio-400 transition-colors line-clamp-1">
+                  <div className="group-hover:text-pistachio-400 transition-colors truncate">
                     {prevPost.summary_zh?.title || prevPost.title}
                   </div>
                 </div>
@@ -207,15 +207,15 @@ export default async function PostPage({ params }: PageProps) {
             )}
           </div>
           
-          <div className="flex-1 text-right">
+          <div className="flex-1 text-right pl-4">
             {nextPost && (
               <Link
                 href={`/posts/${nextPost.slug}`}
                 className="group flex items-center justify-end gap-2 text-terminal-muted hover:text-pistachio-400 transition-colors"
               >
-                <div className="text-right">
+                <div className="text-right min-w-0 flex-1">
                   <div className="text-xs text-terminal-muted">下一篇</div>
-                  <div className="group-hover:text-pistachio-400 transition-colors line-clamp-1">
+                  <div className="group-hover:text-pistachio-400 transition-colors truncate">
                     {nextPost.summary_zh?.title || nextPost.title}
                   </div>
                 </div>
