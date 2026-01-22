@@ -206,12 +206,9 @@ export default async function PostPage({ params }: PageProps) {
           )}
         </article>
 
-        {/* 文章分隔线 */}
-        <div className="border-t-2 border-terminal-border mt-8"></div>
-
         {/* 相关文章 */}
         {relatedPosts.length > 0 && (
-          <section className="space-y-4 border-t-2 border-terminal-border pt-8">
+          <section className="space-y-4 border-t-2 border-terminal-border pt-8 mt-8">
             <h2 className="text-xl font-bold text-pistachio-400 mb-4">📚 相关文章</h2>
             <div className="space-y-4">
               {relatedPosts.slice(0, 3).map((relatedPost: any) => (

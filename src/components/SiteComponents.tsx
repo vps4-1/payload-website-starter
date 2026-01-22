@@ -28,7 +28,7 @@ export function SubscribeSection() {
   return (
     <>
       {/* 订阅区域 */}
-      <div className="mb-6" style={{ textAlign: 'center', width: '100%' }}>
+      <div className="mb-4" style={{ textAlign: 'center', width: '100%' }}>
         <div style={{ 
           display: 'flex', 
           justifyContent: 'center', 
@@ -77,7 +77,7 @@ export function SubscribeSection() {
       <div 
         style={{
           borderTop: '4px solid var(--pistachio-400)',
-          margin: '1.5rem 0 1rem 0',
+          margin: '1rem 0 1rem 0',
           width: '100%'
         }}
       ></div>
