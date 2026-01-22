@@ -81,8 +81,16 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
         </div>
       ) : (
         <>
-          {posts.map((post: Post) => (
-            <article key={post.id} className="py-4 border-b border-terminal-border/30">
+          {posts.map((post: Post, index: number) => (
+            <article 
+              key={post.id} 
+              className="py-4" 
+              style={{ 
+                borderBottom: index < posts.length - 1 ? '1px solid var(--terminal-border)' : 'none',
+                paddingTop: '1rem',
+                paddingBottom: '1rem'
+              }}
+            >
               <div className="space-y-2">
                 {/* 第一行：日期 */}
                 <div className="text-xs text-terminal-muted">
@@ -113,7 +121,7 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
                   <div 
                     className="flex flex-wrap pt-1" 
                     style={{ 
-                      gap: '1.5rem',
+                      gap: '0.3rem',
                       display: 'flex',
                       flexWrap: 'wrap',
                       paddingTop: '0.25rem'
@@ -124,7 +132,7 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
                         className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
-                        style={{ marginRight: '0.5rem', marginBottom: '0.25rem' }}
+                        style={{ marginRight: '0.2rem', marginBottom: '0.2rem' }}
                       >
                         #{kw.keyword}
                       </Link>
