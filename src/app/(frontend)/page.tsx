@@ -55,8 +55,8 @@ export default async function HomePage() {
 
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
-      <div className="space-y-4">
-        {/* 网站介绍 - 强制居中，缩小间距 */}
+      <div className="space-y-2">
+        {/* 网站介绍 - 强制居中，进一步缩小间距 */}
         <div className="w-full" style={{ textAlign: 'center' }}>
           <div className="space-y-1">
             <p className="text-lg text-terminal-muted" style={{ textAlign: 'center' }}>
@@ -68,7 +68,7 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* 订阅服务 - 强制居中，加大间距 */}
+        {/* 订阅服务 - 强制居中，更换分隔符 */}
         <div className="w-full">
           <div className="flex items-center justify-center gap-6" style={{ textAlign: 'center', width: '100%' }}>
             <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
@@ -84,7 +84,7 @@ export default async function HomePage() {
               <span>Telegram 频道</span>
             </a>
             
-            <span className="text-terminal-gray text-lg">•</span>
+            <span className="text-pistachio-400 text-xl font-bold">◆</span>
             
             <a 
               href="mailto:subscribe@sijigpt.com" 
@@ -94,7 +94,7 @@ export default async function HomePage() {
               <span>邮件订阅</span>
             </a>
             
-            <span className="text-terminal-gray text-lg">•</span>
+            <span className="text-pistachio-400 text-xl font-bold">◆</span>
             
             <a 
               href="https://notion.so/sijigpt" 
