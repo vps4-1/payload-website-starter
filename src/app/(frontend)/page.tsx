@@ -109,7 +109,13 @@ export default async function HomePage() {
         </div>
 
         {/* 分隔线 */}
-        <div className="border-t-4 border-pistachio-400 my-8"></div>
+        <div 
+          style={{
+            borderTop: '4px solid var(--pistachio-400)',
+            margin: '2rem 0',
+            width: '100%'
+          }}
+        ></div>
 
         {/* 文章列表 */}
         <div className="space-y-5">
