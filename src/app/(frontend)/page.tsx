@@ -33,22 +33,22 @@ export default async function HomePage() {
     <header className="terminal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '1.5rem 2rem' }}>
       {/* 左侧：网站标题 */}
       <div>
-        <Link href="/" className="hover:text-pistachio-300 transition-colors" style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>
+        <Link href="/" className="hover:text-pistachio-300 transition-colors" style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>
           斯基GPT
         </Link>
       </div>
       
       {/* 右侧：导航 */}
       <nav className="flex items-center gap-4">
-        <Link href="/" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>主页</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.5rem' }}>|</span>
-        <Link href="/posts" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>文章</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.5rem' }}>|</span>
-        <Link href="/tags" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>标签</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.5rem' }}>|</span>
-        <Link href="/archives" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>归档</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.5rem' }}>|</span>
-        <Link href="/rss.xml" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>RSS</Link>
+        <Link href="/" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>主页</Link>
+        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
+        <Link href="/posts" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>文章</Link>
+        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
+        <Link href="/tags" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>标签</Link>
+        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
+        <Link href="/archives" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>归档</Link>
+        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
+        <Link href="/rss.xml" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>RSS</Link>
       </nav>
     </header>
   )
@@ -67,7 +67,7 @@ export default async function HomePage() {
         </div>
 
         {/* 订阅服务 */}
-        <div className="flex items-center justify-center gap-4 text-center">
+        <div className="flex items-center justify-center gap-3 text-center">
           <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
           <span className="text-terminal-gray text-lg">——</span>
           
@@ -81,6 +81,8 @@ export default async function HomePage() {
             <span>Telegram 频道</span>
           </a>
           
+          <span className="text-terminal-gray text-lg">•</span>
+          
           <a 
             href="mailto:subscribe@sijigpt.com" 
             className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
@@ -88,6 +90,8 @@ export default async function HomePage() {
             <span>📧</span>
             <span>邮件订阅</span>
           </a>
+          
+          <span className="text-terminal-gray text-lg">•</span>
           
           <a 
             href="https://notion.so/sijigpt" 
