@@ -161,7 +161,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-pistachio-300 mb-2">🏷️ 相关标签</h3>
-                  <div className="flex flex-wrap" style={{ gap: '0.3rem' }}>
+                  <div className="flex flex-wrap" style={{ gap: '0.75rem' }}>
                     {post.summary_zh.keywords.map((kw: any) => (
                       <Link
                         key={kw.id}
@@ -184,6 +184,24 @@ export default async function PostPage({ params }: PageProps) {
               <div className="text-terminal-muted leading-relaxed whitespace-pre-wrap text-base">
                 {post.summary_en.content}
               </div>
+              
+              {/* 英文标签 */}
+              {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
+                <div className="pt-3">
+                  <h3 className="text-sm font-semibold text-terminal-text mb-2">🏷️ Related Tags</h3>
+                  <div className="flex flex-wrap" style={{ gap: '0.75rem' }}>
+                    {post.summary_en.keywords.map((kw: any) => (
+                      <Link
+                        key={kw.id}
+                        href={`/tags/${encodeURIComponent(kw.keyword)}`}
+                        className="text-sm px-2 py-1 bg-terminal-bg border border-terminal-border text-terminal-text hover:text-terminal-bg hover:bg-terminal-text transition-all duration-200 rounded whitespace-nowrap"
+                      >
+                        #{kw.keyword}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
             </section>
           )}
         </article>
