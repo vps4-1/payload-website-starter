@@ -55,9 +55,9 @@ export default async function HomePage() {
 
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
-      <div className="space-y-2">
-        {/* 网站介绍 - 强制居中，进一步缩小间距 */}
-        <div className="w-full" style={{ textAlign: 'center' }}>
+      <div style={{ marginTop: '-1rem' }}>
+        {/* 网站介绍 - 强制居中 */}
+        <div className="w-full mb-4" style={{ textAlign: 'center' }}>
           <div className="space-y-1">
             <p className="text-lg text-terminal-muted" style={{ textAlign: 'center' }}>
               你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
@@ -68,9 +68,9 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* 订阅服务 - 强制居中，更换分隔符 */}
-        <div className="w-full">
-          <div className="flex items-center justify-center gap-6" style={{ textAlign: 'center', width: '100%' }}>
+        {/* 订阅服务 - 强制居中，扩大分隔符间距 */}
+        <div className="w-full mb-6">
+          <div className="flex items-center justify-center gap-4" style={{ textAlign: 'center', width: '100%' }}>
             <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
             <span className="text-terminal-gray text-lg">——</span>
             
@@ -84,7 +84,7 @@ export default async function HomePage() {
               <span>Telegram 频道</span>
             </a>
             
-            <span className="text-pistachio-400 text-xl font-bold">◆</span>
+            <span className="text-pistachio-400 text-xl font-bold mx-4">◆</span>
             
             <a 
               href="mailto:subscribe@sijigpt.com" 
@@ -94,7 +94,7 @@ export default async function HomePage() {
               <span>邮件订阅</span>
             </a>
             
-            <span className="text-pistachio-400 text-xl font-bold">◆</span>
+            <span className="text-pistachio-400 text-xl font-bold mx-4">◆</span>
             
             <a 
               href="https://notion.so/sijigpt" 
