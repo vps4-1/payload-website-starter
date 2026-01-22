@@ -84,7 +84,7 @@ export default async function HomePage() {
               <span>Telegram 频道</span>
             </a>
             
-            <span style={{ margin: '0 1.5rem', display: 'inline-block', color: 'var(--pistachio-400)', fontSize: '1.25rem', fontWeight: 'bold' }}>◆</span>
+            <span style={{ margin: '0 0.75rem', display: 'inline-block', color: 'var(--pistachio-400)', fontSize: '1.25rem', fontWeight: 'bold' }}>◆</span>
             
             <a 
               href="mailto:subscribe@sijigpt.com" 
@@ -94,7 +94,7 @@ export default async function HomePage() {
               <span>邮件订阅</span>
             </a>
             
-            <span style={{ margin: '0 1.5rem', display: 'inline-block', color: 'var(--pistachio-400)', fontSize: '1.25rem', fontWeight: 'bold' }}>◆</span>
+            <span style={{ margin: '0 0.75rem', display: 'inline-block', color: 'var(--pistachio-400)', fontSize: '1.25rem', fontWeight: 'bold' }}>◆</span>
             
             <a 
               href="https://notion.so/sijigpt" 
