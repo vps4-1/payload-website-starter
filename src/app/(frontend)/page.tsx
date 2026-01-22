@@ -56,9 +56,6 @@ export default async function HomePage() {
       <div style={{ marginTop: '-1rem' }} className="mb-4">
         {/* 介绍信息 */}
         <div className="mb-4" style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)', marginBottom: '1rem' }}>
-            斯基GPT
-          </h1>
           <p className="text-lg text-terminal-text mb-2" style={{ textAlign: 'center' }}>
             你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
           </p>

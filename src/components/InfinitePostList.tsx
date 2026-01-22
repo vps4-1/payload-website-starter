@@ -110,12 +110,21 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
                 
                 {/* 第四行：标签 */}
                 {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                  <div className="flex flex-wrap pt-1" style={{ gap: '1rem' }}>
+                  <div 
+                    className="flex flex-wrap pt-1" 
+                    style={{ 
+                      gap: '1.5rem',
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      paddingTop: '0.25rem'
+                    }}
+                  >
                     {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                       <Link
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
                         className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
+                        style={{ marginRight: '0.5rem', marginBottom: '0.25rem' }}
                       >
                         #{kw.keyword}
                       </Link>
