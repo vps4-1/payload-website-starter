@@ -54,6 +54,9 @@ export default async function HomePage() {
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
       <div style={{ marginTop: '-1rem' }} className="mb-4">
+        {/* header下方细线 */}
+        <div style={{ borderTop: '1px solid var(--terminal-border)', margin: '0 0 1.5rem 0' }}></div>
+        
         {/* 介绍信息 */}
         <div className="mb-4" style={{ textAlign: 'center' }}>
           <p className="text-lg text-terminal-text mb-2" style={{ textAlign: 'center' }}>
@@ -68,7 +71,7 @@ export default async function HomePage() {
         </div>
 
         {/* 订阅区域 */}
-        <div className="mb-8" style={{ textAlign: 'center', width: '100%' }}>
+        <div className="mb-6" style={{ textAlign: 'center', width: '100%' }}>
           <div style={{ 
             display: 'flex', 
             justifyContent: 'center', 
@@ -117,7 +120,7 @@ export default async function HomePage() {
         <div 
           style={{
             borderTop: '4px solid var(--pistachio-400)',
-            margin: '2rem 0',
+            margin: '1.5rem 0 1rem 0',
             width: '100%'
           }}
         ></div>
