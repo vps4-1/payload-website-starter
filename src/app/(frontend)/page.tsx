@@ -55,9 +55,9 @@ export default async function HomePage() {
 
   return (
     <TerminalLayout customHeader={<SiteHeader />}>
-      <div style={{ marginTop: '-1rem' }} className="mb-4">
+      <div style={{ marginTop: '-1.5rem' }} className="mb-4">
         {/* header下方细线 */}
-        <div style={{ borderTop: '1px solid var(--terminal-border)', margin: '0 0 1.5rem 0' }}></div>
+        <div style={{ borderTop: '1px solid var(--terminal-border)', margin: '1.5rem 0 1.5rem 0' }}></div>
         
         {/* 介绍信息 */}
         <div className="mb-4" style={{ textAlign: 'center' }}>
