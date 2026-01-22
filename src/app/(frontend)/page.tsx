@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
+import InfinitePostList from '@/components/InfinitePostList'
 
 export const metadata = {
   title: 'SijiGPT - 斯基GPT - 你的 AI 资讯驾驶员',
@@ -28,51 +29,58 @@ async function getPosts(limit = 50) {
 export default async function HomePage() {
   const { posts, hasMore, totalDocs } = await getPosts(50)
 
-  // 自定义Header组件
   const CustomHeader = () => (
-    <header className="terminal-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '1.5rem 2rem' }}>
-      {/* 左侧：网站标题 */}
-      <div>
-        <Link href="/" className="hover:text-pistachio-300 transition-colors" style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>
-          斯基GPT
-        </Link>
-      </div>
-      
-      {/* 右侧：导航 */}
-      <nav className="flex items-center gap-4">
-        <Link href="/" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>主页</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
-        <Link href="/posts" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>文章</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
-        <Link href="/tags" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>标签</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
-        <Link href="/archives" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>归档</Link>
-        <span className="text-terminal-gray" style={{ fontSize: '1.1rem' }}>|</span>
-        <Link href="/rss.xml" className="hover:text-pistachio-300 px-3 py-2 transition-all duration-200" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)' }}>RSS</Link>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '1.5rem 2rem' }}>
+      <Link 
+        href="/" 
+        style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}
+      >
+        斯基GPT
+      </Link>
+      <nav style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <Link href="/posts" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>主页</Link>
+        <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
+        <Link href="/posts" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>文章</Link>
+        <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
+        <Link href="/tags" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>标签</Link>
+        <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
+        <Link href="/archives" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>归档</Link>
+        <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
+        <Link href="/rss.xml" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>RSS</Link>
       </nav>
-    </header>
+    </div>
   )
 
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
-      <div style={{ marginTop: '-2.5rem', paddingTop: '0' }}>
-        {/* 网站介绍 - 强制居中 */}
-        <div className="w-full" style={{ textAlign: 'center', marginBottom: '1rem' }}>
-          <div style={{ marginBottom: '0.25rem' }}>
-            <p className="text-lg text-terminal-muted" style={{ textAlign: 'center', margin: '0' }}>
-              你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
-            </p>
-            <p className="text-terminal-muted text-sm" style={{ textAlign: 'center', margin: '0.25rem 0 0 0' }}>
-              共 {totalDocs} 篇文章 · 每天 4 次更新 · AI 智能筛选 · 双语摘要
-            </p>
-          </div>
+      <div style={{ marginTop: '-1rem' }} className="mb-4">
+        {/* 介绍信息 */}
+        <div className="mb-4" style={{ textAlign: 'center' }}>
+          <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--pistachio-400)', marginBottom: '1rem' }}>
+            斯基GPT
+          </h1>
+          <p className="text-lg text-terminal-text mb-2" style={{ textAlign: 'center' }}>
+            你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
+          </p>
+        </div>
+        
+        <div className="mb-6" style={{ textAlign: 'center' }}>
+          <p className="text-terminal-muted text-sm">
+            共 {totalDocs} 篇文章 · 每天 4 次更新 · AI 智能筛选 · 双语摘要
+          </p>
         </div>
 
-        {/* 订阅服务 - 强制居中，强制分隔符间距 */}
-        <div className="w-full" style={{ marginBottom: '2rem' }}>
-          <div className="flex items-center justify-center" style={{ textAlign: 'center', width: '100%', gap: '1rem' }}>
-            <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
-            <span className="text-terminal-gray text-lg">——</span>
+        {/* 订阅区域 */}
+        <div className="mb-8" style={{ textAlign: 'center', width: '100%' }}>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            flexWrap: 'wrap', 
+            gap: '1.5rem'
+          }}>
+            <span className="text-pistachio-400 font-bold">$ 订阅我们</span>
+            <span className="text-pistachio-400">——</span>
             
             <a 
               href="https://t.me/sijigpt" 
@@ -118,108 +126,11 @@ export default async function HomePage() {
         ></div>
 
         {/* 文章列表 */}
-        <div className="space-y-5">
-        
-          {posts.length === 0 ? (
-            <div className="space-y-4 text-center py-12">
-              <div className="text-pistachio-400 text-lg">
-                <pre className="text-sm">
-{`
-  📡 正在聚合中...
-  
-  [ ████████████████████████████████ ] 100%
-`}
-                </pre>
-              </div>
-              <p className="text-terminal-muted">
-                Worker 每天自动发布新内容，AI 智能筛选全球优质资讯
-              </p>
-              <div className="text-terminal-muted text-sm">
-                数据源: OpenAI • Google AI • DeepMind • AWS ML Blog • HuggingFace
-              </div>
-            </div>
-          ) : (
-            <div className="space-y-6">
-              {posts.map((post: any, index: number) => (
-                <React.Fragment key={post.id}>
-                  <article className="border-l-2 border-pistachio-400 pl-4 space-y-2">
-                    {/* 第一行：标题 */}
-                    <h3>
-                      <Link 
-                        href={`/posts/${post.slug}`}
-                        className="text-pistachio-400 hover:text-pistachio-300 text-lg font-medium"
-                      >
-                        {post.title}
-                      </Link>
-                    </h3>
-                    
-                    {/* 第二行：发布时间 + 出处 */}
-                    <div className="text-terminal-muted text-sm flex flex-wrap items-center gap-2">
-                      <span>{new Date(post.createdAt).toLocaleDateString('zh-CN')}</span>
-                      {post.source?.url && (
-                        <>
-                          <span>·</span>
-                          <a
-                            href={post.source.url}
-                            target="_blank"
-                            rel="noopener"
-                            className="text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all duration-200"
-                          >
-                            {post.source.name || 'Unknown'}
-                          </a>
-                        </>
-                      )}
-                    </div>
-                    
-                    {/* 第三行：摘要（带链接） */}
-                    {post.summary_zh?.content && (
-                      <Link 
-                        href={`/posts/${post.slug}`}
-                        className="block text-terminal-text hover:text-pistachio-400 transition-colors"
-                      >
-                        <p className="line-clamp-2">
-                          {post.summary_zh.content.substring(0, 200)}...
-                        </p>
-                      </Link>
-                    )}
-                    
-                    {/* 第四行：标签 */}
-                    {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap gap-2 pt-1">
-                        {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
-                          <Link
-                            key={kw.id}
-                            href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
-                          >
-                            #{kw.keyword}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </article>
-                  
-                  {/* 分割线（最后一篇不显示） */}
-                  {index < posts.length - 1 && (
-                    <hr className="border-terminal-border" />
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          )}
-
-          {/* 加载更多提示 */}
-          {hasMore && (
-            <div className="text-center pt-4">
-              <Link
-                href="/posts"
-                className="inline-block px-6 py-2 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-colors"
-              >
-                查看更多文章 →
-              </Link>
-            </div>
-          )}
-        </div>
+        <InfinitePostList 
+          initialPosts={posts} 
+          initialHasMore={hasMore} 
+          totalDocs={totalDocs} 
+        />
 
         {/* 底部信息 */}
         <div className="pt-4 text-terminal-muted text-sm text-center">
