@@ -108,6 +108,9 @@ export default async function HomePage() {
           </div>
         </div>
 
+        {/* 分隔线 */}
+        <div className="border-t-4 border-pistachio-400 my-8"></div>
+
         {/* 文章列表 */}
         <div className="space-y-5">
         
