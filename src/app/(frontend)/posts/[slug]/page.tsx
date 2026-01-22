@@ -42,29 +42,6 @@ async function getRelatedPosts(currentPostId: string, keywords: string[] = []) {
   }
 }
 
-async function getAdjacentPosts(currentSlug: string) {
-  try {
-    const baseUrl = getApiBaseUrl()
-    const res = await fetch(
-      `${baseUrl}/api/posts?limit=100&sort=-createdAt`,
-      { next: { revalidate: 300 } }
-    )
-    if (!res.ok) throw new Error('Failed to fetch')
-    const data = await res.json()
-    const posts = data.docs || []
-    
-    const currentIndex = posts.findIndex((p: any) => p.slug === currentSlug)
-    if (currentIndex === -1) return { prevPost: null, nextPost: null }
-    
-    return {
-      prevPost: currentIndex > 0 ? posts[currentIndex - 1] : null,
-      nextPost: currentIndex < posts.length - 1 ? posts[currentIndex + 1] : null
-    }
-  } catch (error) {
-    console.error('获取相邻文章失败:', error)
-    return { prevPost: null, nextPost: null }
-  }
-}
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
@@ -104,10 +81,7 @@ export default async function PostPage({ params }: PageProps) {
   if (!post) notFound()
 
   const keywords = post.summary_zh?.keywords?.map((kw: any) => kw.keyword) || []
-  const [relatedPosts, { prevPost, nextPost }] = await Promise.all([
-    getRelatedPosts(post.id, keywords),
-    getAdjacentPosts(slug)
-  ])
+  const relatedPosts = await getRelatedPosts(post.id, keywords)
 
   return (
     <TerminalLayout customHeader={<SiteHeader />}>
@@ -161,7 +135,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-pistachio-300 mb-2">🏷️ 相关标签</h3>
-                  <div className="flex flex-wrap" style={{ gap: '0.75rem' }}>
+                  <div className="flex flex-wrap" style={{ gap: '0.75rem !important', rowGap: '0.75rem !important', columnGap: '0.75rem !important' }}>
                     {post.summary_zh.keywords.map((kw: any) => (
                       <Link
                         key={kw.id}
@@ -189,7 +163,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-terminal-text mb-2">🏷️ Related Tags</h3>
-                  <div className="flex flex-wrap" style={{ gap: '0.75rem' }}>
+                  <div className="flex flex-wrap" style={{ gap: '0.75rem !important', rowGap: '0.75rem !important', columnGap: '0.75rem !important' }}>
                     {post.summary_en.keywords.map((kw: any) => (
                       <Link
                         key={kw.id}
@@ -206,42 +180,8 @@ export default async function PostPage({ params }: PageProps) {
           )}
         </article>
 
-        {/* 上一篇下一篇导航 */}
-        <nav className="flex justify-between items-center py-8 border-t-2 border-terminal-border mt-8">
-          <div className="flex-1 pr-4">
-            {prevPost && (
-              <Link
-                href={`/posts/${prevPost.slug}`}
-                className="group flex items-center gap-2 text-terminal-muted hover:text-pistachio-400 transition-colors"
-              >
-                <span className="text-lg">←</span>
-                <div className="min-w-0 flex-1">
-                  <div className="text-xs text-terminal-muted">上一篇</div>
-                  <div className="group-hover:text-pistachio-400 transition-colors truncate">
-                    {prevPost.summary_zh?.title || prevPost.title}
-                  </div>
-                </div>
-              </Link>
-            )}
-          </div>
-          
-          <div className="flex-1 text-right pl-4">
-            {nextPost && (
-              <Link
-                href={`/posts/${nextPost.slug}`}
-                className="group flex items-center justify-end gap-2 text-terminal-muted hover:text-pistachio-400 transition-colors"
-              >
-                <div className="text-right min-w-0 flex-1">
-                  <div className="text-xs text-terminal-muted">下一篇</div>
-                  <div className="group-hover:text-pistachio-400 transition-colors truncate">
-                    {nextPost.summary_zh?.title || nextPost.title}
-                  </div>
-                </div>
-                <span className="text-lg">→</span>
-              </Link>
-            )}
-          </div>
-        </nav>
+        {/* 文章分隔线 */}
+        <div className="border-t-2 border-terminal-border mt-8"></div>
 
         {/* 相关文章 */}
         {relatedPosts.length > 0 && (
