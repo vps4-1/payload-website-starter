@@ -139,9 +139,9 @@ export default async function PostPage({ params }: PageProps) {
                     style={{ 
                       display: 'flex',
                       flexWrap: 'wrap',
-                      gap: '0.75rem !important', 
-                      rowGap: '0.75rem !important', 
-                      columnGap: '0.75rem !important',
+                      gap: '0.75rem', 
+                      rowGap: '0.75rem', 
+                      columnGap: '0.75rem',
                       margin: '0',
                       padding: '0'
                     }}
@@ -183,9 +183,9 @@ export default async function PostPage({ params }: PageProps) {
                     style={{ 
                       display: 'flex',
                       flexWrap: 'wrap',
-                      gap: '0.75rem !important', 
-                      rowGap: '0.75rem !important', 
-                      columnGap: '0.75rem !important',
+                      gap: '0.75rem', 
+                      rowGap: '0.75rem', 
+                      columnGap: '0.75rem',
                       margin: '0',
                       padding: '0'
                     }}
