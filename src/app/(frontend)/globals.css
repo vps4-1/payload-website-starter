@@ -254,7 +254,7 @@ hr {
   display: flex;
   flex-direction: column;
   padding: 40px;
-  max-width: 864px;
+  max-width: 1200px;
   min-height: 100vh;
   margin: 0 auto;
   border-right: 1px solid color-mix(in srgb, var(--accent) 10%, transparent);
@@ -268,7 +268,7 @@ hr {
 
 /* ====== Terminal 组件 ====== */
 .terminal-container {
-  max-width: 864px;
+  max-width: 1200px;
   margin: 0 auto;
   background-color: var(--terminal-bg);
   min-height: 100vh;
