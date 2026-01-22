@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export function SiteHeader() {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '1rem 2rem' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', padding: '0.75rem 2rem 0.5rem 2rem' }}>
       <Link 
         href="/" 
         style={{ fontSize: '1.8rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}
