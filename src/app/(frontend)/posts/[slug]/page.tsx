@@ -194,7 +194,7 @@ export default async function PostPage({ params }: PageProps) {
                       <Link
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                        className="text-sm px-2 py-1 bg-terminal-bg border border-terminal-border text-terminal-text hover:text-terminal-bg hover:bg-terminal-text transition-all duration-200 rounded whitespace-nowrap"
+                        className="text-sm px-2 py-1 bg-pistachio-50 border border-pistachio-400 text-pistachio-300 hover:text-pistachio-50 hover:bg-pistachio-400 transition-all duration-200 rounded whitespace-nowrap"
                       >
                         #{kw.keyword}
                       </Link>
