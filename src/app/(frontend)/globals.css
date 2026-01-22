@@ -67,6 +67,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
   text-size-adjust: 100%;
+  /* 移动端触摸优化 */
+  -webkit-tap-highlight-color: rgba(142, 192, 124, 0.2);
+  -webkit-touch-callout: none;
 }
 
 /* ====== 标题样式 ====== */
@@ -105,6 +108,10 @@ p, ul, ol, img, figure, video, table {
 a {
   color: var(--accent);
   text-decoration: none;
+  /* 移动端触摸优化 */
+  -webkit-tap-highlight-color: rgba(142, 192, 124, 0.2);
+  tap-highlight-color: rgba(142, 192, 124, 0.2);
+  touch-action: manipulation;
 }
 
 a:hover {
@@ -114,6 +121,25 @@ a:hover {
 a:focus-visible {
   outline: 1px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* 移动端链接点击区域扩大 */
+@media (max-width: 768px) {
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0;
+  }
+  
+  .nav-link {
+    min-height: 44px;
+    padding: 0.5rem;
+  }
+  
+  .subscribe-button {
+    min-height: 48px;
+  }
 }
 
 /* ====== 按钮样式 ====== */
@@ -135,6 +161,12 @@ button,
   cursor: pointer;
   outline: none;
   display: inline-block;
+  /* 移动端触摸优化 */
+  -webkit-tap-highlight-color: rgba(142, 192, 124, 0.2);
+  tap-highlight-color: rgba(142, 192, 124, 0.2);
+  touch-action: manipulation;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 button:hover,
@@ -142,6 +174,12 @@ button:hover,
 .read-more:hover {
   background: color-mix(in srgb, var(--accent) 15%, transparent);
   text-decoration: none;
+}
+
+button:active,
+.terminal-button:active,
+.read-more:active {
+  transform: translateY(1px);
 }
 
 /* ====== 列表样式 ====== */
@@ -272,6 +310,7 @@ hr {
   margin: 0 auto;
   background-color: var(--terminal-bg);
   min-height: 100vh;
+  width: 100%;
 }
 
 .terminal-header {
@@ -300,6 +339,18 @@ hr {
 
 .terminal-content {
   padding: 56px 40px 20px 40px;
+}
+
+/* Terminal响应式优化 */
+@media (max-width: 1024px) {
+  .terminal-container {
+    max-width: 100%;
+    margin: 0;
+  }
+  
+  .terminal-content {
+    padding: 40px 20px 16px 20px;
+  }
 }
 
 /* ====== 文章列表样式 ====== */
@@ -642,6 +693,281 @@ hr {
 }
 
 /* ====== 响应式设计 ====== */
+
+/* ====== 网站Header样式 ====== */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0.75rem 2rem 0.5rem 2rem;
+}
+
+.site-logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--pistachio-400);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--pistachio-400);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--pistachio-300);
+}
+
+.nav-separator {
+  color: var(--terminal-gray);
+  font-size: 1.1rem;
+  user-select: none;
+}
+
+/* ====== 订阅区域样式 ====== */
+.subscribe-section {
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 100%;
+}
+
+.subscribe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.subscribe-title {
+  color: var(--pistachio-400);
+  font-weight: bold;
+}
+
+.subscribe-separator {
+  color: var(--pistachio-400);
+}
+
+.subscribe-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--pistachio-400);
+  color: var(--pistachio-400);
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.subscribe-button:hover {
+  background-color: var(--pistachio-400);
+  color: var(--terminal-bg);
+}
+
+.subscribe-diamond {
+  color: var(--pistachio-400);
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0 0.75rem;
+  display: inline-block;
+}
+
+.content-separator {
+  border-top: 4px solid var(--pistachio-400);
+  margin: 1rem 0;
+  width: 100%;
+}
+
+/* ====== 移动端响应式样式 ====== */
+@media (max-width: 768px) {
+  /* Header响应式 */
+  .site-header {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .site-logo {
+    font-size: 1.6rem;
+  }
+
+  .site-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .nav-separator {
+    font-size: 1rem;
+  }
+
+  /* 订阅区域响应式 */
+  .subscribe-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .subscribe-diamond {
+    display: none;
+  }
+
+  .subscribe-separator {
+    display: none;
+  }
+
+  .subscribe-button {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  /* 文章页面响应式 */
+  .terminal-content {
+    padding: 1rem;
+  }
+
+  /* 文章列表响应式 */
+  .post-item {
+    padding: 1rem 0;
+  }
+
+  .post-title {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+
+  .post-tags {
+    gap: 0.4rem;
+  }
+
+  .page-navigation {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  /* 标签容器响应式 */
+  .tag-container {
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  /* 相关文章响应式 */
+  .related-posts {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+
+  .related-post-card {
+    padding: 1rem;
+  }
+
+  /* 文章内容响应式 */
+  .article-content {
+    padding-left: 1rem;
+  }
+
+  .article-header {
+    text-align: center;
+  }
+
+  /* 按钮响应式 */
+  .action-button {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 极小屏幕优化 */
+  .site-header {
+    padding: 0.75rem;
+  }
+
+  .site-logo {
+    font-size: 1.4rem;
+  }
+
+  .site-nav {
+    gap: 0.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .nav-separator {
+    font-size: 0.9rem;
+    margin: 0 0.2rem;
+  }
+
+  .subscribe-button {
+    max-width: 100%;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* 文章标题响应式 */
+  .article-title {
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+
+  .post-title {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  /* 文章内容响应式 */
+  .article-content {
+    padding-left: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* 标签响应式 */
+  .tag-item {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
+  /* 导航按钮 */
+  .page-navigation {
+    padding-top: 2rem;
+  }
+
+  .page-navigation .action-button {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  /* 内容区域 */
+  .terminal-content {
+    padding: 0.75rem;
+  }
+}
+
 @media (max-width: 684px) {
   :root {
     --font-size: 0.95rem;

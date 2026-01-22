@@ -65,7 +65,7 @@ export default async function PostsPage() {
               {posts.map((post: any, index: number) => (
                 <article 
                   key={post.id} 
-                  className="py-4" 
+                  className="py-4 post-item" 
                   style={{ 
                     borderBottom: index < posts.length - 1 ? '2px solid var(--terminal-border)' : 'none',
                     paddingTop: '1.5rem',
@@ -79,7 +79,7 @@ export default async function PostsPage() {
                     </div>
 
                     {/* 第二行：标题 */}
-                    <h2 className="text-lg font-semibold text-terminal-text hover:text-pistachio-400 transition-colors">
+                    <h2 className="text-lg font-semibold text-terminal-text hover:text-pistachio-400 transition-colors post-title">
                       <Link href={`/posts/${post.slug}`}>
                         {post.summary_zh?.title || post.title}
                       </Link>
@@ -100,7 +100,7 @@ export default async function PostsPage() {
                     {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
                       <div 
-                        className="flex flex-wrap pt-1" 
+                        className="flex flex-wrap pt-1 post-tags" 
                         style={{ 
                           gap: '0.3rem',
                           display: 'flex',
@@ -112,7 +112,7 @@ export default async function PostsPage() {
                           <Link
                             key={kw.id}
                             href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
+                            className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap tag-item"
                             style={{ marginRight: '0.2rem', marginBottom: '0.2rem' }}
                           >
                             #{kw.keyword}
@@ -125,10 +125,10 @@ export default async function PostsPage() {
               ))}
 
               {/* 分页导航 */}
-              <div className="flex justify-center items-center gap-4 pt-8">
+              <div className="flex justify-center items-center gap-4 pt-8 page-navigation">
                 <Link
                   href="/"
-                  className="px-6 py-2 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-colors rounded"
+                  className="px-6 py-2 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-colors rounded action-button"
                 >
                   ← 返回首页
                 </Link>

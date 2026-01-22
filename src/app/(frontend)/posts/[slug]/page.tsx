@@ -93,8 +93,8 @@ export default async function PostPage({ params }: PageProps) {
 
         <article className="space-y-6">
           {/* 文章标题 */}
-          <header className="space-y-4">
-            <h1 className="text-2xl font-bold text-pistachio-400 leading-tight">
+          <header className="space-y-4 article-header">
+            <h1 className="text-2xl font-bold text-pistachio-400 leading-tight article-title">
               {post.summary_zh?.title || post.title}
             </h1>
 
@@ -125,7 +125,7 @@ export default async function PostPage({ params }: PageProps) {
 
           {/* 中文摘要 */}
           {post.summary_zh?.content && (
-            <section className="border-l-4 border-pistachio-400 pl-6 space-y-4">
+            <section className="border-l-4 border-pistachio-400 pl-6 space-y-4 article-content">
               <h2 className="text-lg font-semibold text-pistachio-400">📄 中文摘要</h2>
               <div className="text-terminal-text leading-relaxed whitespace-pre-wrap text-base">
                 {post.summary_zh.content}
@@ -135,7 +135,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-pistachio-300 mb-2">🏷️ 相关标签</h3>
-                  <div 
+                  <div className="tag-container"
                     style={{ 
                       display: 'flex',
                       flexWrap: 'wrap',
@@ -150,7 +150,7 @@ export default async function PostPage({ params }: PageProps) {
                       <Link
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                        className="text-sm px-2 py-1 bg-terminal-bg border border-pistachio-400 text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
+                        className="text-sm px-2 py-1 bg-terminal-bg border border-pistachio-400 text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap tag-item"
                       >
                         #{kw.keyword}
                       </Link>
@@ -163,7 +163,7 @@ export default async function PostPage({ params }: PageProps) {
 
           {/* 英文摘要 */}
           {post.summary_en?.content && (
-            <section className="border-l-4 border-terminal-border pl-6 space-y-4">
+            <section className="border-l-4 border-terminal-border pl-6 space-y-4 article-content">
               <h2 className="text-lg font-semibold text-terminal-text">📄 English Summary</h2>
               
               {/* 英文标题 */}
@@ -179,7 +179,7 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-terminal-text mb-2">🏷️ Related Tags</h3>
-                  <div 
+                  <div className="tag-container"
                     style={{ 
                       display: 'flex',
                       flexWrap: 'wrap',
@@ -194,7 +194,7 @@ export default async function PostPage({ params }: PageProps) {
                       <Link
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                        className="text-sm px-2 py-1 bg-pistachio-50 border border-pistachio-400 text-pistachio-300 hover:text-pistachio-50 hover:bg-pistachio-400 transition-all duration-200 rounded whitespace-nowrap"
+                        className="text-sm px-2 py-1 bg-pistachio-50 border border-pistachio-400 text-pistachio-300 hover:text-pistachio-50 hover:bg-pistachio-400 transition-all duration-200 rounded whitespace-nowrap tag-item"
                       >
                         #{kw.keyword}
                       </Link>
@@ -208,11 +208,11 @@ export default async function PostPage({ params }: PageProps) {
 
         {/* 相关文章 */}
         {relatedPosts.length > 0 && (
-          <section className="space-y-4 border-t-4 border-pistachio-400 pt-8 mt-16" style={{ borderTop: '4px solid var(--pistachio-400)' }}>
+          <section className="space-y-4 border-t-4 border-pistachio-400 pt-8 mt-16 related-posts" style={{ borderTop: '4px solid var(--pistachio-400)' }}>
             <h2 className="text-xl font-bold text-pistachio-400 mb-4">📚 相关文章</h2>
             <div className="space-y-4">
               {relatedPosts.slice(0, 3).map((relatedPost: any) => (
-                <article key={relatedPost.id} className="border-l-2 border-pistachio-400 pl-4 space-y-2">
+                <article key={relatedPost.id} className="border-l-2 border-pistachio-400 pl-4 space-y-2 related-post-card">
                   <h3>
                     <Link 
                       href={`/posts/${relatedPost.slug}`}
@@ -238,7 +238,7 @@ export default async function PostPage({ params }: PageProps) {
             <div className="text-center pt-4">
               <Link
                 href="/posts"
-                className="inline-block px-6 py-2 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-colors rounded"
+                className="inline-block px-6 py-2 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-colors rounded action-button"
               >
                 查看更多文章 →
               </Link>
