@@ -32,7 +32,9 @@ export const getApiBaseUrl = () => {
     // 尝试使用环境变量，如果没有设置或为 undefined，使用本地地址
     const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
     if (!serverUrl || serverUrl === 'undefined') {
-      return 'http://localhost:3002'  // 更新端口
+      // 动态检测当前端口 - 从 process.env.PORT 或默认
+      const port = process.env.PORT || '3004'
+      return `http://localhost:${port}`
     }
     return serverUrl
   }
