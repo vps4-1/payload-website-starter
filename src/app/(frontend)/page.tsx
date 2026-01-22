@@ -56,19 +56,21 @@ export default async function HomePage() {
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
       <div className="space-y-6">
-        {/* 网站介绍 */}
-        <div className="text-center space-y-3">
-          <p className="text-lg text-terminal-muted">
-            你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
-          </p>
-          <p className="text-terminal-muted text-sm">
-            共 {totalDocs} 篇文章 · 每天 4 次更新 · AI 智能筛选 · 双语摘要
-          </p>
+        {/* 网站介绍 - 强制居中 */}
+        <div className="w-full" style={{ textAlign: 'center' }}>
+          <div className="space-y-3">
+            <p className="text-lg text-terminal-muted" style={{ textAlign: 'center' }}>
+              你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
+            </p>
+            <p className="text-terminal-muted text-sm" style={{ textAlign: 'center' }}>
+              共 {totalDocs} 篇文章 · 每天 4 次更新 · AI 智能筛选 · 双语摘要
+            </p>
+          </div>
         </div>
 
-        {/* 订阅服务 - 强制居中 */}
+        {/* 订阅服务 - 强制居中，加大间距 */}
         <div className="w-full">
-          <div className="flex items-center justify-center gap-3" style={{ textAlign: 'center', width: '100%' }}>
+          <div className="flex items-center justify-center gap-6" style={{ textAlign: 'center', width: '100%' }}>
             <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
             <span className="text-terminal-gray text-lg">——</span>
             
