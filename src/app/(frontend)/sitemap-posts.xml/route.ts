@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getApiBaseUrl } from '@/utilities/getURL';
+import { getCanonicalSiteUrl } from '@/lib/site-url';
 
 // 获取所有文章的函数
 async function getAllPosts() {
@@ -50,7 +51,7 @@ async function getAllPosts() {
 }
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com';
+  const siteUrl = getCanonicalSiteUrl();
   
   try {
     const posts = await getAllPosts();

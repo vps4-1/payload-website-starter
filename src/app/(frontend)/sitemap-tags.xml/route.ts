@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getApiBaseUrl } from '@/utilities/getURL';
+import { getCanonicalSiteUrl } from '@/lib/site-url';
 
 // 从所有文章中提取唯一标签
 async function getAllTags() {
@@ -67,7 +68,7 @@ async function getAllTags() {
 }
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com';
+  const siteUrl = getCanonicalSiteUrl();
   
   try {
     const tags = await getAllTags();

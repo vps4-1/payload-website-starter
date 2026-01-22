@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server'
+import { getCanonicalSiteUrl } from '@/lib/site-url'
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com'
+  const siteUrl = getCanonicalSiteUrl()
   
   const robots = `# SiJiGPT Robots.txt
 # AI驾驶员的全球资讯聚合站 - 专注AI资讯聚合与智能分析

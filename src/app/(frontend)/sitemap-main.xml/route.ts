@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
+import { getCanonicalSiteUrl } from '@/lib/site-url';
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com';
+  const siteUrl = getCanonicalSiteUrl();
   const currentDate = new Date().toISOString();
   
   // AI资讯站点的静态页面配置

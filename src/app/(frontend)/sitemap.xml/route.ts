@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { getApiBaseUrl } from '@/utilities/getURL'
+import { getCanonicalSiteUrl } from '@/lib/site-url'
 
 interface Post {
   id: string
@@ -150,7 +151,7 @@ function calculateAIPriority(post: Post): number {
 
 // 生成sitemap XML
 function generateSitemap(posts: Post[], tags: Tag[]) {
-  const siteUrl = process.env.NEXT_PUBLIC_SERVER_URL || 'https://sijigpt.com'
+  const siteUrl = getCanonicalSiteUrl()
   const currentDate = new Date().toISOString()
   
   // 静态页面 URLs
