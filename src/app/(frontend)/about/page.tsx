@@ -1,262 +1,159 @@
-import type { Metadata } from 'next'
-import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
+import { SiteHeader, SubscribeSection } from '@/components/SiteComponents'
 
-export const metadata: Metadata = {
-  title: '关于 - SiJiGPT',
-  description: 'AI驾驶员的全球资讯聚合站 - 关于 SiJiGPT 和站长的介绍',
+export const metadata = {
+  title: '关于我们 - SijiGPT',
+  description: 'SijiGPT - 你的AI资讯驾驶员，专注于聚合全球优质AI资讯和技术动态',
+  keywords: '关于SijiGPT, AI资讯, 人工智能, 团队介绍',
 }
 
 export default function AboutPage() {
   return (
-    <TerminalLayout title="SiJiGPT">
-      <div className="about-page">
-        {/* 站点标语 */}
-        <section className="about-section">
-          <div className="terminal-output">
-            <pre className="ascii-art">
-{`
-   _____ _ _ _  _____ _____ _______ 
-  / ____(_|_) |/ ____|  __ \\__   __|
- | (___  _| | | |  __| |__) | | |   
-  \\___ \\| | | | | |_ |  ___/  | |   
-  ____) | | | | |__| | |      | |   
- |_____/|_| |_|\\_____|_|      |_|   
-                                     
-   AI驾驶员的全球资讯聚合站
-`}
-            </pre>
-          </div>
-        </section>
+    <TerminalLayout customHeader={<SiteHeader />}>
+      <div style={{ marginTop: '-1rem' }} className="mb-4">
+        {/* header下方细线 */}
+        <div style={{ borderTop: '1px solid var(--terminal-border)', margin: '0 0 1.5rem 0' }}></div>
+        
+        {/* 页面标题 */}
+        <div className="mb-6" style={{ textAlign: 'center' }}>
+          <h1 className="text-2xl font-bold text-terminal-text mb-2">
+            🚗 关于 SijiGPT
+          </h1>
+          <p className="text-terminal-muted">
+            你的 AI 资讯驾驶员，带你遨游人工智能的世界
+          </p>
+        </div>
 
-        {/* 关于本站 */}
-        <section className="about-section">
-          <h2>$ cat about.txt</h2>
-          <div className="terminal-output">
-            <p>
-              <strong>SiJiGPT（斯基GPT）</strong>是一个专注于 AI 资讯聚合的站点，为 AI 驾驶员们提供全球 AI 硬件软件资讯，助力驾驶技术越来越好。
-            </p>
-            <p>
-              本站采用双语摘要模式（中文 + English），每篇文章都包含：
-            </p>
-            <ul>
-              <li>📝 约 300 字的中文摘要</li>
-              <li>🌍 约 300 字的英文摘要</li>
-              <li>🔗 带内链的关键词系统</li>
-              <li>🏷️ 完整的标签分类</li>
-            </ul>
-            <p style={{ marginTop: '15px' }}>
-              <Link href="/rss.xml" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
-                📡 RSS 订阅
-              </Link>
-              <span> :: </span>
-              <Link href="https://github.com/vps4-1/payload-website-starter" target="_blank" rel="noopener" style={{ color: 'var(--accent)', fontWeight: 'bold' }}>
-                GitHub 仓库
-              </Link>
-            </p>
-          </div>
-        </section>
+        <SubscribeSection />
+        
+        {/* 内容区域 */}
+        <div className="space-y-8 max-w-3xl mx-auto">
+          {/* 使命愿景 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              🎯 我们的使命
+            </h2>
+            <div className="pl-4 space-y-3 text-terminal-text">
+              <p>
+                SijiGPT 致力于成为最优质的 AI 资讯聚合平台，为关注人工智能发展的用户提供：
+              </p>
+              <ul className="list-disc list-inside space-y-2 text-terminal-muted">
+                <li>📰 全球前沿的AI技术资讯</li>
+                <li>🔬 深度的行业分析和趋势解读</li>
+                <li>🚀 最新的AI产品和工具发布</li>
+                <li>💡 实用的AI应用案例分享</li>
+              </ul>
+            </div>
+          </section>
 
-        {/* 关于站长 */}
-        <section className="about-section">
-          <h2>$ whoami</h2>
-          <div className="terminal-output">
-            <p>
-              我是一名非技术背景的 AI 爱好者，完全依靠 AI 工具构建了这个网站。
-            </p>
-            <p>
-              使用的工具：
-            </p>
-            <ul>
-              <li><strong>Genspark</strong> - AI 搜索和内容整理</li>
-              <li><strong>Manus</strong> - AI 辅助开发</li>
-              <li><strong>ChatGPT</strong> - 文案优化</li>
-            </ul>
-            <p>
-              这证明了：在 AI 时代，想法比技术更重要。任何人都可以创造自己的数字产品！
-            </p>
-          </div>
-        </section>
-
-        {/* 技术栈 */}
-        <section className="about-section">
-          <h2>$ cat tech-stack.json</h2>
-          <div className="terminal-output">
-            <div className="tech-stack">
-              <div className="tech-item">
-                <strong>前端框架</strong>
-                <span>Next.js 15 + React 19</span>
-              </div>
-              <div className="tech-item">
-                <strong>内容管理</strong>
-                <span>Payload CMS 3.0</span>
-              </div>
-              <div className="tech-item">
-                <strong>数据库</strong>
-                <span>PostgreSQL (Neon)</span>
-              </div>
-              <div className="tech-item">
-                <strong>文件存储</strong>
-                <span>Vercel Blob</span>
-              </div>
-              <div className="tech-item">
-                <strong>部署平台</strong>
-                <span>Vercel</span>
-              </div>
-              <div className="tech-item">
-                <strong>主题风格</strong>
-                <span>Terminal (移植自 aigc-weekly)</span>
+          {/* 数据来源 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              📡 数据来源
+            </h2>
+            <div className="pl-4 space-y-3 text-terminal-text">
+              <p>我们的内容来源于全球知名的AI机构和技术博客：</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 text-sm">
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-pistachio-400">研究机构</h3>
+                  <ul className="space-y-1 text-terminal-muted">
+                    <li>• OpenAI</li>
+                    <li>• Google AI</li>
+                    <li>• DeepMind</li>
+                    <li>• Anthropic</li>
+                  </ul>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-pistachio-400">技术平台</h3>
+                  <ul className="space-y-1 text-terminal-muted">
+                    <li>• HuggingFace</li>
+                    <li>• AWS ML Blog</li>
+                    <li>• GitHub</li>
+                    <li>• arXiv</li>
+                  </ul>
+                </div>
+                <div className="space-y-2">
+                  <h3 className="font-semibold text-pistachio-400">行业媒体</h3>
+                  <ul className="space-y-1 text-terminal-muted">
+                    <li>• TechCrunch</li>
+                    <li>• VentureBeat</li>
+                    <li>• MIT Tech Review</li>
+                    <li>• The Verge</li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* 联系方式 */}
-        <section className="about-section">
-          <h2>$ cat contact.txt</h2>
-          <div className="terminal-output contact-grid">
-            <div>
-              <strong>📧 邮箱</strong>
-              <Link href="mailto:contact@sijigpt.com">contact@sijigpt.com</Link>
-            </div>
-            <div>
-              <strong>🌐 网站</strong>
-              <Link href="https://sijigpt.com" target="_blank" rel="noopener">sijigpt.com</Link>
-            </div>
-            <div>
-              <strong>🏠 主站</strong>
-              <Link href="https://zhuji.gd" target="_blank" rel="noopener">zhuji.gd</Link>
-            </div>
-          </div>
-        </section>
+          {/* 技术架构 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              ⚙️ 技术架构
+            </h2>
+            <div className="pl-4 space-y-3">
+              <div className="bg-terminal-bg border border-terminal-border p-4 rounded">
+                <pre className="text-sm text-terminal-text">
+{`🔧 前端架构
+├── Next.js 15 (App Router)
+├── TypeScript
+├── Tailwind CSS
+└── Payload CMS
 
-        {/* 内容主题 */}
-        <section className="about-section">
-          <h2>$ ls topics/</h2>
-          <div className="terminal-output">
-            <div className="topics-grid">
-              <div className="topic-card">
-                <h3>🖥️ AI 硬件</h3>
-                <p>GPU、AI 芯片、算力资讯</p>
-              </div>
-              <div className="topic-card">
-                <h3>💻 AI 软件</h3>
-                <p>大模型、工具、应用案例</p>
-              </div>
-              <div className="topic-card">
-                <h3>📊 行业观察</h3>
-                <p>趋势分析、商业模式</p>
-              </div>
-              <div className="topic-card">
-                <h3>🛠️ 实用指南</h3>
-                <p>教程、最佳实践、工具对比</p>
+🚀 部署架构  
+├── Cloudflare Pages (静态部署)
+├── Cloudflare Workers (API服务)
+├── PostgreSQL (数据存储)
+└── Claude 3.5 (AI处理)`}
+                </pre>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* 站点统计 */}
-        <section className="about-section">
-          <h2>$ cat stats.log</h2>
-          <div className="terminal-output">
-            <div className="stats-grid">
-              <div className="stat-card">
-                <div className="stat-number">2</div>
-                <div className="stat-label">文章总数</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">10</div>
-                <div className="stat-label">标签分类</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">3</div>
-                <div className="stat-label">运行天数</div>
-              </div>
-              <div className="stat-card">
-                <div className="stat-number">100%</div>
-                <div className="stat-label">AI 驱动</div>
+          {/* 更新频率 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              🔄 更新频率
+            </h2>
+            <div className="pl-4 space-y-3 text-terminal-text">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="border border-terminal-border p-4 rounded">
+                  <h3 className="font-semibold text-pistachio-400 mb-2">⏰ 自动更新</h3>
+                  <p className="text-sm text-terminal-muted">
+                    每天定时抓取和更新内容，确保资讯的时效性
+                  </p>
+                </div>
+                <div className="border border-terminal-border p-4 rounded">
+                  <h3 className="font-semibold text-pistachio-400 mb-2">🤖 AI筛选</h3>
+                  <p className="text-sm text-terminal-muted">
+                    使用AI智能筛选，只推送高质量和有价值的内容
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* SEO 相关 */}
-        <section className="about-section">
-          <h2>$ ls seo/</h2>
-          <div className="terminal-output">
-            <p>搜索引擎优化相关：</p>
-            <ul className="links-list">
-              <li>
-                <Link href="/sitemap.xml" target="_blank" rel="noopener">
-                  Sitemap.xml
-                </Link> - 网站地图
-              </li>
-              <li>
-                <Link href="/robots.txt" target="_blank" rel="noopener">
-                  Robots.txt
-                </Link> - 爬虫协议
-              </li>
-              <li>
-                <Link href="/rss.xml" target="_blank" rel="noopener">
-                  RSS Feed
-                </Link> - 订阅源
-              </li>
-            </ul>
-          </div>
-        </section>
+          {/* 联系我们 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              📧 联系我们
+            </h2>
+            <div className="pl-4 space-y-3 text-terminal-text">
+              <p>如果您有任何建议或合作意向，欢迎联系我们：</p>
+              <div className="space-y-2 text-terminal-muted">
+                <p>📮 邮箱：contact@sijigpt.com</p>
+                <p>🐦 Twitter：@SijiGPT</p>
+                <p>💬 微信：SijiGPT_Official</p>
+              </div>
+            </div>
+          </section>
+        </div>
 
-        {/* 致谢 */}
-        <section className="about-section">
-          <h2>$ cat thanks.md</h2>
-          <div className="terminal-output">
-            <p>本站的诞生离不开以下项目和资源：</p>
-            <ul className="links-list">
-              <li>
-                <Link href="https://aigc-weekly.agi.li" target="_blank" rel="noopener">
-                  Agili 的 AIGC 周刊
-                </Link> - Terminal 主题的灵感来源
-              </li>
-              <li>
-                <Link href="https://payloadcms.com" target="_blank" rel="noopener">
-                  Payload CMS
-                </Link> - 强大的内容管理系统
-              </li>
-              <li>
-                <Link href="https://nextjs.org" target="_blank" rel="noopener">
-                  Next.js
-                </Link> - 现代化的 React 框架
-              </li>
-              <li>
-                <Link href="https://neon.tech" target="_blank" rel="noopener">
-                  Neon
-                </Link> - Serverless PostgreSQL
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* 结束语 */}
-        <section className="about-section">
-          <div className="terminal-output">
-            <pre>
-{`
-> 在 AI 时代，每个人都可以是创造者
-> 让我们一起探索 AI 的无限可能 🚀
-
-$ █
-`}
-            </pre>
-          </div>
-        </section>
-
-        {/* 导航按钮 */}
-        <div className="terminal-actions">
-          <Link href="/posts" className="terminal-button">
-            📚 浏览文章
-          </Link>
-          <Link href="/search" className="terminal-button">
-            🔍 搜索内容
-          </Link>
+        {/* 底部信息 */}
+        <div className="pt-8 text-terminal-muted text-sm text-center border-t border-terminal-border">
+          <p>Powered by Cloudflare Workers + Payload CMS + Claude 3.5</p>
+          <p className="mt-1">
+            © 2024 SijiGPT. All rights reserved.
+          </p>
         </div>
       </div>
     </TerminalLayout>
