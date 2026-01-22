@@ -12,14 +12,23 @@ export const metadata = {
 
 // 按需刷新
 
-async function getPosts(limit = 50) {
+async function getPosts(limit = 50, retries = 3) {
   try {
     const baseUrl = getApiBaseUrl()
+    console.log(`[getPosts] 尝试获取文章，URL: ${baseUrl}/api/posts?limit=${limit}&sort=-createdAt`)
+    
     const res = await fetch(`${baseUrl}/api/posts?limit=${limit}&sort=-createdAt`, { 
       next: { revalidate: 0, tags: [] }
     })
-    if (!res.ok) throw new Error('Failed to fetch')
+    
+    if (!res.ok) {
+      console.log(`[getPosts] API 响应错误: ${res.status} ${res.statusText}`)
+      throw new Error(`HTTP ${res.status}: ${res.statusText}`)
+    }
+    
     const data = await res.json()
+    console.log(`[getPosts] 成功获取 ${data.docs?.length || 0} 篇文章`)
+    
     return {
       posts: data.docs || [],
       hasMore: data.hasNextPage || false,
@@ -27,6 +36,16 @@ async function getPosts(limit = 50) {
     }
   } catch (error) {
     console.error('获取文章失败:', error)
+    
+    // 如果还有重试次数，等待一秒后重试
+    if (retries > 0) {
+      console.log(`[getPosts] 重试中... (剩余 ${retries} 次)`)
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      return getPosts(limit, retries - 1)
+    }
+    
+    // 所有重试都失败了，返回空结果
+    console.log('[getPosts] 所有重试都失败，返回空结果')
     return { posts: [], hasMore: false, totalDocs: 0 }
   }
 }
