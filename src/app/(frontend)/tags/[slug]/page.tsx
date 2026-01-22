@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 import { SiteHeader, SubscribeSection } from '@/components/SiteComponents'
+import { getApiBaseUrl } from '@/utilities/getURL'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -10,8 +11,9 @@ interface PageProps {
 
 async function getPostsByTag(tag: string) {
   try {
+    const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=100&sort=-createdAt`,
+      `${baseUrl}/api/posts?limit=100&sort=-createdAt`,
       { next: { revalidate: 0, tags: [] } }
     )
 

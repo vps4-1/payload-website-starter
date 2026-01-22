@@ -24,3 +24,19 @@ export const getClientSideURL = () => {
 
   return process.env.NEXT_PUBLIC_SERVER_URL || ''
 }
+
+// 获取 API 基础 URL（针对服务器端和客户端）
+export const getApiBaseUrl = () => {
+  // 在服务器端运行时
+  if (typeof window === 'undefined') {
+    // 尝试使用环境变量，如果没有设置或为 undefined，使用本地地址
+    const serverUrl = process.env.NEXT_PUBLIC_SERVER_URL
+    if (!serverUrl || serverUrl === 'undefined') {
+      return 'http://localhost:3000'
+    }
+    return serverUrl
+  }
+  
+  // 在客户端运行时，使用相对路径
+  return ''
+}

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 import { SiteHeader, SubscribeSection } from '@/components/SiteComponents'
+import { getApiBaseUrl } from '@/utilities/getURL'
 
 export const metadata = {
   title: '文章标签 - SijiGPT',
@@ -12,10 +13,10 @@ export const metadata = {
 
 async function getTags() {
   try {
-    const NEXT_PUBLIC_SERVER_URL = process.env.NEXT_PUBLIC_SERVER_URL
+    const baseUrl = getApiBaseUrl()
     
     const res = await fetch(
-      `${NEXT_PUBLIC_SERVER_URL}/api/posts?limit=1000`,
+      `${baseUrl}/api/posts?limit=1000`,
       { 
         next: { tags: ['posts'] }
       }
@@ -84,21 +85,24 @@ export default async function TagsPage() {
                 🔥 热门标签 (前20个)
               </h2>
               
-              <div className="flex flex-wrap" style={{ gap: '0.5rem' }}>
-                {tags.slice(0, 20).map(({ keyword, count }) => {
-                  const fontSize = Math.max(0.875, Math.min(1.25, count / 5 + 0.875))
-                  return (
-                    <Link
-                      key={keyword}
-                      href={`/tags/${encodeURIComponent(keyword)}`}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded"
-                      style={{ fontSize: `${fontSize}rem` }}
-                    >
-                      <span>#{keyword}</span>
-                      <span className="text-xs opacity-70">({count})</span>
-                    </Link>
-                  )
-                })}
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  flexWrap: 'wrap', 
+                  gap: '0.75rem',
+                  marginBottom: '1rem'
+                }}
+              >
+                {tags.slice(0, 20).map(({ keyword, count }) => (
+                  <Link
+                    key={keyword}
+                    href={`/tags/${encodeURIComponent(keyword)}`}
+                    className="inline-flex items-center gap-1 px-3 py-1.5 border border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded text-sm"
+                  >
+                    <span>#{keyword}</span>
+                    <span className="text-xs opacity-70">({count})</span>
+                  </Link>
+                ))}
               </div>
             </section>
           )}
@@ -110,14 +114,20 @@ export default async function TagsPage() {
                 📚 所有标签 (按使用频率排序)
               </h2>
               
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div 
+                style={{ 
+                  display: 'flex', 
+                  flexWrap: 'wrap', 
+                  gap: '0.75rem'
+                }}
+              >
                 {tags.map(({ keyword, count }) => (
                   <Link
                     key={keyword}
                     href={`/tags/${encodeURIComponent(keyword)}`}
-                    className="flex justify-between items-center px-3 py-2 border border-terminal-border text-terminal-text hover:border-pistachio-400 hover:text-pistachio-400 transition-all duration-200 rounded"
+                    className="inline-flex items-center justify-between px-3 py-2 border border-terminal-border text-terminal-text hover:border-pistachio-400 hover:text-pistachio-400 transition-all duration-200 rounded text-sm gap-2"
                   >
-                    <span className="text-sm">#{keyword}</span>
+                    <span>#{keyword}</span>
                     <span className="text-xs text-terminal-muted">({count})</span>
                   </Link>
                 ))}

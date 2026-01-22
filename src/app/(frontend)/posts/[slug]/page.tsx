@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 import { SiteHeader, SubscribeSection } from '@/components/SiteComponents'
+import { getApiBaseUrl } from '@/utilities/getURL'
 
 // 按需刷新
 
@@ -11,8 +12,9 @@ interface PageProps {
 
 async function getPost(slug: string) {
   try {
+    const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?where[slug][equals]=${slug}&limit=1`,
+      `${baseUrl}/api/posts?where[slug][equals]=${slug}&limit=1`,
       { next: { revalidate: 0 } }
     )
     if (!res.ok) throw new Error('Failed to fetch')
@@ -26,8 +28,9 @@ async function getPost(slug: string) {
 
 async function getRelatedPosts(currentPostId: string, keywords: string[] = []) {
   try {
+    const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=5&sort=-createdAt&where[id][not_equals]=${currentPostId}`,
+      `${baseUrl}/api/posts?limit=5&sort=-createdAt&where[id][not_equals]=${currentPostId}`,
       { next: { revalidate: 300 } }
     )
     if (!res.ok) throw new Error('Failed to fetch')
@@ -41,8 +44,9 @@ async function getRelatedPosts(currentPostId: string, keywords: string[] = []) {
 
 async function getAdjacentPosts(currentSlug: string) {
   try {
+    const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=100&sort=-createdAt`,
+      `${baseUrl}/api/posts?limit=100&sort=-createdAt`,
       { next: { revalidate: 300 } }
     )
     if (!res.ok) throw new Error('Failed to fetch')

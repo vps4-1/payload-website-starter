@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 import { SiteHeader, SubscribeSection } from '@/components/SiteComponents'
+import { getApiBaseUrl } from '@/utilities/getURL'
 
 export const metadata = {
   title: '全部文章 - SijiGPT',
@@ -12,7 +13,8 @@ export const metadata = {
 
 async function getPosts() {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=20&sort=-createdAt`, { 
+    const baseUrl = getApiBaseUrl()
+    const res = await fetch(`${baseUrl}/api/posts?limit=20&sort=-createdAt`, { 
       next: { revalidate: 0, tags: ['posts'] } 
     })
     if (!res.ok) throw new Error('Failed to fetch')

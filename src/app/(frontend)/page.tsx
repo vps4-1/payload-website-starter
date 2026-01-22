@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { TerminalLayout } from '@/components/TerminalLayout'
 import InfinitePostList from '@/components/InfinitePostList'
 import { SiteHeader, SubscribeSection } from '@/components/SiteComponents'
+import { getApiBaseUrl } from '@/utilities/getURL'
 
 export const metadata = {
   title: 'SijiGPT - 斯基GPT - 你的 AI 资讯驾驶员',
@@ -13,7 +14,10 @@ export const metadata = {
 
 async function getPosts(limit = 50) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/api/posts?limit=${limit}&sort=-createdAt`, { next: { revalidate: 0, tags: [] } })
+    const baseUrl = getApiBaseUrl()
+    const res = await fetch(`${baseUrl}/api/posts?limit=${limit}&sort=-createdAt`, { 
+      next: { revalidate: 0, tags: [] }
+    })
     if (!res.ok) throw new Error('Failed to fetch')
     const data = await res.json()
     return {

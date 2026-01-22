@@ -3,6 +3,53 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 
+// 从URL中提取友好的来源名称
+function getSourceName(url: string): string {
+  try {
+    const domain = new URL(url).hostname
+    
+    // 特殊域名映射
+    const sourceMap: Record<string, string> = {
+      'blog.replit.com': 'Replit',
+      'www.media.mit.edu': 'MIT',
+      'blog.langchain.com': 'LangChain',
+      'www.blog.langchain.com': 'LangChain',
+      'openai.com': 'OpenAI',
+      'blog.openai.com': 'OpenAI',
+      'ai.googleblog.com': 'Google AI',
+      'deepmind.google': 'DeepMind',
+      'deepmind.com': 'DeepMind',
+      'aws.amazon.com': 'AWS',
+      'huggingface.co': 'HuggingFace',
+      'blog.huggingface.co': 'HuggingFace',
+      'techcrunch.com': 'TechCrunch',
+      'venturebeat.com': 'VentureBeat',
+      'technologyreview.com': 'MIT Tech Review',
+      'www.technologyreview.com': 'MIT Tech Review',
+      'theverge.com': 'The Verge',
+      'www.theverge.com': 'The Verge',
+      'arxiv.org': 'arXiv',
+      'github.com': 'GitHub',
+      'microsoft.com': 'Microsoft',
+      'blog.microsoft.com': 'Microsoft',
+      'anthropic.com': 'Anthropic',
+      'cohere.ai': 'Cohere',
+      'stability.ai': 'Stability AI'
+    }
+    
+    if (sourceMap[domain]) {
+      return sourceMap[domain]
+    }
+    
+    // 如果没有特殊映射，返回清理后的域名
+    return domain.replace('www.', '').replace('blog.', '').split('.')[0]
+      .split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')
+      
+  } catch {
+    return '未知来源'
+  }
+}
+
 interface Post {
   id: string
   slug: string
@@ -11,6 +58,11 @@ interface Post {
     title?: string
     content?: string
     keywords?: Array<{ id: string; keyword: string }>
+  }
+  source?: {
+    url?: string
+    name?: string
+    author?: string
   }
   createdAt: string
 }
@@ -92,17 +144,32 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
               }}
             >
               <div className="space-y-2">
-                {/* 第一行：日期 */}
-                <div className="text-xs text-terminal-muted">
-                  {new Date(post.createdAt).toLocaleDateString('zh-CN')}
-                </div>
-
-                {/* 第二行：标题 */}
+                {/* 第一行：标题 */}
                 <h2 className="text-lg font-semibold text-terminal-text hover:text-pistachio-400 transition-colors">
                   <Link href={`/posts/${post.slug}`}>
                     {post.summary_zh?.title || post.title}
                   </Link>
                 </h2>
+
+                {/* 第二行：日期和出处 */}
+                <div className="flex items-center text-xs text-terminal-muted" style={{ gap: '1.5rem' }}>
+                  <time>{new Date(post.createdAt).toLocaleDateString('zh-CN')}</time>
+                  <span className="text-terminal-muted" style={{ marginLeft: '0.5rem' }}>
+                    出处：
+                    {post.source?.url ? (
+                      <a 
+                        href={post.source.url} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-pistachio-400 transition-colors ml-1"
+                      >
+                        {getSourceName(post.source.url)}
+                      </a>
+                    ) : (
+                      <span className="ml-1">未知来源</span>
+                    )}
+                  </span>
+                </div>
 
                 {/* 第三行：摘要 */}
                 {post.summary_zh?.content && (

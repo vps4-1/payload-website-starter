@@ -12,11 +12,11 @@ export function SiteHeader() {
       <nav style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
         <Link href="/" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>主页</Link>
         <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
-        <Link href="/posts" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>文章</Link>
-        <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
         <Link href="/tags" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>标签</Link>
         <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
         <Link href="/archives" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>归档</Link>
+        <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
+        <Link href="/about" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>关于</Link>
         <span style={{ color: 'var(--terminal-gray)', fontSize: '1.1rem' }}>|</span>
         <Link href="/rss.xml" style={{ fontSize: '1.1rem', fontWeight: 'bold', color: 'var(--pistachio-400)', textDecoration: 'none' }}>RSS</Link>
       </nav>
