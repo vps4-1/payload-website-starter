@@ -64,25 +64,39 @@ export default async function HomePage() {
         <div className="space-y-6">
           <h2 className="text-xl text-pistachio-400 border-b border-terminal-border pb-2">
           {/* 导航栏 */}
-          <nav className="flex items-center justify-center gap-6 text-base font-bold border-2 border-pistachio-400 rounded-lg px-6 py-3 mb-6 bg-terminal-bg-secondary shadow-lg">
-            <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">主页</Link>
+          <nav className="flex items-center justify-center gap-6 text-base font-bold border-4 border-pistachio-400 px-6 py-3 mb-6 bg-terminal-bg-secondary shadow-lg rounded-lg" style={{ borderRadius: 'var(--radius)' }}>
+            <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">主页</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">文章</Link>
+            <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">文章</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">标签</Link>
+            <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">标签</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">归档</Link>
+            <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">归档</Link>
             <span className="text-terminal-gray">|</span>
-            <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 rounded transition-all">RSS</Link>
+            <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">RSS</Link>
           </nav>
 
             最新文章
           </h2>
           
           {posts.length === 0 ? (
-            <p className="text-terminal-muted">
-              文章正在聚合中，Worker 每天会自动发布新内容...
-            </p>
+            <div className="space-y-4 text-center py-12">
+              <div className="text-pistachio-400 text-lg">
+                <pre className="text-sm">
+{`
+  📡 正在聚合中...
+  
+  [ ████████████████████████████████ ] 100%
+`}
+                </pre>
+              </div>
+              <p className="text-terminal-muted">
+                Worker 每天自动发布新内容，AI 智能筛选全球优质资讯
+              </p>
+              <div className="text-terminal-muted text-sm">
+                数据源: OpenAI • Google AI • DeepMind • AWS ML Blog • HuggingFace
+              </div>
+            </div>
           ) : (
             <div className="space-y-6">
               {posts.map((post: any, index: number) => (

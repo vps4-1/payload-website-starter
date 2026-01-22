@@ -11,9 +11,11 @@ export function TerminalLayout({ children, title, showNav = false }: TerminalLay
   return (
     <div className="terminal-container">
       <header className="terminal-header">
-        <Link href="/" className="terminal-logo">
-          {title || '斯基GPT'}
-        </Link>
+        <div className="terminal-title">
+          <Link href="/" className="text-pistachio-400 hover:text-pistachio-300 transition-colors duration-200">
+            {title || '斯基GPT'}
+          </Link>
+        </div>
       </header>
 
       <main className="terminal-content">
