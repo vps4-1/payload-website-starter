@@ -55,22 +55,22 @@ export default async function HomePage() {
 
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
-      <div style={{ marginTop: '-1rem' }}>
+      <div style={{ marginTop: '-2.5rem', paddingTop: '0' }}>
         {/* 网站介绍 - 强制居中 */}
-        <div className="w-full mb-4" style={{ textAlign: 'center' }}>
-          <div className="space-y-1">
-            <p className="text-lg text-terminal-muted" style={{ textAlign: 'center' }}>
+        <div className="w-full" style={{ textAlign: 'center', marginBottom: '1rem' }}>
+          <div style={{ marginBottom: '0.25rem' }}>
+            <p className="text-lg text-terminal-muted" style={{ textAlign: 'center', margin: '0' }}>
               你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
             </p>
-            <p className="text-terminal-muted text-sm" style={{ textAlign: 'center' }}>
+            <p className="text-terminal-muted text-sm" style={{ textAlign: 'center', margin: '0.25rem 0 0 0' }}>
               共 {totalDocs} 篇文章 · 每天 4 次更新 · AI 智能筛选 · 双语摘要
             </p>
           </div>
         </div>
 
-        {/* 订阅服务 - 强制居中，扩大分隔符间距 */}
-        <div className="w-full mb-6">
-          <div className="flex items-center justify-center gap-4" style={{ textAlign: 'center', width: '100%' }}>
+        {/* 订阅服务 - 强制居中，强制分隔符间距 */}
+        <div className="w-full" style={{ marginBottom: '2rem' }}>
+          <div className="flex items-center justify-center" style={{ textAlign: 'center', width: '100%', gap: '1rem' }}>
             <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
             <span className="text-terminal-gray text-lg">——</span>
             
@@ -84,7 +84,7 @@ export default async function HomePage() {
               <span>Telegram 频道</span>
             </a>
             
-            <span className="text-pistachio-400 text-xl font-bold mx-4">◆</span>
+            <span className="text-pistachio-400 text-xl font-bold" style={{ margin: '0 2rem', display: 'inline-block' }}>◆</span>
             
             <a 
               href="mailto:subscribe@sijigpt.com" 
@@ -94,7 +94,7 @@ export default async function HomePage() {
               <span>邮件订阅</span>
             </a>
             
-            <span className="text-pistachio-400 text-xl font-bold mx-4">◆</span>
+            <span className="text-pistachio-400 text-xl font-bold" style={{ margin: '0 2rem', display: 'inline-block' }}>◆</span>
             
             <a 
               href="https://notion.so/sijigpt" 
