@@ -86,9 +86,9 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
               key={post.id} 
               className="py-4" 
               style={{ 
-                borderBottom: index < posts.length - 1 ? '1px solid var(--terminal-border)' : 'none',
-                paddingTop: '1rem',
-                paddingBottom: '1rem'
+                borderBottom: index < posts.length - 1 ? '2px solid var(--terminal-border)' : 'none',
+                paddingTop: '1.5rem',
+                paddingBottom: '1.5rem'
               }}
             >
               <div className="space-y-2">
