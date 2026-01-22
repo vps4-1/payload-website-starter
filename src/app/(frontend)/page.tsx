@@ -32,42 +32,30 @@ export default async function HomePage() {
     <TerminalLayout>
       <div className="space-y-8">
         {/* 导航栏 */}
-        <nav className="flex items-center justify-center gap-6 text-base font-bold border-4 border-pistachio-400 px-6 py-3 mb-8 bg-terminal-bg-secondary shadow-lg rounded-lg" style={{ borderRadius: 'var(--radius)' }}>
-          <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">主页</Link>
+        <nav className="flex items-center justify-center gap-8 text-lg font-bold border-4 border-pistachio-400 px-8 py-4 mb-8 bg-terminal-bg-secondary shadow-lg rounded-lg" style={{ borderRadius: 'var(--radius)' }}>
+          <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-4 py-2 transition-all duration-200 rounded">主页</Link>
           <span className="text-terminal-gray">|</span>
-          <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">文章</Link>
+          <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-4 py-2 transition-all duration-200 rounded">文章</Link>
           <span className="text-terminal-gray">|</span>
-          <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">标签</Link>
+          <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-4 py-2 transition-all duration-200 rounded">标签</Link>
           <span className="text-terminal-gray">|</span>
-          <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">归档</Link>
+          <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-4 py-2 transition-all duration-200 rounded">归档</Link>
           <span className="text-terminal-gray">|</span>
-          <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">RSS</Link>
+          <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-4 py-2 transition-all duration-200 rounded">RSS</Link>
         </nav>
 
         {/* Header */}
-        <div className="space-y-4">
-          <pre className="text-pistachio-400 text-sm overflow-x-auto">
-{`
-   _____ _ _ _  _____  _____ _______ 
-  / ____(_|_|_)/ ____|/ ____|__   __|
- | (___  _ _  | |  __| |  __   | |   
-  \\___ \\| | | | | |_ | | |_ |  | |   
-  ____) | | | | |__| | |__| |  | |   
- |_____/|_| |_|\\_____|\\_____|  |_|   
-`}
-          </pre>
-
+        <div className="space-y-4 text-center">
+          <h1 className="text-4xl font-bold text-pistachio-400">斯基GPT</h1>
           
           <div className="text-terminal-muted">
-            <span className="text-pistachio-400">$ whoami</span>
-            <p className="pl-4 mt-1">
-              斯基GPT (SijiGPT) - 你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
+            <p className="text-lg">
+              你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
             </p>
           </div>
 
           <div className="text-terminal-muted text-sm">
-            <span className="text-pistachio-400">$ ls -la posts/</span>
-            <p className="pl-4 mt-1">
+            <p>
               共 {totalDocs} 篇文章 · 每天 4 次更新 · AI 智能筛选 · 双语摘要
             </p>
           </div>
@@ -75,9 +63,6 @@ export default async function HomePage() {
 
         {/* 文章列表 */}
         <div className="space-y-6">
-          <h2 className="text-xl text-pistachio-400 border-b border-terminal-border pb-2">
-            最新文章
-          </h2>
           
           {posts.length === 0 ? (
             <div className="space-y-4 text-center py-12">
@@ -180,21 +165,36 @@ export default async function HomePage() {
           )}
         </div>
 
-        {/* 底部导航 */}
-        <div className="pt-8 border-t border-terminal-border space-y-2">
-          <div className="text-pistachio-400">$ ls -la</div>
-          <div className="pl-4 space-y-1 text-sm">
-            <Link href="/posts" className="block hover:text-pistachio-300">
-              drwxr-xr-x <span className="text-pistachio-400">posts/</span> - 所有文章
-            </Link>
-            <Link href="/tags" className="block hover:text-pistachio-300">
-              drwxr-xr-x <span className="text-pistachio-400">tags/</span> - 标签分类
-            </Link>
-            <Link href="/archives" className="block hover:text-pistachio-300">
-              drwxr-xr-x <span className="text-pistachio-400">archives/</span> - 时间归档
-            </Link>
-            <a href="/rss.xml" className="block hover:text-pistachio-300" target="_blank">
-              -rw-r--r-- <span className="text-terminal-text">rss.xml</span> - RSS 订阅
+        {/* 订阅服务 */}
+        <div className="pt-8 border-t border-terminal-border space-y-4">
+          <div className="text-pistachio-400 text-center">$ 订阅我们</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <a 
+              href="https://t.me/sijigpt" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 p-4 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded"
+            >
+              <span>📱</span>
+              <span>Telegram 频道</span>
+            </a>
+            
+            <a 
+              href="mailto:subscribe@sijigpt.com" 
+              className="flex items-center justify-center gap-2 p-4 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded"
+            >
+              <span>📧</span>
+              <span>邮件订阅</span>
+            </a>
+            
+            <a 
+              href="https://notion.so/sijigpt" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 p-4 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded"
+            >
+              <span>📄</span>
+              <span>Notion 订阅</span>
             </a>
           </div>
         </div>

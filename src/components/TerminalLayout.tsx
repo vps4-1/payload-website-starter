@@ -13,7 +13,7 @@ export function TerminalLayout({ children, title, showNav = false }: TerminalLay
       <header className="terminal-header">
         <div className="terminal-title">
           <Link href="/" className="text-pistachio-400 hover:text-pistachio-300 transition-colors duration-200">
-            {title || 'SijiGPT'}
+            {title || '斯基GPT'}
           </Link>
         </div>
       </header>
