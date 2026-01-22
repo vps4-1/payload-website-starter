@@ -55,9 +55,9 @@ export default async function HomePage() {
 
   return (
     <TerminalLayout customHeader={<CustomHeader />}>
-      <div className="space-y-8">
+      <div className="space-y-6">
         {/* 网站介绍 */}
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-3">
           <p className="text-lg text-terminal-muted">
             你的 AI 资讯驾驶员 | 聚合全球优质 AI 资讯
           </p>
@@ -66,46 +66,48 @@ export default async function HomePage() {
           </p>
         </div>
 
-        {/* 订阅服务 */}
-        <div className="flex items-center justify-center gap-3 text-center">
-          <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
-          <span className="text-terminal-gray text-lg">——</span>
-          
-          <a 
-            href="https://t.me/sijigpt" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
-          >
-            <span>📱</span>
-            <span>Telegram 频道</span>
-          </a>
-          
-          <span className="text-terminal-gray text-lg">•</span>
-          
-          <a 
-            href="mailto:subscribe@sijigpt.com" 
-            className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
-          >
-            <span>📧</span>
-            <span>邮件订阅</span>
-          </a>
-          
-          <span className="text-terminal-gray text-lg">•</span>
-          
-          <a 
-            href="https://notion.so/sijigpt" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
-          >
-            <span>📄</span>
-            <span>Notion 订阅</span>
-          </a>
+        {/* 订阅服务 - 强制居中 */}
+        <div className="w-full">
+          <div className="flex items-center justify-center gap-3" style={{ textAlign: 'center', width: '100%' }}>
+            <span className="text-pistachio-400 text-lg font-bold">$ 订阅我们</span>
+            <span className="text-terminal-gray text-lg">——</span>
+            
+            <a 
+              href="https://t.me/sijigpt" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
+            >
+              <span>📱</span>
+              <span>Telegram 频道</span>
+            </a>
+            
+            <span className="text-terminal-gray text-lg">•</span>
+            
+            <a 
+              href="mailto:subscribe@sijigpt.com" 
+              className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
+            >
+              <span>📧</span>
+              <span>邮件订阅</span>
+            </a>
+            
+            <span className="text-terminal-gray text-lg">•</span>
+            
+            <a 
+              href="https://notion.so/sijigpt" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 border-2 border-pistachio-400 text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
+            >
+              <span>📄</span>
+              <span>Notion 订阅</span>
+            </a>
+          </div>
         </div>
 
         {/* 文章列表 */}
-        <div className="space-y-6">
+        <div className="space-y-5">
         
           {posts.length === 0 ? (
             <div className="space-y-4 text-center py-12">
