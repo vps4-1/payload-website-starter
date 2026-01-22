@@ -135,7 +135,17 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_zh.keywords && post.summary_zh.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-pistachio-300 mb-2">🏷️ 相关标签</h3>
-                  <div className="flex flex-wrap" style={{ gap: '0.75rem !important', rowGap: '0.75rem !important', columnGap: '0.75rem !important' }}>
+                  <div 
+                    style={{ 
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.75rem !important', 
+                      rowGap: '0.75rem !important', 
+                      columnGap: '0.75rem !important',
+                      margin: '0',
+                      padding: '0'
+                    }}
+                  >
                     {post.summary_zh.keywords.map((kw: any) => (
                       <Link
                         key={kw.id}
@@ -155,6 +165,12 @@ export default async function PostPage({ params }: PageProps) {
           {post.summary_en?.content && (
             <section className="border-l-4 border-terminal-border pl-6 space-y-4">
               <h2 className="text-lg font-semibold text-terminal-text">📄 English Summary</h2>
+              
+              {/* 英文标题 */}
+              <h3 className="text-lg font-medium text-terminal-text leading-tight">
+                {post.title_en || post.title}
+              </h3>
+              
               <div className="text-terminal-muted leading-relaxed whitespace-pre-wrap text-base">
                 {post.summary_en.content}
               </div>
@@ -163,7 +179,17 @@ export default async function PostPage({ params }: PageProps) {
               {post.summary_en.keywords && post.summary_en.keywords.length > 0 && (
                 <div className="pt-3">
                   <h3 className="text-sm font-semibold text-terminal-text mb-2">🏷️ Related Tags</h3>
-                  <div className="flex flex-wrap" style={{ gap: '0.75rem !important', rowGap: '0.75rem !important', columnGap: '0.75rem !important' }}>
+                  <div 
+                    style={{ 
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '0.75rem !important', 
+                      rowGap: '0.75rem !important', 
+                      columnGap: '0.75rem !important',
+                      margin: '0',
+                      padding: '0'
+                    }}
+                  >
                     {post.summary_en.keywords.map((kw: any) => (
                       <Link
                         key={kw.id}
