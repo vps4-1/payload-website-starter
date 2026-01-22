@@ -31,6 +31,19 @@ export default async function HomePage() {
   return (
     <TerminalLayout>
       <div className="space-y-8">
+        {/* 导航栏 */}
+        <nav className="flex items-center justify-center gap-6 text-base font-bold border-4 border-pistachio-400 px-6 py-3 mb-8 bg-terminal-bg-secondary shadow-lg rounded-lg" style={{ borderRadius: 'var(--radius)' }}>
+          <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">主页</Link>
+          <span className="text-terminal-gray">|</span>
+          <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">文章</Link>
+          <span className="text-terminal-gray">|</span>
+          <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">标签</Link>
+          <span className="text-terminal-gray">|</span>
+          <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">归档</Link>
+          <span className="text-terminal-gray">|</span>
+          <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">RSS</Link>
+        </nav>
+
         {/* Header */}
         <div className="space-y-4">
           <pre className="text-pistachio-400 text-sm overflow-x-auto">
@@ -63,19 +76,6 @@ export default async function HomePage() {
         {/* 文章列表 */}
         <div className="space-y-6">
           <h2 className="text-xl text-pistachio-400 border-b border-terminal-border pb-2">
-          {/* 导航栏 */}
-          <nav className="flex items-center justify-center gap-6 text-base font-bold border-4 border-pistachio-400 px-6 py-3 mb-6 bg-terminal-bg-secondary shadow-lg rounded-lg" style={{ borderRadius: 'var(--radius)' }}>
-            <Link href="/" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">主页</Link>
-            <span className="text-terminal-gray">|</span>
-            <Link href="/posts" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">文章</Link>
-            <span className="text-terminal-gray">|</span>
-            <Link href="/tags" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">标签</Link>
-            <span className="text-terminal-gray">|</span>
-            <Link href="/archives" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">归档</Link>
-            <span className="text-terminal-gray">|</span>
-            <Link href="/rss.xml" className="text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg px-3 py-1 transition-all duration-200">RSS</Link>
-          </nav>
-
             最新文章
           </h2>
           
@@ -144,7 +144,7 @@ export default async function HomePage() {
                     
                     {/* 第四行：标签 */}
                     {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
-                      <div className="flex flex-wrap pt-1" style={{ gap: '64px' }}>
+                      <div className="flex flex-wrap gap-2 pt-1">
                         {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                           <Link
                             key={kw.id}
