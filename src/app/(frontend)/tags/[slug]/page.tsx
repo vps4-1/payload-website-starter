@@ -167,24 +167,22 @@ export default async function TagPage({ params }: PageProps) {
                 {/* 第四行：标签 */}
                 {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
                   <div 
-                    className="flex flex-wrap pt-1" 
+                    className="flex flex-wrap pt-2" 
                     style={{ 
-                      gap: '0.3rem',
+                      gap: '0.5rem',
                       display: 'flex',
-                      flexWrap: 'wrap',
-                      paddingTop: '0.25rem'
+                      flexWrap: 'wrap'
                     }}
                   >
                     {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                       <Link
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                        className={`text-sm hover:underline whitespace-nowrap ${
+                        className={`text-xs px-2 py-1 bg-terminal-bg border border-pistachio-400 rounded whitespace-nowrap transition-all duration-200 ${
                           kw.keyword.toLowerCase() === tag.toLowerCase() 
-                            ? 'text-pistachio-400 font-bold' 
-                            : 'text-pistachio-300 hover:text-pistachio-400'
+                            ? 'text-pistachio-400 font-bold bg-pistachio-400/10' 
+                            : 'text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg'
                         }`}
-                        style={{ marginRight: '0.2rem', marginBottom: '0.2rem' }}
                       >
                         #{kw.keyword}
                       </Link>

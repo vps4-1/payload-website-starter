@@ -194,20 +194,18 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
                 {/* 第四行：标签 */}
                 {post.summary_zh?.keywords && post.summary_zh.keywords.length > 0 && (
                   <div 
-                    className="flex flex-wrap pt-1" 
+                    className="flex flex-wrap pt-2" 
                     style={{ 
-                      gap: '0.3rem',
+                      gap: '0.5rem',
                       display: 'flex',
-                      flexWrap: 'wrap',
-                      paddingTop: '0.25rem'
+                      flexWrap: 'wrap'
                     }}
                   >
                     {post.summary_zh.keywords.slice(0, 5).map((kw: any) => (
                       <Link
                         key={kw.id}
                         href={`/tags/${encodeURIComponent(kw.keyword)}`}
-                        className="text-sm text-pistachio-300 hover:text-pistachio-400 hover:underline whitespace-nowrap"
-                        style={{ marginRight: '0.2rem', marginBottom: '0.2rem' }}
+                        className="text-xs px-2 py-1 bg-terminal-bg border border-pistachio-400 text-pistachio-300 hover:text-pistachio-400 hover:bg-pistachio-400 hover:text-terminal-bg transition-all duration-200 rounded whitespace-nowrap"
                       >
                         #{kw.keyword}
                       </Link>
