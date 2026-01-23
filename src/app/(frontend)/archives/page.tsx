@@ -88,7 +88,9 @@ export default async function ArchivesPage() {
                 </h2>
                 
                 <div style={{ marginLeft: '1.5rem' }}>
-                  {posts.map((post: any) => (
+                  {posts
+                    .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+                    .map((post: any) => (
                     <div 
                       key={post.id} 
                       style={{ 
