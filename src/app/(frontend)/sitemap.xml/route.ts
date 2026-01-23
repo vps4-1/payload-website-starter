@@ -32,7 +32,7 @@ interface Tag {
 async function getAllPosts(): Promise<Post[]> {
   try {
     const baseUrl = getApiBaseUrl()
-    const res = await fetch(`${baseUrl}/api/posts?limit=1000&sort=-createdAt`, {
+    const res = await fetch(`${baseUrl}/api/frontend-posts?limit=1000&sort=-createdAt`, {
       next: { revalidate: 3600 } // 1小时缓存
     })
     

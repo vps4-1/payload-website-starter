@@ -9,7 +9,7 @@ async function getAllTags() {
   try {
     // 获取所有文章来提取标签
     const response = await fetch(
-      `${baseUrl}/api/posts?limit=1000&sort=-createdAt`,
+      `${baseUrl}/api/frontend-posts?limit=1000&sort=-createdAt`,
       {
         next: { revalidate: 7200 }, // 2小时缓存
         headers: {

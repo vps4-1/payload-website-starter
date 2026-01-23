@@ -13,7 +13,7 @@ async function getAllPosts() {
   try {
     while (hasMore) {
       const response = await fetch(
-        `${baseUrl}/api/posts?limit=${batchSize}&page=${page}&sort=-createdAt`,
+        `${baseUrl}/api/frontend-posts?limit=${batchSize}&page=${page}&sort=-createdAt`,
         {
           next: { revalidate: 3600 }, // 1小时缓存
           headers: {

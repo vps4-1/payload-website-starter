@@ -16,7 +16,7 @@ async function getTags() {
     const baseUrl = getApiBaseUrl()
     
     const res = await fetch(
-      `${baseUrl}/api/posts?limit=1000`,
+      `${baseUrl}/api/frontend-posts?limit=1000`,
       { 
         next: { tags: ['posts'] }
       }

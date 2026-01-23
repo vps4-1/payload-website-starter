@@ -14,7 +14,7 @@ export const metadata = {
 async function getPosts() {
   try {
     const baseUrl = getApiBaseUrl()
-    const res = await fetch(`${baseUrl}/api/posts?limit=20&sort=-createdAt`, { 
+    const res = await fetch(`${baseUrl}/api/frontend-posts?limit=20&sort=-createdAt`, { 
       next: { revalidate: 0, tags: ['posts'] } 
     })
     if (!res.ok) throw new Error('Failed to fetch')

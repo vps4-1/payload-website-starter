@@ -13,7 +13,7 @@ async function getPostsByTag(tag: string) {
   try {
     const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${baseUrl}/api/posts?limit=100&sort=-createdAt`,
+      `${baseUrl}/api/frontend-posts?limit=100&sort=-createdAt`,
       { next: { revalidate: 0, tags: [] } }
     )
 

@@ -86,13 +86,13 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
     try {
       const offset = posts.length
       // 在客户端使用相对路径访问API
-      const apiUrl = `/api/posts?limit=20&sort=-createdAt&page=${page + 1}`
+      const apiUrl = `/api/frontend-posts?limit=20&sort=-createdAt&page=${page + 1}`
       console.log('InfinitePostList: 尝试加载更多文章，URL:', apiUrl)
       
       const res = await fetch(apiUrl)
       if (!res.ok) {
         console.error('API请求失败:', res.status, res.statusText)
-        throw new Error(`Failed to load /api/posts: ${res.status}`)
+        throw new Error(`Failed to load /api/frontend-posts: ${res.status}`)
       }
       
       const data = await res.json()

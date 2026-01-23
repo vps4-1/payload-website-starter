@@ -15,9 +15,9 @@ export const metadata = {
 async function getPosts(limit = 50, retries = 3) {
   try {
     const baseUrl = getApiBaseUrl()
-    console.log(`[getPosts] 尝试获取文章，URL: ${baseUrl}/api/posts?limit=${limit}&sort=-createdAt`)
+    console.log(`[getPosts] 尝试获取文章，URL: ${baseUrl}/api/frontend-posts?limit=${limit}&sort=-createdAt`)
     
-    const res = await fetch(`${baseUrl}/api/posts?limit=${limit}&sort=-createdAt`, { 
+    const res = await fetch(`${baseUrl}/api/frontend-posts?limit=${limit}&sort=-createdAt`, { 
       next: { revalidate: 0, tags: [] }
     })
     

@@ -14,7 +14,7 @@ async function getPost(slug: string) {
   try {
     const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${baseUrl}/api/posts?where[slug][equals]=${slug}&limit=1`,
+      `${baseUrl}/api/frontend-posts?where[slug][equals]=${slug}&limit=1`,
       { next: { revalidate: 0 } }
     )
     if (!res.ok) throw new Error('Failed to fetch')
@@ -30,7 +30,7 @@ async function getRelatedPosts(currentPostId: string, keywords: string[] = []) {
   try {
     const baseUrl = getApiBaseUrl()
     const res = await fetch(
-      `${baseUrl}/api/posts?limit=5&sort=-createdAt&where[id][not_equals]=${currentPostId}`,
+      `${baseUrl}/api/frontend-posts?limit=5&sort=-createdAt&where[id][not_equals]=${currentPostId}`,
       { next: { revalidate: 300 } }
     )
     if (!res.ok) throw new Error('Failed to fetch')

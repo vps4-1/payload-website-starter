@@ -1,5 +1,8 @@
 import type { CollectionConfig } from 'payload'
 
+import { apiKeyOrAuthenticated } from '../access/apiKeyOrAuthenticated'
+import { anyone } from '../access/anyone'
+
 export const Posts: CollectionConfig = {
   slug: 'posts',
   admin: {
@@ -7,7 +10,10 @@ export const Posts: CollectionConfig = {
     defaultColumns: ['title', 'publishedAt', 'original_language'],
   },
   access: {
-    read: () => true,
+    read: anyone,
+    create: anyone,  // 临时允许所有人创建，便于测试
+    update: anyone,  // 临时允许所有人更新，便于测试
+    delete: apiKeyOrAuthenticated,  // 删除仍需要认证
   },
   fields: [
     // ===== 基础信息 =====

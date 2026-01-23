@@ -17,7 +17,7 @@ async function getArchives() {
     const baseUrl = getApiBaseUrl()
     
     const res = await fetch(
-      `${baseUrl}/api/posts?limit=1000&sort=-createdAt`,
+      `${baseUrl}/api/frontend-posts?limit=1000&sort=-createdAt`,
       { 
         next: { tags: ['posts'] }  // 支持 revalidateTag('posts')
       }
