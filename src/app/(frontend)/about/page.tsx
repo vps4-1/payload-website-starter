@@ -60,7 +60,8 @@ export default function AboutPage() {
                 <div className="text-sm text-terminal-text space-y-2">
                   <div>🌐 <strong>主站</strong>: sijigpt.com（Payload CMS 驱动）</div>
                   <div>💬 <strong>Telegram 频道</strong>: 实时资讯推送</div>
-                  <div>📧 <strong>邮件订阅</strong>: 网站顶部订阅框（敬请期待开通）</div>
+                  <div>📧 <strong>邮件订阅</strong>: 一点即可定时发送更新</div>
+                  <div>📝 <strong>Notion 订阅</strong>: 一点即可定时发送更新</div>
                 </div>
               </div>
             </div>
@@ -96,18 +97,8 @@ export default function AboutPage() {
                   <div className="ml-4 space-y-1">
                     <div>📡 <strong>RSS 采集</strong> → Cloudflare Workers（边缘计算）</div>
                     <div>🤖 <strong>AI 处理</strong> → OpenRouter 多模型分析</div>
-                    <div>📤 <strong>API 写入</strong> → POST /api/posts → Payload CMS</div>
                     <div>🗄️ <strong>数据存储</strong> → PostgreSQL (Neon)</div>
                     <div>🌐 <strong>前端展示</strong> → Next.js 读取 → Vercel 部署</div>
-                  </div>
-                  
-                  <div className="mt-4 pt-3 border-t border-terminal-border">
-                    <div className="font-semibold text-pistachio-400">连接方式：</div>
-                    <div className="ml-4 space-y-1">
-                      <div>🔐 <strong>鉴权</strong>: Bearer Token (PAYLOAD_API_KEY)</div>
-                      <div>🚀 <strong>写入</strong>: REST API → PAYLOAD_URL/api/posts</div>
-                      <div>♻️ <strong>缓存刷新</strong>: /api/revalidate 自动更新</div>
-                    </div>
                   </div>
                 </div>
               </div>
