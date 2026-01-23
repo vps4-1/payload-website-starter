@@ -12,27 +12,30 @@ export const seoConfig = {
   // AI时代关键词策略
   keywords: {
     primary: [
-      "AI资讯", "人工智能", "机器学习", "深度学习", "大语言模型", "LLM",
-      "ChatGPT", "Claude", "Gemini", "GPT-4", "AI新闻", "科技资讯"
+      "斯基GPT", "AI资讯聚合", "人工智能", "机器学习", "深度学习", "大语言模型", "LLM",
+      "ChatGPT", "Claude", "Gemini", "GPT-4", "AI新闻", "科技资讯", "GenSpark AI"
     ],
     secondary: [
       "自然语言处理", "NLP", "计算机视觉", "CV", "机器人技术", "RPA",
-      "神经网络", "Transformer", "AI应用", "AI工具", "AI产品", "AI趋势"
+      "神经网络", "Transformer", "AI应用", "AI工具", "AI产品", "AI趋势",
+      "Cloudflare Workers", "Edge Computing", "多模型AI", "RSS聚合"
     ],
     technical: [
       "PyTorch", "TensorFlow", "Hugging Face", "OpenAI API", "AI训练",
-      "模型优化", "AI部署", "MLOps", "AI安全", "AI伦理"
+      "模型优化", "AI部署", "MLOps", "AI安全", "AI伦理", "Payload CMS",
+      "Kimi", "DeepSeek", "Groq", "Qwen", "OpenRouter"
     ],
     chinese: [
       "斯基GPT", "AI驾驶员", "智能资讯", "AI聚合", "人工智能新闻",
-      "机器学习资讯", "深度学习动态", "AI技术前沿", "智能科技", "AI创新"
+      "机器学习资讯", "深度学习动态", "AI技术前沿", "智能科技", "AI创新",
+      "内容聚合平台", "自动化内容", "双语摘要", "智能筛选"
     ]
   },
 
   // 页面默认配置
   defaults: {
     title: "SijiGPT - 斯基GPT - 你的AI资讯驾驶员",
-    description: "聚合全球优质AI资讯，提供中英双语深度解读，AI智能筛选，每天4次更新。覆盖OpenAI、Google AI、DeepMind、AWS ML Blog、HuggingFace等顶级数据源。",
+    description: "斯基GPT是基于AI的自动化内容聚合平台，专注收集全球AI/ML技术资讯。使用Cloudflare Workers和多模型AI提供高质量双语内容，每天4次更新。",
     type: "website",
     locale: "zh_CN",
     alternateLocale: "en_US"
