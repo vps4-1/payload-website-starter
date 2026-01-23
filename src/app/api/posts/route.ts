@@ -19,16 +19,38 @@ export async function GET(request: NextRequest) {
     const page = parseInt(searchParams.get('page') || '1')
     const sort = searchParams.get('sort') || '-createdAt'
     
-    console.log(`[API /posts] 参数: limit=${limit}, page=${page}, sort=${sort}`)
+    // 构建 where 查询条件
+    const where: any = {}
+    
+    // 处理 where[slug][equals] 查询 - 用于单个文章
+    const slugEquals = searchParams.get('where[slug][equals]')
+    if (slugEquals) {
+      where.slug = { equals: slugEquals }
+    }
+    
+    // 处理 where[id][not_equals] 查询 - 用于排除特定文章
+    const idNotEquals = searchParams.get('where[id][not_equals]')
+    if (idNotEquals) {
+      where.id = { not_equals: parseInt(idNotEquals) }
+    }
+    
+    console.log(`[API /posts] 参数: limit=${limit}, page=${page}, sort=${sort}, where=`, JSON.stringify(where))
     
     const payloadInstance = await getPayloadInstance()
     
-    const result = await payloadInstance.find({
+    const queryOptions: any = {
       collection: 'posts',
       limit,
       page,
       sort: sort.startsWith('-') ? [sort.substring(1), 'desc'] : [sort, 'asc'],
-    })
+    }
+    
+    // 只有在有 where 条件时才添加
+    if (Object.keys(where).length > 0) {
+      queryOptions.where = where
+    }
+    
+    const result = await payloadInstance.find(queryOptions)
     
     console.log(`[API /posts] 成功获取 ${result.docs?.length || 0} 篇文章`)
     
