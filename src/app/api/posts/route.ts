@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
       collection: 'posts',
       limit,
       page,
-      sort: sort.startsWith('-') ? [sort.substring(1), 'desc'] : [sort, 'asc'],
+      sort,
     }
     
     // 只有在有 where 条件时才添加

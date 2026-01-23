@@ -35,7 +35,7 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     const result = await payloadInstance.find({
       collection: 'posts',
       limit: 1000, // 先获取足够的文章进行过滤
-      sort: sort.startsWith('-') ? [sort.substring(1), 'desc'] : [sort, 'asc'],
+      sort,
     })
     
     const allPosts = result.docs || []
