@@ -37,6 +37,35 @@ export default function AboutPage() {
             </div>
           </section>
 
+          {/* 使命宣言 - 移到前面 */}
+          <section className="space-y-4">
+            <div className="bg-terminal-bg border border-pistachio-400 p-6 rounded text-center">
+              <h3 className="text-lg font-bold text-pistachio-400 mb-3">SijiGPT 的使命</h3>
+              <p className="text-terminal-text mb-4">
+                用最小的阅读成本，让你第一时间掌握 AI 领域的最新进展与核心洞见。
+              </p>
+              <p className="text-terminal-muted text-sm">
+                欢迎订阅，一起见证 AI 的未来！
+              </p>
+            </div>
+          </section>
+
+          {/* 多平台分发 - 移到前面 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              📱 多平台分发
+            </h2>
+            <div className="pl-4">
+              <div className="bg-terminal-bg border border-terminal-border p-4 rounded">
+                <div className="text-sm text-terminal-text space-y-2">
+                  <div>🌐 <strong>主站</strong>: sijigpt.com（Payload CMS 驱动）</div>
+                  <div>💬 <strong>Telegram 频道</strong>: 实时资讯推送</div>
+                  <div>📧 <strong>邮件订阅</strong>: 网站顶部订阅框（敬请期待开通）</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* 开发团队 */}
           <section className="space-y-4">
             <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
@@ -50,6 +79,36 @@ export default function AboutPage() {
                   <div>• <strong className="text-pistachio-400">思路提供</strong>: Grok 4</div>
                   <div>• <strong className="text-pistachio-400">上线时间</strong>: 2026 年 1 月 1 日</div>
                   <div>• <strong className="text-pistachio-400">参考项目</strong>: <a href="https://aigc-weekly.agi.li/" className="text-pistachio-400 hover:underline" target="_blank" rel="noopener noreferrer">AIGC Weekly</a></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* 架构连接说明 */}
+          <section className="space-y-4">
+            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
+              🏗️ Cloudflare Workers + Payload CMS 架构
+            </h2>
+            <div className="pl-4">
+              <div className="bg-terminal-bg border border-terminal-border p-4 rounded">
+                <div className="text-sm text-terminal-text space-y-3">
+                  <div className="font-semibold text-pistachio-400">数据流转路径：</div>
+                  <div className="ml-4 space-y-1">
+                    <div>📡 <strong>RSS 采集</strong> → Cloudflare Workers（边缘计算）</div>
+                    <div>🤖 <strong>AI 处理</strong> → OpenRouter 多模型分析</div>
+                    <div>📤 <strong>API 写入</strong> → POST /api/posts → Payload CMS</div>
+                    <div>🗄️ <strong>数据存储</strong> → PostgreSQL (Neon)</div>
+                    <div>🌐 <strong>前端展示</strong> → Next.js 读取 → Vercel 部署</div>
+                  </div>
+                  
+                  <div className="mt-4 pt-3 border-t border-terminal-border">
+                    <div className="font-semibold text-pistachio-400">连接方式：</div>
+                    <div className="ml-4 space-y-1">
+                      <div>🔐 <strong>鉴权</strong>: Bearer Token (PAYLOAD_API_KEY)</div>
+                      <div>🚀 <strong>写入</strong>: REST API → PAYLOAD_URL/api/posts</div>
+                      <div>♻️ <strong>缓存刷新</strong>: /api/revalidate 自动更新</div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -97,63 +156,65 @@ export default function AboutPage() {
               🤖 AI 模型配置（性价比优先）
             </h2>
             <div className="pl-4">
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-terminal-border text-sm">
-                  <thead>
-                    <tr className="bg-terminal-bg">
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">模型</th>
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">优势特点</th>
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">适用场景</th>
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">调度优先级</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-terminal-text">
-                    <tr>
-                      <td className="border border-terminal-border p-3">
-                        <div className="font-semibold">Kimi</div>
-                        <div className="text-xs text-terminal-muted">(moonshot-v1-8k)</div>
-                      </td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">中文理解极强，语义准确</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">详细摘要、翻译标注</td>
-                      <td className="border border-terminal-border p-3 text-center">
-                        <span className="bg-pistachio-400 text-black px-2 py-1 rounded text-xs">主力</span>
-                      </td>
-                    </tr>
-                    <tr className="bg-terminal-bg/30">
-                      <td className="border border-terminal-border p-3">
-                        <div className="font-semibold">DeepSeek</div>
-                        <div className="text-xs text-terminal-muted">(deepseek-chat)</div>
-                      </td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">AI/ML 技术专家，成本极低</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">内容筛选、技术分析</td>
-                      <td className="border border-terminal-border p-3 text-center">
-                        <span className="bg-blue-400 text-black px-2 py-1 rounded text-xs">备用</span>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="border border-terminal-border p-3">
-                        <div className="font-semibold">Groq</div>
-                        <div className="text-xs text-terminal-muted">(Llama-3.1-70B)</div>
-                      </td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">推理速度极快，高吞吐</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">批量筛选、快速处理</td>
-                      <td className="border border-terminal-border p-3 text-center">
-                        <span className="bg-yellow-400 text-black px-2 py-1 rounded text-xs">筛选首选</span>
-                      </td>
-                    </tr>
-                    <tr className="bg-terminal-bg/30">
-                      <td className="border border-terminal-border p-3">
-                        <div className="font-semibold">Qwen 2.5</div>
-                        <div className="text-xs text-terminal-muted">(qwen-2.5-72b)</div>
-                      </td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">中文术语准确，稳定性高</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">专业术语、稳定备份</td>
-                      <td className="border border-terminal-border p-3 text-center">
-                        <span className="bg-gray-400 text-black px-2 py-1 rounded text-xs">稳定备份</span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="min-w-full">
+                  <table className="w-full border-collapse border border-terminal-border text-sm">
+                    <thead>
+                      <tr className="bg-terminal-bg">
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[120px]">模型</th>
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[140px]">优势特点</th>
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[120px]">适用场景</th>
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[100px]">调度优先级</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-terminal-text">
+                      <tr>
+                        <td className="border border-terminal-border p-2 sm:p-3">
+                          <div className="font-semibold">Kimi</div>
+                          <div className="text-xs text-terminal-muted">(moonshot-v1-8k)</div>
+                        </td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">中文理解极强，语义准确</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">详细摘要、翻译标注</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-center">
+                          <span className="bg-pistachio-400 text-black px-2 py-1 rounded text-xs whitespace-nowrap">主力</span>
+                        </td>
+                      </tr>
+                      <tr className="bg-terminal-bg/30">
+                        <td className="border border-terminal-border p-2 sm:p-3">
+                          <div className="font-semibold">DeepSeek</div>
+                          <div className="text-xs text-terminal-muted">(deepseek-chat)</div>
+                        </td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">AI/ML 技术专家，成本极低</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">内容筛选、技术分析</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-center">
+                          <span className="bg-blue-400 text-black px-2 py-1 rounded text-xs whitespace-nowrap">备用</span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="border border-terminal-border p-2 sm:p-3">
+                          <div className="font-semibold">Groq</div>
+                          <div className="text-xs text-terminal-muted">(Llama-3.1-70B)</div>
+                        </td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">推理速度极快，高吞吐</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">批量筛选、快速处理</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-center">
+                          <span className="bg-yellow-400 text-black px-2 py-1 rounded text-xs whitespace-nowrap">筛选首选</span>
+                        </td>
+                      </tr>
+                      <tr className="bg-terminal-bg/30">
+                        <td className="border border-terminal-border p-2 sm:p-3">
+                          <div className="font-semibold">Qwen 2.5</div>
+                          <div className="text-xs text-terminal-muted">(qwen-2.5-72b)</div>
+                        </td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">中文术语准确，稳定性高</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">专业术语、稳定备份</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-center">
+                          <span className="bg-gray-400 text-black px-2 py-1 rounded text-xs whitespace-nowrap">稳定备份</span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
               
               {/* 调度策略 */}
@@ -174,110 +235,51 @@ export default function AboutPage() {
               ⚡ 技术亮点 & 性能指标
             </h2>
             <div className="pl-4">
-              <div className="overflow-x-auto">
-                <table className="w-full border-collapse border border-terminal-border text-sm">
-                  <thead>
-                    <tr className="bg-terminal-bg">
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">技术实现</th>
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">关键优势</th>
-                      <th className="border border-terminal-border p-3 text-left text-pistachio-400">性能指标</th>
-                    </tr>
-                  </thead>
-                  <tbody className="text-terminal-text">
-                    <tr>
-                      <td className="border border-terminal-border p-3 font-semibold">Edge Computing</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">Cloudflare Workers 全球边缘网络</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">毫秒级延迟</td>
-                    </tr>
-                    <tr className="bg-terminal-bg/30">
-                      <td className="border border-terminal-border p-3 font-semibold">智能轮换 RSS 源</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">动态调度算法</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">100+ RSS 源</td>
-                    </tr>
-                    <tr>
-                      <td className="border border-terminal-border p-3 font-semibold">多模型降级机制</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">4 模型智能切换，高可用</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">99.9% 可用性</td>
-                    </tr>
-                    <tr className="bg-terminal-bg/30">
-                      <td className="border border-terminal-border p-3 font-semibold">SEO 友好</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">英文 slug 自动生成</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">URL 规范化</td>
-                    </tr>
-                    <tr>
-                      <td className="border border-terminal-border p-3 font-semibold">实时预热</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">内容发布后自动预热核心页面</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">CDN 缓存优化</td>
-                    </tr>
-                    <tr className="bg-terminal-bg/30">
-                      <td className="border border-terminal-border p-3 font-semibold">成本控制</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">性价比模型组合策略</td>
-                      <td className="border border-terminal-border p-3 text-terminal-muted">成本优化 60%+</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </section>
-
-          {/* 多平台分发 */}
-          <section className="space-y-4">
-            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
-              📱 多平台分发
-            </h2>
-            <div className="pl-4">
-              <div className="bg-terminal-bg border border-terminal-border p-4 rounded">
-                <div className="text-sm text-terminal-text space-y-2">
-                  <div>🌐 <strong>主站</strong>: sijigpt.com（Payload CMS 驱动）</div>
-                  <div>💬 <strong>Telegram 频道</strong>: 实时资讯推送</div>
-                  <div>📧 <strong>邮件订阅</strong>: 网站顶部订阅框（敬请期待开通）</div>
+              <div className="overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0">
+                <div className="min-w-full">
+                  <table className="w-full border-collapse border border-terminal-border text-sm">
+                    <thead>
+                      <tr className="bg-terminal-bg">
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[120px]">技术实现</th>
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[140px]">关键优势</th>
+                        <th className="border border-terminal-border p-2 sm:p-3 text-left text-pistachio-400 min-w-[100px]">性能指标</th>
+                      </tr>
+                    </thead>
+                    <tbody className="text-terminal-text">
+                      <tr>
+                        <td className="border border-terminal-border p-2 sm:p-3 font-semibold">Edge Computing</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">Cloudflare Workers 全球边缘网络</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">毫秒级延迟</td>
+                      </tr>
+                      <tr className="bg-terminal-bg/30">
+                        <td className="border border-terminal-border p-2 sm:p-3 font-semibold">智能轮换 RSS 源</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">动态调度算法</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">100+ RSS 源</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-terminal-border p-2 sm:p-3 font-semibold">多模型降级机制</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">4 模型智能切换，高可用</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">99.9% 可用性</td>
+                      </tr>
+                      <tr className="bg-terminal-bg/30">
+                        <td className="border border-terminal-border p-2 sm:p-3 font-semibold">SEO 友好</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">英文 slug 自动生成</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">URL 规范化</td>
+                      </tr>
+                      <tr>
+                        <td className="border border-terminal-border p-2 sm:p-3 font-semibold">实时预热</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">内容发布后自动预热核心页面</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">CDN 缓存优化</td>
+                      </tr>
+                      <tr className="bg-terminal-bg/30">
+                        <td className="border border-terminal-border p-2 sm:p-3 font-semibold">成本控制</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">性价比模型组合策略</td>
+                        <td className="border border-terminal-border p-2 sm:p-3 text-terminal-muted">成本优化 60%+</td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-            </div>
-          </section>
-
-          {/* 核心指标 */}
-          <section className="space-y-4">
-            <h2 className="text-lg font-bold text-pistachio-400 border-l-4 border-pistachio-400 pl-4">
-              📊 核心指标（截至 2026 年 1 月）
-            </h2>
-            <div className="pl-4">
-              <div className="bg-terminal-bg border border-terminal-border p-4 rounded">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-sm">
-                  <div>
-                    <div className="text-pistachio-400 font-bold text-lg">100+</div>
-                    <div className="text-terminal-muted">RSS 源数量</div>
-                  </div>
-                  <div>
-                    <div className="text-pistachio-400 font-bold text-lg">99.9%</div>
-                    <div className="text-terminal-muted">系统可用性</div>
-                  </div>
-                  <div>
-                    <div className="text-pistachio-400 font-bold text-lg">60%+</div>
-                    <div className="text-terminal-muted">运营成本优化</div>
-                  </div>
-                  <div>
-                    <div className="text-pistachio-400 font-bold text-lg">毫秒级</div>
-                    <div className="text-terminal-muted">页面响应延迟</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* 使命宣言 */}
-          <section className="space-y-4">
-            <div className="bg-terminal-bg border border-pistachio-400 p-6 rounded text-center">
-              <h3 className="text-lg font-bold text-pistachio-400 mb-3">SijiGPT 的使命</h3>
-              <p className="text-terminal-text mb-4">
-                用最小的阅读成本，让你第一时间掌握 AI 领域的最新进展与核心洞见。
-              </p>
-              <p className="text-terminal-muted text-sm">
-                欢迎订阅，一起见证 AI 的未来！
-              </p>
-              <p className="text-terminal-muted text-xs mt-4">
-                （最后更新：2026 年 1 月）
-              </p>
             </div>
           </section>
         </div>
