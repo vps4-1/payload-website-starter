@@ -85,17 +85,25 @@ export default function InfinitePostList({ initialPosts, initialHasMore, totalDo
     setLoading(true)
     try {
       const offset = posts.length
-      const res = await fetch(`/api/posts?limit=20&sort=-createdAt&page=${page + 1}`)
-      if (!res.ok) throw new Error('Failed to fetch')
+      // 在客户端使用相对路径访问API
+      const apiUrl = `/api/posts?limit=20&sort=-createdAt&page=${page + 1}`
+      console.log('InfinitePostList: 尝试加载更多文章，URL:', apiUrl)
+      
+      const res = await fetch(apiUrl)
+      if (!res.ok) {
+        console.error('API请求失败:', res.status, res.statusText)
+        throw new Error(`Failed to load /api/posts: ${res.status}`)
+      }
       
       const data = await res.json()
       const newPosts = data.docs || []
+      console.log('InfinitePostList: 成功加载', newPosts.length, '篇文章')
       
       setPosts(prev => [...prev, ...newPosts])
       setHasMore(data.hasNextPage || false)
       setPage(prev => prev + 1)
     } catch (error) {
-      console.error('加载更多文章失败:', error)
+      console.error('Failed to load posts:', error)
     } finally {
       setLoading(false)
     }
