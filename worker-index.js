@@ -369,7 +369,7 @@ export default {
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-          'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+          'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Payload-Source'
         }
       });
     }
@@ -387,6 +387,100 @@ export default {
           'Access-Control-Allow-Origin': '*'
         }
       });
+    }
+
+    if (path === '/webhook/article' && request.method === 'POST') {
+      try {
+        // 验证 API 密钥
+        const authHeader = request.headers.get('Authorization');
+        const expectedKey = env.WORKER_API_KEY;
+        
+        if (!authHeader || !expectedKey) {
+          return new Response(JSON.stringify({ error: 'No authorization' }), {
+            status: 401,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        
+        const receivedKey = authHeader.replace('Bearer ', '');
+        if (receivedKey !== expectedKey) {
+          return new Response(JSON.stringify({ error: 'Invalid API key' }), {
+            status: 403,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        
+        // 验证来源
+        const payloadSource = request.headers.get('X-Payload-Source');
+        if (payloadSource !== 'sijigpt-cms') {
+          return new Response(JSON.stringify({ error: 'Invalid source' }), {
+            status: 403,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+        
+        const article = await request.json();
+        console.log('[Webhook] 收到新文章通知:', article.title);
+        
+        // 这里可以添加额外的处理逻辑，比如：
+        // 1. 发送到 Telegram 频道
+        // 2. 更新缓存
+        // 3. 触发其他 Webhook
+        
+        if (env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHANNEL) {
+          try {
+            const telegramMessage = `🆕 新文章发布
+            
+**${article.title}**
+
+📝 摘要: ${article.summary_zh?.content?.substring(0, 100)}...
+
+🔗 查看详情: https://sijigpt.com/posts/${article.slug}`;
+
+            await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                chat_id: env.TELEGRAM_CHANNEL,
+                text: telegramMessage,
+                parse_mode: 'Markdown',
+                disable_web_page_preview: false
+              })
+            });
+            
+            console.log('[Webhook] Telegram 通知已发送');
+          } catch (tgError) {
+            console.error('[Webhook] Telegram 通知失败:', tgError.message);
+          }
+        }
+        
+        return new Response(JSON.stringify({ 
+          success: true, 
+          message: 'Article notification processed',
+          article: {
+            id: article.id,
+            title: article.title,
+            slug: article.slug
+          }
+        }), {
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        });
+      } catch (error) {
+        console.error('[Webhook] 处理错误:', error);
+        return new Response(JSON.stringify({ 
+          error: 'Internal server error',
+          message: error.message 
+        }), {
+          status: 500,
+          headers: { 
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*'
+          }
+        });
+      }
     }
 
     if (path === '/test' && request.method === 'POST') {
@@ -950,54 +1044,24 @@ async function translateWithOpenRouter(env, text, title, fromLang) {
 // ==================== Payload 发布 (修复版) ====================
 
 async function publishToPayload(env, article, logs) {
-  // 步骤 1: 先登录获取 Token
-  let token = env.PAYLOAD_TOKEN;
-  
-  if (!token) {
-    if (!env.PAYLOAD_EMAIL || !env.PAYLOAD_PASSWORD) {
-      logs.push('[Payload] ❌ 未配置认证信息 (需要 PAYLOAD_TOKEN 或 PAYLOAD_EMAIL + PAYLOAD_PASSWORD)');
-      return false;
-    }
-    
-    try {
-      logs.push('[Payload] 开始登录...');
-      const loginResponse = await fetch('https://payload-website-starter-blush-sigma.vercel.app/api/users/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: env.PAYLOAD_EMAIL,
-          password: env.PAYLOAD_PASSWORD
-        })
-      });
-      
-      if (!loginResponse.ok) {
-        const errorText = await loginResponse.text();
-        logs.push(`[Payload] ❌ 登录失败: ${errorText}`);
-        return false;
-      }
-      
-      const loginData = await loginResponse.json();
-      token = loginData.token;
-      logs.push('[Payload] ✅ 登录成功');
-    } catch (error) {
-      logs.push(`[Payload] ❌ 登录错误: ${error.message}`);
-      return false;
-    }
-  } else {
-    logs.push('[Payload] 使用已配置的 Token');
+  // 使用 API Key 认证方式
+  if (!env.PAYLOAD_API_KEY) {
+    logs.push('[Payload] ❌ 未配置 PAYLOAD_API_KEY');
+    return false;
   }
   
-  // 步骤 2: 发布文章
   try {
-     // 构建 Payload 数据（双语格式）
-    // 直接使用传入的 article（已包含正确的嵌套结构）
+    logs.push('[Payload] 使用 API Key 发布...');
+    
+    // 构建 Payload 数据（双语格式）
     article.slug = generateSlug(article.title);
     article.publishedAt = new Date().toISOString();
     article._status = "published";
-    const response = await fetch('https://payload-website-starter-blush-sigma.vercel.app/api/posts', {
+    
+    const response = await fetch('https://payload-website-starter-git-main-billboings-projects.vercel.app/api/posts', {
       method: 'POST',
       headers: {
-        'Authorization': `JWT ${token}`,
+        'Authorization': `Bearer ${env.PAYLOAD_API_KEY}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(article)
@@ -1005,12 +1069,12 @@ async function publishToPayload(env, article, logs) {
     
     if (!response.ok) {
       const errorText = await response.text();
-      logs.push(`[Payload] ❌ 发布失败: ${errorText}`);
+      logs.push(`[Payload] ❌ 发布失败: ${response.status} - ${errorText}`);
       return false;
     }
     
     const result = await response.json();
-    logs.push(`[Payload] ✅ 发布成功 ID: ${result.doc.id}`);
+    logs.push(`[Payload] ✅ 发布成功 ID: ${result.id}`);
 
     // 触发 Next.js 按需刷新
     if (env.REVALIDATE_URL && env.REVALIDATE_SECRET) {
@@ -1021,6 +1085,7 @@ async function publishToPayload(env, article, logs) {
         );
         
         if (revalidateResponse.ok) {
+          logs.push('[Revalidate] ✅ 页面刷新成功');
           
           logs.push('[Warmup] ⏳ 等待 2 秒后开始预热...');
           await new Promise(resolve => setTimeout(resolve, 2000));
@@ -1036,14 +1101,12 @@ async function publishToPayload(env, article, logs) {
             logs.push(`[Warmup] ❌ 预热出错: ${warmupError.message}`);
           }
         } else {
-          logs.push(`[Revalidate] ⚠️ 刷新失败`);
+          logs.push(`[Revalidate] ⚠️ 刷新失败: ${revalidateResponse.status}`);
         }
       } catch (err) {
         logs.push(`[Revalidate] ⚠️ 刷新错误: ${err.message}`);
       }
     }
-    
-    
     
     return true;
   } catch (error) {
