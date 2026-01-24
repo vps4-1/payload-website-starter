@@ -93,7 +93,6 @@ export default function AboutPage() {
             <div className="pl-4">
               <div className="bg-terminal-bg border border-terminal-border p-4 rounded">
                 <div className="text-sm text-terminal-text space-y-3">
-                  <div className="font-semibold text-pistachio-400">数据流转路径：</div>
                   <div className="ml-4 space-y-1">
                     <div>📡 <strong>RSS 采集</strong> → Cloudflare Workers（边缘计算）</div>
                     <div>🤖 <strong>AI 处理</strong> → OpenRouter 多模型分析</div>
