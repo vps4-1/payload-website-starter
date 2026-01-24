@@ -2,6 +2,7 @@ import type { CollectionConfig } from 'payload'
 
 import { apiKeyOrAuthenticated } from '../access/apiKeyOrAuthenticated'
 import { anyone } from '../access/anyone'
+import { notifyWorkerHook } from '../hooks/notifyWorkerHook'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -14,6 +15,9 @@ export const Posts: CollectionConfig = {
     create: anyone,  // 临时允许所有人创建，便于测试
     update: anyone,  // 临时允许所有人更新，便于测试
     delete: apiKeyOrAuthenticated,  // 删除仍需要认证
+  },
+  hooks: {
+    afterChange: [notifyWorkerHook],
   },
   fields: [
     // ===== 基础信息 =====
