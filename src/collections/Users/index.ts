@@ -32,6 +32,9 @@ export const Users: CollectionConfig = {
       type: 'checkbox',
       label: 'Enable API Key',
       defaultValue: false,
+      admin: {
+        description: '启用后将自动生成 API Token 用于程序化访问',
+      },
     },
   ],
   timestamps: true,
