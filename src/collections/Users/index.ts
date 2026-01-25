@@ -15,7 +15,13 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email'],
     useAsTitle: 'name',
   },
-  auth: true,
+  auth: {
+    tokenExpiration: 7200, // 2 hours, in seconds
+    verify: false,
+    maxLoginAttempts: 5,
+    lockTime: 600 * 1000, // lock for 10 minutes
+    useAPIKey: true, // 启用 API Key 功能
+  },
   fields: [
     {
       name: 'name',
