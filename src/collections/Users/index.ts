@@ -20,7 +20,7 @@ export const Users: CollectionConfig = {
     verify: false,
     maxLoginAttempts: 5,
     lockTime: 600 * 1000, // lock for 10 minutes
-    useAPIKey: false, // 暂时禁用 API Key 功能以避免 schema 问题
+    useAPIKey: true, // 重新启用 API Key 功能，生产环境可能需要此列存在
   },
   fields: [
     {
