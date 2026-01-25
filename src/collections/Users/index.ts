@@ -27,13 +27,12 @@ export const Users: CollectionConfig = {
       name: 'name',
       type: 'text',
     },
-    // 暂时移除 enableAPIKey 字段，避免数据库 Schema 问题
-    // {
-    //   name: 'enableAPIKey',
-    //   type: 'checkbox',
-    //   label: 'Enable API Key',
-    //   defaultValue: false,
-    // },
+    {
+      name: 'enableAPIKey',
+      type: 'checkbox',
+      label: 'Enable API Key',
+      defaultValue: false,
+    },
   ],
   timestamps: true,
 }
