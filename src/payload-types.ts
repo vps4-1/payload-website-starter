@@ -304,6 +304,9 @@ export interface User {
   name?: string | null;
   updatedAt: string;
   createdAt: string;
+  /**
+   * 启用后将自动生成 API Token 用于程序化访问
+   */
   enableAPIKey?: boolean | null;
   apiKey?: string | null;
   apiKeyIndex?: string | null;
