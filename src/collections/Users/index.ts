@@ -12,7 +12,7 @@ export const Users: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['name', 'email', 'enableAPIKey'],
+    defaultColumns: ['name', 'email'],
     useAsTitle: 'name',
   },
   auth: {
@@ -20,19 +20,20 @@ export const Users: CollectionConfig = {
     verify: false,
     maxLoginAttempts: 5,
     lockTime: 600 * 1000, // lock for 10 minutes
-    useAPIKey: true, // 启用 API Key 功能
+    useAPIKey: true, // 启用 API Key 功能，但不添加自定义字段
   },
   fields: [
     {
       name: 'name',
       type: 'text',
     },
-    {
-      name: 'enableAPIKey',
-      type: 'checkbox',
-      label: 'Enable API Key',
-      defaultValue: false,
-    },
+    // 暂时移除 enableAPIKey 字段，避免数据库 Schema 问题
+    // {
+    //   name: 'enableAPIKey',
+    //   type: 'checkbox',
+    //   label: 'Enable API Key',
+    //   defaultValue: false,
+    // },
   ],
   timestamps: true,
 }
