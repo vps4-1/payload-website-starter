@@ -12,7 +12,7 @@ export const Users: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['name', 'email'],
+    defaultColumns: ['name', 'email', 'enableAPIKey'],
     useAsTitle: 'name',
   },
   auth: {
@@ -26,6 +26,12 @@ export const Users: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
+    },
+    {
+      name: 'enableAPIKey',
+      type: 'checkbox',
+      label: 'Enable API Key',
+      defaultValue: false,
     },
   ],
   timestamps: true,
